@@ -1,0 +1,136 @@
+/* Property Container with smooth transitions */
+.property-container {
+    /* margin-left: var(--width-bar); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 2px;
+    min-height: 80vh;
+    transition: all 0.5s ease;
+    /* Smooth transitions for rearrangement */
+}
+
+.property-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2px 8px;
+
+    h1 {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    h2 {
+        font-size: 18px;
+        font-weight: 400;
+        opacity: 0.6;
+    }
+
+}
+
+/* Property Card with fade-in, fade-out, and slide effect */
+.property {
+    min-width: 520px;
+    min-height: 420px;
+    flex-grow: 1;
+    margin: 14px;
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Hover effect: subtle tilt and shadow */
+.property:hover {
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.property-desc.highlight {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Property that will disappear */
+.property.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+
+/* Image and property banner hover effect */
+.property-banner {
+    position: relative;
+    height: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.property-banner img {
+    transition: transform 0.4s ease;
+}
+
+.property-desc {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-around;
+    padding: 18px 32px;
+    margin-bottom: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 0 0 12px 12px;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.6s ease, opacity 0.3s ease;
+}
+
+.property[css-state="on"] .property-desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.property-container[last-man-standing="on"] .property:hover {
+    transform: none;
+    /* or any transformation reset you want */
+    transition: none;
+    /* Disable transition if needed */
+}
+
+.desc-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.desc-icon {
+    font-size: 18px;
+    color: #fff;
+}
+
+.property:hover .property-desc {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    /* Slide up effect */
+}
+
+.property-container .property {
+    transition: all 0.5s ease-in-out;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

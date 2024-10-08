@@ -1,0 +1,16 @@
+.hero-image-scroll-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  .hero-image-scroll-container div {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+  }
+  
+  img {
+    border-radius: 0.5rem;
+  }
+  

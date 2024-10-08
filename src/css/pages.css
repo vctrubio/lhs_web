@@ -1,0 +1,108 @@
+.main {
+    height: 100vh;
+    padding: 1em .5em;
+    border: var(--tmp-border);
+
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+
+    >* {
+        /* border: var(--tmp-border); */
+        scroll-snap-align: start;
+        min-height: 100vh;
+    }
+}
+
+.banner-container {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 80vh;
+    width: 90vw;
+    margin: auto;
+    /* Full viewport height */
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo {
+    --color: var(--color-green-light);
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 86px;
+    text-align: center;
+
+    >* {
+        padding: 12px;
+        /* border: 1px solid var(--color); */
+        border-radius: 8px;
+    }
+}
+
+#tiger-eye {
+    width: 400px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 5px 10px;
+        text-align: center;
+        outline-color: black;
+        cursor: none;
+        background-color: black;
+        opacity: 0.8;
+        color: var(--color-green-light);
+
+        border: 4px solid transparent;
+        border-radius: 50px;
+        box-shadow: 0 18px 26px rgba(0, 0, 0, 0.8);
+
+        transition: all 1.4s;
+
+        &::placeholder {
+            color: black;
+        }
+    }
+
+    input:hover {
+        background-color: transparent;
+        border: 4px solid transparent;
+        opacity: 1;
+        box-shadow: 0 8px 16px oklch(0.3 0.2 200);
+        /* Strong bottom box shadow using oklch */
+    }
+
+    input:focus,
+    input:focus::placeholder {
+        border-color: var(--color-green-light);
+        color: var(--color-green-light);
+        background-color: transparent;
+        outline: none;
+    }
+
+
+    input::placeholder {
+        font-style: italic;
+        font-weight: lighter;
+        opacity: 0.6;
+    }
+}
+
+
+#luxury-living {
+    /* background-color: red; */
+}

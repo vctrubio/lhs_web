@@ -1,0 +1,89 @@
+.sidebar-level {
+  border: 2px solid black;
+  padding: 10px;
+  height: 100vh;
+  min-width: 365px;
+  font-size: 24px;
+
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  >* {
+    border: 1px solid black;
+    display: flex;
+  }
+
+  .top {
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .middle {
+    flex-grow: 1;
+  }
+
+}
+
+.flexy{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.logo {
+  font-size: 88px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.navigation {
+  position: relative;
+}
+
+.selected-option {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown div {
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown div:hover {
+  background-color: var(--color-green-light);
+}
+
+
+/* --mobile-width: 950px; */
+@media (max-width: 950px) {
+  .sidebar-level {
+    /* Uncomment if you want to hide the sidebar on mobile */
+    /* display: none; */
+    border: 1px solid red;
+  }
+}

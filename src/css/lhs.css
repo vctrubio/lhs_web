@@ -1,0 +1,200 @@
+.lhs-concept {
+
+    width: 600px; /*used to be 800*/
+    min-height: 300px;
+    border: 2px solid var(--color-green-dark);
+    border-radius: 18px;
+
+    .lhs-twins {
+        display: flex;
+        padding: 4px 6px;
+        height: auto;
+        gap: 12px;
+
+        >* {
+            height: 100%;
+            width: 100%;
+            /* border: 1px solid black; */
+        }
+    }
+}
+
+.i-search {
+    --padding-xy: 4px 8px;
+    --boder-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    height: auto;
+
+    background-color: var(--color-sad);
+    border: 2px solid var(--color-green-dark);
+    border-radius: 12px;
+
+    .i-got-it {
+        height: 56px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: var(--boder-radius);
+        padding: var(--padding-xy);
+        gap: 10px;
+
+        input {
+            padding: 0 4px;
+            height: 100%;
+            outline: none;
+            border-radius: calc(var(--boder-radius) * 0.5);
+            background-color: var(--color-green-dark);
+            color: var(--color-beigh-light-bg);
+            max-width: 100%;
+            overflow-x: auto;
+            /* Allow horizontal scrolling */
+            white-space: nowrap;
+            /* Prevent text wrapping */
+        }
+    }
+
+    .i-got-you {
+        padding: 8px;
+        color: black;
+
+        >* {
+            border: 1px solid transparent;
+            border-color: var(--color-green-dark-opec);
+            border-radius: var(--boder-radius);
+            padding: 4px;
+        }
+
+        >*:hover {
+            background-color: var(--color-green-dark-opec);
+            border-radius: var(--boder-radius);
+            border-color: var(--color-green-dark)
+        }
+    }
+
+}
+
+.tv-box {
+    /* parent div is 300 */
+    min-height: 276px !important;
+    margin: auto 0;
+
+    border: 1px solid black;
+    
+    display: flex;
+    flex-direction: column;
+    /* Center content vertically */
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: start;
+    /* Allow it to grow and take available space */
+    flex-grow: 1;
+    text-align: left;
+
+    >* {
+        padding: 4px 24px;
+    }
+
+    h1 {
+        font-size: 69px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        color: white;
+        opacity: 0.6;
+    }
+
+    .content {
+        color: var(--color-sad);
+        font-weight: 400;
+    }
+}
+
+
+.photo-box{
+    transform: scale(1.05);
+    transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+.title-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 14px 0px;
+
+    h1 {
+        font-size: 56px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        color: var(--color-green-light);
+        opacity: 0.6;
+    } 
+    h2{
+        color: var(--color-beigh-dark);
+        letter-spacing: 2px;
+        font-weight: 400;
+    }
+    h3{
+        color: var(--color-beigh-dark);
+        letter-spacing: 1px;
+        font-weight: 200;
+    }
+}
+
+
+
+.what-we-do{
+    display: flex;
+    flex-direction: column;
+
+    font: 1.2rem 'Patrick Hand', cursive;
+    letter-spacing: 1px;
+    line-height: 2.5;
+    text-align: center;
+    h2{
+        margin-top: 18px;
+        font-weight: bolder;
+    }
+    span{
+        font-style: italic;
+        opacity: 0.9;
+    }
+}
+
+
+.subscribe-now{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 42px;
+    width: 442px;
+    margin: 0 auto;
+    border: 1px solid var(--color-green-dark);
+    border-radius: 24px;
+    overflow: hidden;
+    input{
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+        text-align: center;
+    }
+    input:focus {
+        outline: yellow;
+    }
+
+    &:focus-within {
+        border-color: var(--color-green-light)
+    }
+    
+    button{
+        background-color: var(--color-green-light);
+        padding: 4px;
+        height: 110%;
+        width: 120px;
+        border-radius: 24px;
+    }
+}

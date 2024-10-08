@@ -1,0 +1,348 @@
+.sidebar{
+    --width: 325px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    min-width: var(--width);
+    height: 100vh;
+
+    padding: 40px 20px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+
+    padding: 12px;
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-content{
+    border: 1px solid black;
+    flex-grow: 2;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.iterm {
+    --size: 18px;
+    /* Define a custom 18 */
+    --bg-title: #ece3e3;
+    --bg-content: #9c9898;
+    --color-search-bar: #9c9898;
+    --size-min: 500;
+    font-size: var(--size);
+
+
+    max-width: 820px;
+    min-height: 250px;
+
+    border: 1px solid #c08787;
+    border-radius: var(--size);
+
+    padding: calc(var(--size) * 1);
+    /* This will set padding to 18px */
+
+    .container-twoes {
+        display: flex;
+        height: 100%;
+        gap: 10px;
+        overflow: hidden;
+
+        >* {
+            flex-grow: 1;
+            height: 100%;
+            width: 100%;
+        }
+
+        >*:first-child {
+            background-color: rgb(88, 88, 83);
+            opacity: 0.8;
+            min-width: var(--size-min);
+            /* !!!! */
+        }
+
+
+    }
+
+    .tv {
+        --border-out: #c08787;
+        --display-bg: #575454;
+
+        display: flex;
+        flex-direction: column;
+        border-radius: calc(var(--size) * 1);
+        padding: calc(var(--size) * 0.4);
+        border: calc(var(--size) * 0.2) solid var(--border-out);
+        background-color: white;
+        overflow: hidden;
+        box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.6);
+
+        >* {
+            padding: 4px 8px;
+        }
+
+        >*:first-child {
+            /* search-icon-bar */
+            color: var(--color-search-bar);
+            display: flex;
+            font-size: calc(var(--size) * 1.8);
+
+            border: 1px solid black;
+            background-color: var(--display-bg);
+            border-radius: calc(var(--size) * 0.8);
+
+            /* Background color for content area */
+            >*:first-child {
+                /* border: 1px solid black; */
+                margin-right: 12px;
+                min-width: 24px;
+            }
+        }
+
+        #search-result {
+            font-size: 25px;
+            color: rgb(12, 2, 2);
+        }
+
+    }
+
+
+
+    .tv-controller {
+        /* Your styles here */
+        /* Example style */
+        padding-left: 28px;
+        padding-top: 34px;
+
+        /* This will set padding to 18px */
+        >* {
+            flex-direction: column;
+        }
+    }
+
+    .title {
+        font-weight: bold;
+        color: var(--bg-title);
+
+        font-size: calc(var(--size) * 4.2);
+    }
+
+    .content {
+        display: flex;
+        color: var(--bg-content);
+        font-size: calc(var(--size) * 1.2);
+    }
+
+    .caplog {
+        font-size: 32px;
+        min-width: 24px;
+        background-color: rgb(23, 38, 22);
+        padding: 0 4px;
+        overflow: hidden;
+        border-radius: calc(var(--size) * 0.6);
+        /* display: flex; */
+
+        input {
+            background-color: transparent;
+            width: inherit;
+            width: 24px;
+            padding-left: 6px;
+            &:focus {
+                outline: red;
+            }
+        }
+    }
+
+}
+
+
+
+
+.six-ways>*:nth-child(1) {
+    grid-column: span 3;
+    /* First item in the first row spans 3 columns */
+    text-align: center;
+}
+
+.six-ways>*:nth-child(2) {
+    grid-column: span 6;
+    /* Second item in the first row spans 6 columns */
+    text-align: center;
+}
+
+.six-ways>*:nth-child(3) {
+    grid-column: span 3;
+    /* Third* in the first row spans 3 columns */
+    text-align: center;
+}
+
+.six-ways>*:nth-child(4) {
+    grid-column: span 2;
+    /* First* in the second row spans 2 columns */
+    display: flex;
+    justify-self: end;
+    text-align: right;
+    /* Aligns the* to the right of its grid cell */
+}
+
+.six-ways>*:nth-child(5) {
+    grid-column: span 8;
+    /* Second* in the second row spans 8 columns */
+    text-align: center;
+
+    &:hover {
+        background-color: transparent !important;
+    }
+}
+
+.six-ways>.item:nth-child(6) {
+    grid-column: span 2;
+    display: flex;
+    justify-self: flex-start;
+    /* Third item in the second row spans 2 columns */
+}
+
+.color-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+
+.box {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+}
+
+.theme-color {
+    background-color: var(--theme-color);
+}
+
+.color-green-dark {
+    background-color: var(--color-green-dark);
+}
+
+.color-green-light {
+    background-color: var(--color-green-light);
+}
+
+.color-blue {
+    background-color: var(--color-blue);
+}
+
+.color-beigh-darkish {
+    background-color: var(--color-beigh-darkish);
+}
+
+.color-beigh-light {
+    background-color: var(--color-beigh-light-bg);
+}
+
+.color-beigh {
+    background-color: var(--color-beigh);
+}
+
+.color-danger {
+    background-color: var(--color-danger);
+}
+
+.color-backup {
+    background-color: var(--color-backup);
+}
+
+.color-info {
+    background-color: var(--color-info);
+}
+
+.color-love {
+    background-color: var(--color-love);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .container-twoes {
+        flex-wrap: wrap;
+    }
+
+    .tv-controller {
+        text-align: center;
+        margin-top: 1em;
+        opacity: 0.6;
+    }
+}

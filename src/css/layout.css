@@ -1,0 +1,12 @@
+.layout-div {
+    display: flex;
+    flex-direction: row;
+
+}
+
+/* --mobile-width */
+@media (max-width: 950px) {
+    .layout-div {
+        flex-direction: column-reverse;
+    }
+}

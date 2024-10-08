@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --light: #f7ede7;
+  --dark: #1e1d1b;
+  --theme-color: #ff6c11;
+
+  --color-yellow: #FABC3F;
+  --color-green-dark: #15423B;
+  --color-green-dark-opec: #15423bb6;
+  --color-green-light: #6A9B89;
+  --color-blue: #285F98;
+  --color-blue-light: #285e9887;
+  --color-beigh-darkish: #CDC2A6;
+  --color-beigh-light-bg: #E1D8C6;
+  --color-beigh: #EAE4DC;
+  --color-danger: #C7253E;
+  --color-backup: #821131;
+  --color-info: #CD5C08;
+  --color-love: #F05A7E;
+  --color-sad: #999495;
+  --tmp-border: 1px solid #000;
+
+  --hover-color-red: #c08787;
+  --hover-color-green: #6A9B89;
+  --hover-color-blue: #285e9887;
+  --hover-color-yellow: #fabc3fc7;
+
+  --background: var(--light);
+  --foreground: var(--dark);
+
+  --font-verdana: Verdana, Geneva, Tahoma, sans-serif;
+  --font-times: Times, Times New Roman, serif;
+
+  --width-bar: 220px;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--dark);
+    --foreground: var(--light);
+  }
+} */
+
+::selection {
+  background: var(--color-green-light);
+  color: var(--color-beigh-light-bg);
+}
+
+
+body {
+  color: var(--foreground);
+  background: var(--color-beigh-light-bg);
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2rem;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.flex-mob {
+  display: flex;
+}
+
+@media screen and (max-width: 964px) {
+  .flex-mob {
+    flex-direction: column;
+  }
+
+}
