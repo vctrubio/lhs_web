@@ -49,6 +49,17 @@
   color: var(--color-beigh-light-bg);
 }
 
+input{
+  padding: 10px;
+  border: 1px solid #4c4c4c98;
+  border-radius: 12px;
+}
+
+input:focus{
+  outline: none;
+  border-color: var(--color-green-light);
+}
+
 
 body {
   color: var(--foreground);

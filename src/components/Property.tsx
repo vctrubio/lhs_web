@@ -1,28 +1,10 @@
-import { House } from "@/types/house";
 import Image from "next/image";
 import Link from "next/link";
 import { getBathrooms, getTotalRooms } from "@/lib/utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRulerCombined, faBed, faMapMarkerAlt, faBath } from '@fortawesome/free-solid-svg-icons'; // Import icons
 import { Property } from "@/types/property";
-import { inherits } from "util";
-
-function formatCurrency(value: number, rent: boolean = false): any {
-    let formattedValue;
-    if (value >= 1_000_000) {
-        formattedValue = (value / 1_000_000).toFixed(1) + 'M';
-    } else if (value >= 1_000) {
-        formattedValue = (value / 1_000).toFixed(0) + 'K';
-    } else {
-        formattedValue = value.toLocaleString('de-DE');
-    }
-
-    return (
-        <>
-            {formattedValue} <span className="italic">€{rent ? '' : '/mes'}</span>
-        </>
-    );
-}
+import { formatCurrency } from "@/lib/utils";
 
 interface DescBoxProps {
     text: string;
@@ -38,7 +20,6 @@ const DescBox: React.FC<DescBoxProps> = ({ text, icon }) => {
 };
 
 export const PropertyCard = ({ property, cssStateHover }: { property: Property, cssStateHover: boolean }) => {
-    // console.log("🚀 ~ PropertyCard ~ property:", property)
     const coverPhoto = property ? property.cover_url[0] : '/images/placeholder.jpg';
 
     const area = property.charRef.metrosCuadradros || 'N/A';
@@ -55,8 +36,8 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
                     <Image
                         src={coverPhoto}
                         alt={property.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{ objectFit: 'cover' }}
                         quality={100}
                         priority
                     />

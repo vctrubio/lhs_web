@@ -1,4 +1,5 @@
 import { Room, Property } from '@/types/property';
+import { fetchEntriesContentful } from './bridges';
 
 export const Logo = () => {
   return (
@@ -8,6 +9,27 @@ export const Logo = () => {
       <div>S</div>
     </div>
   )
+}
+
+export function formatCurrency(value: number, rent: boolean = false): any {
+  let formattedValue;
+  if (value >= 1_000_000) {
+      formattedValue = (value / 1_000_000).toFixed(1) + 'M';
+  } else if (value >= 1_000) {
+      formattedValue = (value / 1_000).toFixed(0) + 'K';
+  } else {
+      formattedValue = value.toLocaleString('de-DE');
+  }
+
+  return (
+      <>
+          {formattedValue} <span className="italic">€{rent ? '' : '/mes'}</span>
+      </>
+  );
+}
+
+export function formatPrice(value: number): number {
+  return parseFloat((value / 1_000_000).toFixed(2));
 }
 
 export function ImageToUrl(entry: any): string {
@@ -48,14 +70,29 @@ export function showRenderAmentities({ property }: { property: Property }) {
 
 export function getRooms({ property }: { property: Property }) {
   if (!property.charRef) return 0;
-  
+
   const { banos = 0, aseo = 0, dormitorios = 0 } = property.charRef;
   return banos + aseo + dormitorios
 }
 
 export function getBathrooms({ property }: { property: Property }) {
   if (!property.charRef) return 0;
-  
+
   const { banos = 0, aseo = 0 } = property.charRef;
   return banos + aseo;
+}
+
+export async function getPropertiesPricesBuy() {
+  const { properties } = await fetchEntriesContentful();
+
+  if (!properties || properties.length === 0) {
+    return { min: null, max: null };
+  }
+
+  const precios = properties.map((property: Property) => property.precio);
+
+  const minPrecio = Math.min(...precios);
+  const maxPrecio = Math.max(...precios);
+
+  return { min: Number(minPrecio), max: Number(maxPrecio) };
 }

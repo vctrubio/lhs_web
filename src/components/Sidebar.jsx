@@ -1,11 +1,11 @@
-'use client'; // Ensure this is at the top of the file
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useSharedQueryState } from '@/lib/queries';
-import { useRouter } from 'next/navigation'; // Make sure to import from next/navigation for Next.js 13+
+import { Slider, TextField, Select, MenuItem, Checkbox, FormControlLabel, Button } from '@mui/material';
 
 const Logo = () => {
     return (
@@ -78,7 +78,8 @@ const Footer = () => {
     );
 };
 
-const SearchProperties = () => {
+
+export const SearchProperties = () => {
     const {
         title, setTitle,
         minPrice, setMinPrice,
@@ -90,71 +91,26 @@ const SearchProperties = () => {
         size, setSize,
         handleReset,
     } = useSharedQueryState([]);
-    
-    
+
+
     return (
         <div className="content-browser">
-            <input
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                type='text'
-                placeholder='Buscador'
-            />
             <div>
+                <h2>Search Property</h2>
                 <input
-                    value={minPrice || ''}
-                    onChange={(e) => setMinPrice(e.target.value)}
-                    type='number'
-                    placeholder='Min Price'
-                />
-                <input
-                    value={maxPrice || ''}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                    type='number'
-                    placeholder='Max Price'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    type='text'
+                    placeholder='Buscador'
                 />
             </div>
+
             <div>
-                <select
-                    value={buyOrRent}
-                    onChange={(e) => setBuyOrRent(e.target.value)}
-                >
-                    <option value="all">All</option>
-                    <option value="rent">Rent</option>
-                    <option value="buy">Buy</option>
-                </select>
             </div>
+            
             <div>
-                <select
-                    value={reformadoFilter}
-                    onChange={(e) => setReformadoFilter(e.target.value)}
-                >
-                    <option value="all">All</option>
-                    <option value="reformado">Reformado</option>
-                    <option value="sinReformar">Sin reformar</option>
-                </select>
+                <button onClick={handleReset}>Reset Filters</button>
             </div>
-            <div>
-                <input
-                    value={bathrooms || ''}
-                    onChange={(e) => setBathrooms(e.target.value)}
-                    type='number'
-                    placeholder='Bathrooms'
-                />
-                <input
-                    value={bedrooms || ''}
-                    onChange={(e) => setBedrooms(e.target.value)}
-                    type='number'
-                    placeholder='Bedrooms'
-                />
-                <input
-                    value={size || ''}
-                    onChange={(e) => setSize(e.target.value)}
-                    type='number'
-                    placeholder='Metros (m2)'
-                />
-            </div>
-            <button onClick={handleReset}>Reset Filters</button>
         </div>
     );
 };
@@ -179,7 +135,27 @@ export const SideBar = () => {
 
 
 /*
-
+   <div>
+                <select
+                    value={buyOrRent}
+                    onChange={(e) => setBuyOrRent(e.target.value)}
+                >
+                    <option value="all">All</option>
+                    <option value="rent">Rent</option>
+                    <option value="buy">Buy</option>
+                </select>
+            </div>
+            <div>
+                <select
+                    value={reformadoFilter}
+                    onChange={(e) => setReformadoFilter(e.target.value)}
+                >
+                    <option value="all">All</option>
+                    <option value="reformado">Reformado</option>
+                    <option value="sinReformar">Sin reformar</option>
+                </select>
+            </div>
+            
      <div>
                 <select
                     value={sortOrder}

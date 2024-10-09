@@ -5,6 +5,7 @@ import { Property } from "@/types/property";
 import { getRooms } from "@/lib/utils";
 import { Logo } from "@/lib/utils";
 import { useSharedQueryState } from '@/lib/queries';
+import { SearchProperties } from "./sidebar";
 
 //for server side {params, searchParams} as props
 export const SNF = ({ entries }: { entries: Property[] }) => {
@@ -85,7 +86,6 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
 
     return (
         <>
-
             <div className="property-container" last-man-standing={cssUniqueBoy ? 'on' : ''}>
                 {filteredHouses.length === 0 ? (
                     <div className="flex justify-center flex-col m-auto">
