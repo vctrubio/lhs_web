@@ -2,7 +2,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faSort, faNoteSticky, faFile, faBook } from "@fortawesome/free-solid-svg-icons";
 
-import { formatPrice } from '@/lib/utils';
 import React, { useState, useEffect, use } from 'react';
 import Slider from '@mui/material/Slider';
 import { FormControl, InputLabel, MenuItem, Select, Checkbox, ListItemText } from '@mui/material';
@@ -10,8 +9,6 @@ import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { useSharedQueryState } from '@/lib/queries';
 
 interface RenderViewProps {
@@ -59,16 +56,17 @@ export const SearchBar = () => {
     bedroomRange, bedroomValue, setBedroomValue,
     metersSquareRange, metersSquareValue, setMetersSquareValue,
     selectedBarrios, setSelectedBarrios,
-    barrios, selectedAmenities, setSelectedAmenities,
-    title, setTitle, amenitiesOptions,
+    barrios, selectedAmenities, setSelectedAmenities, amenitiesOptions,
+    setFlagReformado, setFlagSinReformar,
+    title, setTitle,
     handleReset
   } = useSharedQueryState();
 
   useEffect(() => {
     setSelectedBarrios(barrios);
-  },[barrios]);
+  }, [barrios]);
 
-  
+
   const handleAmenitiesChange = (event: any) => {
     setSelectedAmenities(event.target.value);
   };
@@ -77,28 +75,37 @@ export const SearchBar = () => {
     setSelectedBarrios(value);
   };
 
+  const handleReformadoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFlagReformado(event.target.checked ? '' : 'no');
+};
+
+const handleSinReformarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFlagSinReformar(event.target.checked ? '' : 'no');
+};
+
   return (
     <div className='p-4' style={{ width: 365 }}>
-
       <div>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type='text'
-          placeholder='Buscador Propiedades'
-          className='w-full m-2'
+          placeholder='Propiedades'
+          className='w-full mb-4'
         />
       </div>
 
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <FormGroup>
-          <FormControlLabel control={<Switch defaultChecked />} label="Alquilar" labelPlacement='start' />
-          <FormControlLabel control={<Switch defaultChecked />} label="Comprar" labelPlacement='start' />
-        </FormGroup>
-        <FormGroup>
-          <FormControlLabel control={<Switch defaultChecked />} label="Reformado" labelPlacement='start' />
-          <FormControlLabel control={<Switch defaultChecked />} label="Sin Reformar" labelPlacement='start' />
-        </FormGroup>
+      <div style={{ display: 'flex', gap: '5px' }}>
+        <FormControlLabel
+          control={<Switch defaultChecked onChange={handleReformadoChange} />}
+          label="Reformado"
+          labelPlacement='start'
+        />
+        <FormControlLabel
+          control={<Switch defaultChecked onChange={handleSinReformarChange} />}
+          label="Sin Reformar"
+          labelPlacement='start'
+        />
       </div>
 
       <div>
@@ -110,7 +117,7 @@ export const SearchBar = () => {
 
 
       <div className='flex flex-col gap-4 mt-2'>
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <InputLabel id="amenities-select-label"
             shrink={false}
             style={{
@@ -136,7 +143,7 @@ export const SearchBar = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
 
         <Autocomplete
           multiple
@@ -153,6 +160,8 @@ export const SearchBar = () => {
           )}
         />
       </div>
+
+
       <div>
         <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
       </div>

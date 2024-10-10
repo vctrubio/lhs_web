@@ -24,7 +24,8 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
 
     const area = property.charRef.metrosCuadradros || 'N/A';
     const bedrooms = property.charRef.dormitorios || 'N/A';
-    const bathrooms = getBathrooms({ property: property })
+    const bathrooms = getBathrooms(property) || 'N/A';
+
     return (
         <div className="property" css-state={cssStateHover ? 'on' : ''}>
             <Link href={`/propiedades/${property.url}`}>

@@ -67,13 +67,13 @@ const Footer = () => {
     return (
         <div className='flexy'>
             <div onClick={handleWhatsAppClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faWhatsapp} size="2x" />
+                <FontAwesomeIcon icon={faWhatsapp} />
             </div>
             <div onClick={handleEmailClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faEnvelope} size="2x" />
+                <FontAwesomeIcon icon={faEnvelope} />
             </div>
             <div onClick={handleShareClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faShareAlt} size="2x" />
+                <FontAwesomeIcon icon={faShareAlt} />
             </div>
         </div>
     );
@@ -85,7 +85,7 @@ export const SideBar = () => {
         <div className="sidebar-level">
             <div className="top">
                 <Logo />
-                <Navigation />
+                {/* <Navigation /> */}
             </div>
             <div className="middle">
                 <SearchBar />

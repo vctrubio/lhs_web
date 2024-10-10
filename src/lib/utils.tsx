@@ -29,7 +29,7 @@ export function formatCurrency(value: number, rent: boolean = false): any {
 }
 
 export function formatPrice(value: number): number {
-  return parseFloat((value / 1_000_000).toFixed(2));
+  return parseFloat((value / 1_000_000).toFixed(4));
 }
 
 export function ImageToUrl(entry: any): string {
@@ -75,7 +75,7 @@ export function getRooms({ property }: { property: Property }) {
   return banos + aseo + dormitorios
 }
 
-export function getBathrooms({ property }: { property: Property }) {
+export function getBathrooms(property: Property) {
   if (!property.charRef) return 0;
 
   const { banos = 0, aseo = 0 } = property.charRef;

@@ -2,20 +2,27 @@
 import React, { useEffect, useState } from "react";
 import { PropertyCard } from '@/components/Property';
 import { Property } from "@/types/property";
-import { getRooms } from "@/lib/utils";
+import { getBathrooms, getRooms } from "@/lib/utils";
 import { Logo } from "@/lib/utils";
 import { useSharedQueryState } from '@/lib/queries';
 
 //for server side {params, searchParams} as props
 export const SNF = ({ entries }: { entries: Property[] }) => {
-    const [filteredHouses, setFilteredHouses] = useState<Property[]>(entries);
+    const [filterProperties, setFilterProperties] = useState<Property[]>(entries);
 
     const {
-        title, minPrice, maxPrice,
-        buyOrRent, sortOrder, sortBy,
-        bedrooms, bathrooms,
-        reformadoFilter, selectedBarrios,
-        size,
+        title,
+        banosMaximo,
+        banosMinimo,
+        dormitoriosMaximo,
+        dormitoriosMinimo,
+        metrosCuadradosMaximo,
+        metrosCuadradosMinimo,
+        precioMaximo,
+        precioMinimo,
+        includeBarrios,
+        flagReformado,
+        flagSinReformar,
         handleReset
     } = useSharedQueryState();
 
@@ -23,77 +30,106 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
     const [cssUniqueBoy, setUniqueBoy] = useState(false);
 
     useEffect(() => {
-        if (title.length > 0 || sortBy !== 'precio' || reformadoFilter !== 'all')
+        if (title.length > 0)
             setCssStateHover(true);
         else
             setCssStateHover(false);
-    }, [title, sortBy, reformadoFilter])
+    }, [title])
+
 
 
     useEffect(() => {
-        let updatedHouses = [...entries];
+        let updateProperty = [...entries];
 
         if (title) {
-            updatedHouses = updatedHouses.filter(house =>
+            updateProperty = updateProperty.filter(house =>
                 house.title.toLowerCase().includes(title.toLowerCase())
             );
         }
 
-        if (buyOrRent && buyOrRent !== 'all') {
-            updatedHouses = updatedHouses.filter(house =>
-                buyOrRent === 'buy' ? house.buyOrRent : !house.buyOrRent
-            );
+        if (banosMinimo) {
+            updateProperty = updateProperty.filter(property => getBathrooms(property) >= parseInt(banosMinimo));
         }
 
-        if (minPrice) {
-            updatedHouses = updatedHouses.filter(house => house.precio >= parseInt(minPrice));
+        if (banosMaximo) {
+            updateProperty = updateProperty.filter(property => getBathrooms(property) <= parseInt(banosMaximo));
         }
 
-        if (maxPrice) {
-            updatedHouses = updatedHouses.filter(house => house.precio <= parseInt(maxPrice));
+        if (dormitoriosMinimo) {
+            updateProperty = updateProperty.filter(property => property.charRef.dormitorios >= parseInt(dormitoriosMinimo));
         }
 
-        if (selectedBarrios && selectedBarrios.length > 0) {
-            updatedHouses = updatedHouses.filter(house =>
-                selectedBarrios.includes(house.barrioRef?.name)
-            );
+        if (dormitoriosMaximo) {
+            updateProperty = updateProperty.filter(property => property.charRef.dormitorios <= parseInt(dormitoriosMaximo));
         }
 
-        if (reformadoFilter === 'reformado') {
-            updatedHouses = updatedHouses.filter(house => house.reformado === true);
-        } else if (reformadoFilter === 'sinReformar') {
-            updatedHouses = updatedHouses.filter(house => house.reformado === false);
+        if (metrosCuadradosMinimo) {
+            updateProperty = updateProperty.filter(property => property.charRef.metrosCuadradros >= parseInt(metrosCuadradosMinimo));
         }
 
-        if (bedrooms) {
-            updatedHouses = updatedHouses.filter(house => house.charRef.dormitorios >= parseInt(bedrooms));
+        if (metrosCuadradosMaximo) {
+            updateProperty = updateProperty.filter(property => property.charRef.metrosCuadradros <= parseInt(metrosCuadradosMaximo));
         }
 
-        if (bathrooms) {
-            updatedHouses = updatedHouses.filter(house => (house.charRef.banos + house.charRef.aseo) >= parseInt(bathrooms));
+        if (precioMinimo) {
+            updateProperty = updateProperty.filter(property => {
+                return property.precio >= parseInt(precioMinimo) * 1000000;
+            });
         }
 
-        if (size) {
-            updatedHouses = updatedHouses.filter(house => house.charRef.metrosCuadradros >= parseInt(size));
+        if (precioMaximo) {
+            updateProperty = updateProperty.filter(property => {
+                return property.precio <= parseInt(precioMaximo) * 1000000;
+            });
         }
 
+        if (includeBarrios) {
+            updateProperty = updateProperty.filter(property => {
+                return includeBarrios.includes(property.barrioRef?.name);
+            });
+        }
 
-        setFilteredHouses(updatedHouses);
-        setUniqueBoy(updatedHouses.length === 1);
-    }, [title, minPrice, maxPrice, buyOrRent, sortOrder, sortBy, selectedBarrios, reformadoFilter, bedrooms, bathrooms, size, entries]);
+        if (flagReformado) {
+            updateProperty = updateProperty.filter(property => {
+                return !property.reformado;
+            });
+        }
+
+        if (flagSinReformar) {
+            updateProperty = updateProperty.filter(property => {
+                return property.reformado;
+            });
+        }
+
+        setFilterProperties(updateProperty);
+        setUniqueBoy(updateProperty.length === 1);
+    }, [
+        title,
+        banosMaximo,
+        banosMinimo,
+        dormitoriosMaximo,
+        dormitoriosMinimo,
+        metrosCuadradosMaximo,
+        metrosCuadradosMinimo,
+        precioMaximo,
+        precioMinimo,
+        includeBarrios,
+        flagReformado,
+        flagSinReformar,
+    ]);
 
 
     return (
         <>
             <div className="property-container" last-man-standing={cssUniqueBoy ? 'on' : ''}>
-                {filteredHouses.length === 0 ? (
+                {filterProperties.length === 0 ? (
                     <div className="flex justify-center flex-col m-auto">
                         <Logo />
                         <p className="text-center">No encontramos lo que buscas</p>
                         <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
                     </div>
                 ) : (
-                    filteredHouses.map((entry: Property) => (
+                    filterProperties.map((entry: Property) => (
                         <PropertyCard property={entry} key={entry.title} cssStateHover={cssStateHover} />
                     ))
                 )}
@@ -124,21 +160,3 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         //         : (b[sortBy as keyof typeof b] as number) - (a[sortBy as keyof typeof a] as number);
         // });
 */
-
-{/* <LeftBar
-                setSearchQuery={setSearchQuery}
-                setSortOrder={setSortOrder}
-                setSortBy={setSortBy}
-                setFilter={setFilter}
-                handleReset={handleReset}
-                allBarrios={allBarrios}
-                selectedBarrios={selectedBarrios}
-                setSelectedBarrios={setSelectedBarrios}
-                searchQuery={searchQuery}
-                filter={filter}
-                sortBy={sortBy}
-                sortOrder={sortOrder}
-                houseCountsByBarrio={houseCountsByBarrio} // Pass the house counts
-                reformadoFilter={reformadoFilter} // Pass reformado filter
-                setReformadoFilter={setReformadoFilter} // Function to update the reformado filter
-            /> */}
