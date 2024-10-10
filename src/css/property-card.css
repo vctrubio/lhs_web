@@ -1,13 +1,10 @@
-/* Property Container with smooth transitions */
 .property-container {
-    /* margin-left: var(--width-bar); */
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
     gap: 2px;
     min-height: 80vh;
     transition: all 0.5s ease;
-    /* Smooth transitions for rearrangement */
 }
 
 .property-title {
@@ -38,8 +35,33 @@
     margin: 14px;
     position: relative;
     opacity: 1;
-    transform: translateY(0);
     transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Image and property banner hover effect */
+.property-banner {
+    position: relative;
+    height: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.property-desc {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-around;
+    padding: 18px 32px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 0 0 12px 12px;
+    color: white;
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.3s ease;
+}
+
+.property-banner img {
+    transition: transform 0.4s ease;
 }
 
 /* Hover effect: subtle tilt and shadow */
@@ -50,7 +72,6 @@
 
 .property-desc.highlight {
     opacity: 1;
-    transform: translateY(0);
 }
 
 /* Property that will disappear */
@@ -60,45 +81,13 @@
     pointer-events: none;
 }
 
-
-/* Image and property banner hover effect */
-.property-banner {
-    position: relative;
-    height: 90%;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.property-banner img {
-    transition: transform 0.4s ease;
-}
-
-.property-desc {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    justify-content: space-around;
-    padding: 18px 32px;
-    margin-bottom: 12px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 0 0 12px 12px;
-    color: white;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: transform 0.6s ease, opacity 0.3s ease;
-}
-
 .property[css-state="on"] .property-desc {
     opacity: 1;
-    transform: translateY(0);
 }
 
 .property-container[last-man-standing="on"] .property:hover {
     transform: none;
-    /* or any transformation reset you want */
     transition: none;
-    /* Disable transition if needed */
 }
 
 .desc-box {
@@ -113,10 +102,7 @@
 }
 
 .property:hover .property-desc {
-    display: flex;
     opacity: 1;
-    transform: translateY(0);
-    /* Slide up effect */
 }
 
 .property-container .property {

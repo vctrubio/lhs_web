@@ -42,12 +42,12 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
                         quality={100}
                         priority
                     />
-                </div>
                 <div className="property-desc">
                     <DescBox text={`${area} m²`} icon={faRulerCombined} /> {/* Square meters */}
                     {bedrooms && <DescBox text={String(bedrooms)} icon={faBed} />}
                     {bathrooms && <DescBox text={String(bathrooms)} icon={faBath} />}
                     <DescBox text={String(property.barrioRef?.name)} icon={faMapMarkerAlt} /> {/* Location */}
+                </div>
                 </div>
             </Link>
         </div >
