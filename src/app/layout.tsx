@@ -78,10 +78,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-
-
-
-/*
-Twitter carad video embedment for EVENT page
-*/
