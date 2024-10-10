@@ -4,16 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { useSharedQueryState } from '@/lib/queries';
 import { Slider, TextField, Select, MenuItem, Checkbox, FormControlLabel, Button } from '@mui/material';
 import { SearchBar } from './SearchBar';
 import { Content } from './PropertyDesc';
-import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export const Logo = () => {
     return (
         <div className="logo">
-            LHS
+            <Link href="/">
+                LHS
+            </Link>
         </div>
     );
 };

@@ -15,6 +15,7 @@ import "@/css/searchbar.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
+import { SideBar } from "@/components/sidebar";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 
@@ -63,7 +64,12 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <PropertyProvider>
-          {children}
+          <div className="layout-div">
+            <SideBar />
+            <main style={{ flex: 1, padding: '1rem' }}>
+              {children}
+            </main>
+          </div>
         </PropertyProvider>
       </body>
     </html>
