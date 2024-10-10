@@ -4,18 +4,12 @@ import { Property } from "@/types/property";
 
 interface LayoutProps {
     children: React.ReactNode;
-    property: Property; // Ensure the property type matches your data
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, property }) => {
-    console.log("Layout Property:", property); // Log the property
-
+const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className="layout-div">
-            <div style={{ width: 420 }}>
-                <Content property={property} />
-            </div>
-            <main style={{ flex: 1, padding: '1rem' }}>
+            <main style={{ flex: 1, paddingTop: '24px' }}>
                 {children}
             </main>
         </div>

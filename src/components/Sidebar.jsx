@@ -7,6 +7,8 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useSharedQueryState } from '@/lib/queries';
 import { Slider, TextField, Select, MenuItem, Checkbox, FormControlLabel, Button } from '@mui/material';
 import { SearchBar } from './SearchBar';
+import { Content } from './PropertyDesc';
+import { usePathname } from 'next/navigation';
 
 export const Logo = () => {
     return (
@@ -88,7 +90,7 @@ export const SideBar = () => {
                 {/* <Navigation /> */}
             </div>
             <div className="middle">
-                <SearchBar />
+                <Content/>
             </div>
             <div className="footer">
                 <Footer />

@@ -9,10 +9,8 @@ import 'yet-another-react-lightbox/styles.css'; // Import the lightbox styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnowflake, faFire, faConciergeBell, faBox, faElevator, faCouch, faCar, faSun, faDraftingCompass, faRulerCombined } from '@fortawesome/free-solid-svg-icons';
 import { Property, Amentities, PropiedadCharacteristics } from '@/types/property';
-import { faBuilding } from '@fortawesome/free-regular-svg-icons';
-import { LeftSideBar } from '@/app/test/page';
-import { getRooms } from '@/lib/utils';
-import Layout from '../layout';
+
+import { useRouter } from 'next/navigation'
 
 /* MetaData for SEO */
 const MetaData = ({ property }) => (
@@ -115,17 +113,23 @@ const CharacteristicsIcons: React.FC<CharacteristicsIconsProps> = ({ characteris
 };
 
 
-const CardIdPage = ({ params }) => {
+const CardIdPage = ({ params }: { params: { [key: string]: string } }) => {
     const [property, setProperty] = useState<Property | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [photoIndex, setPhotoIndex] = useState(0);
 
     const { slug } = params;
 
+
     useEffect(() => {
         const fetchProperty = async () => {
-            const fetchedProperty = await fetchPropertyByID(slug);
-            setProperty(fetchedProperty);
+            try {
+                const fetchedProperty = await fetchPropertyByID(slug);
+                setProperty(fetchedProperty);
+            } catch (error) {
+                console.error("Error fetching property:", error);
+                setProperty(null); // or handle error state
+            }
         };
         fetchProperty();
     }, [slug]);
@@ -140,48 +144,42 @@ const CardIdPage = ({ params }) => {
 
     return (
         <>
-            {console.log("Property before passing to Layout:", property)} {/* Log here */}
-
-            <Layout property={property}>
-                <div className="page-id">
-                    {/*                 
+            <div className="page-id">
                 <div className={`photo-collage ${property.photos_url.length < 5 ? 'few-photos' : ''}`}>
-                {property.photos_url.map((photo, idx) => (
-                    <div
-                    key={idx}
-                    className={`photo-wrapper photo-${idx}`}
-                    onClick={() => {
-                        setPhotoIndex(idx);
-                        setIsOpen(true);
-                        }}
+                    {property.photos_url.map((photo, idx) => (
+                        <div
+                            key={idx}
+                            className={`photo-wrapper photo-${idx}`}
+                            onClick={() => {
+                                setPhotoIndex(idx);
+                                setIsOpen(true);
+                            }}
                         >
-                        <Image
-                        src={photo}
-                        alt={property.title}
-                        layout="fill"
-                        objectFit="cover"
-                        loading="lazy"
-                        quality={100}
-                        />
-                        </div>
-                        ))}
-                        </div>
-                        
-                        {isOpen && (
-                            <Lightbox
-                            open={isOpen}
-                            close={() => setIsOpen(false)}
-                            slides={images}
-                            index={photoIndex}
+                            <Image
+                                src={photo}
+                                alt={property.title}
+                                layout="fill"
+                                objectFit="cover"
+                                loading="lazy"
+                                quality={100}
                             />
-                            )} */}
-
-                    {/* Property Info */}
-                    <div className="page-id-desc">
-                        {property.description}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </Layout>
+
+                {isOpen && (
+                    <Lightbox
+                        open={isOpen}
+                        close={() => setIsOpen(false)}
+                        slides={images}
+                        index={photoIndex}
+                    />
+                )}
+
+                <div className="page-id-desc">
+                    {property.description}
+                </div>
+            </div>
         </>
     );
 };
