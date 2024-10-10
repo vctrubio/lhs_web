@@ -16,6 +16,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/sidebar";
+import { Suspense } from "react";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 
@@ -64,12 +65,14 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <PropertyProvider>
-          <div className="layout-div">
-            <SideBar />
-            <main style={{ flex: 1, padding: '1rem' }}>
-              {children}
-            </main>
-          </div>
+          <Suspense fallback={<div>Loading432...</div>}>
+            <div className="layout-div">
+              <SideBar />
+              <main style={{ flex: 1, padding: '1rem' }}>
+                {children}
+              </main>
+            </div>
+          </Suspense>
         </PropertyProvider>
       </body>
     </html>

@@ -13,20 +13,20 @@ import { Property, Amentities, PropiedadCharacteristics } from '@/types/property
 import { useRouter } from 'next/navigation'
 
 /* MetaData for SEO */
-const MetaData = ({ property }) => (
-    <Head>
-        <title>{property.title} - Property Details</title>
-        <meta name="description" content={property.description} />
-        <meta property="og:title" content={property.title} />
-        <meta property="og:description" content={property.description} />
-        <meta property="og:image" content={`https:${property.cover_url[0]}`} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={property.title} />
-        <meta name="twitter:description" content={property.description} />
-        <meta name="twitter:image" content={`https:${property.cover_url[0]}`} />
-    </Head>
-);
+// const MetaData = ({ property }) => (
+//     <Head>
+//         <title>{property.title} - Property Details</title>
+//         <meta name="description" content={property.description} />
+//         <meta property="og:title" content={property.title} />
+//         <meta property="og:description" content={property.description} />
+//         <meta property="og:image" content={`https:${property.cover_url[0]}`} />
+//         <meta property="og:type" content="website" />
+//         <meta name="twitter:card" content="summary_large_image" />
+//         <meta name="twitter:title" content={property.title} />
+//         <meta name="twitter:description" content={property.description} />
+//         <meta name="twitter:image" content={`https:${property.cover_url[0]}`} />
+//     </Head>
+// );
 
 const AmentitiesIcons = ({ amentities }: { amentities: Amentities }) => {
     const iconMap = {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getBathrooms, getTotalRooms } from "@/lib/utils";
+import { getBathrooms } from "@/lib/utils";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRulerCombined, faBed, faMapMarkerAlt, faBath } from '@fortawesome/free-solid-svg-icons'; // Import icons
 import { Property } from "@/types/property";

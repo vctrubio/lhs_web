@@ -1,8 +1,6 @@
 import { createClient, Entry } from 'contentful';
 import { Property, Barrio, BannerListings } from '@/types/property';
 import { ImageToUrl, extractImageUrls } from './utils';
-import { List } from 'postcss/lib/list';
-import { title } from 'process';
 
 const client = createClient({
     space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID as string,
@@ -32,8 +30,7 @@ export async function fetchPropertyByID(url: string): Promise<Property | null> {
 }
 
 
-function parsePropertyFromContentful({ entry }): Property {
-
+function parsePropertyFromContentful({ entry }: { entry: any }): Property {
     function getRoomPhotoUrl(entries: any[]): string[] {
         const urls = entries.map(entry => {
             const photos = entry.fields.photos
@@ -77,7 +74,7 @@ function parsePropertyFromContentful({ entry }): Property {
     } as Property;
 }
 
-function parseBarrioFromContentful({ entry }): Barrio {
+function parseBarrioFromContentful({ entry }: { entry: any }): Barrio {
     const { name, rating, description, location, longDescription } = entry.fields;
 
     return {
@@ -89,8 +86,8 @@ function parseBarrioFromContentful({ entry }): Barrio {
     } as Barrio;
 }
 
-function parseBannerListingsFromContentful({ entry }): BannerListings {
-    return entry.fields.listings.map(listing => ({
+function parseBannerListingsFromContentful({ entry }: { entry: any }): BannerListings {
+    return entry.fields.listings.map((listing: any) => ({
         title: entry.fields.title,
         photo: `https:${listing.fields.photos[0].fields.file.url}`,
         url: listing.fields.url
