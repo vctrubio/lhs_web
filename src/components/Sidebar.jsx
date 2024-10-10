@@ -6,6 +6,7 @@ import { faEnvelope, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useSharedQueryState } from '@/lib/queries';
 import { Slider, TextField, Select, MenuItem, Checkbox, FormControlLabel, Button } from '@mui/material';
+import { SearchBar } from './SearchBar';
 
 const Logo = () => {
     return (
@@ -79,42 +80,6 @@ const Footer = () => {
 };
 
 
-export const SearchProperties = () => {
-    const {
-        title, setTitle,
-        minPrice, setMinPrice,
-        maxPrice, setMaxPrice,
-        buyOrRent, setBuyOrRent,
-        reformadoFilter, setReformadoFilter,
-        bathrooms, setBathrooms,
-        bedrooms, setBedrooms,
-        size, setSize,
-        handleReset,
-    } = useSharedQueryState([]);
-
-
-    return (
-        <div className="content-browser">
-            <div>
-                <h2>Search Property</h2>
-                <input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    type='text'
-                    placeholder='Buscador'
-                />
-            </div>
-
-            <div>
-            </div>
-            
-            <div>
-                <button onClick={handleReset}>Reset Filters</button>
-            </div>
-        </div>
-    );
-};
-
 export const SideBar = () => {
     return (
         <div className="sidebar-level">
@@ -123,7 +88,7 @@ export const SideBar = () => {
                 <Navigation />
             </div>
             <div className="middle">
-                <SearchProperties />
+                <SearchBar />
             </div>
             <div className="footer">
                 <Footer />

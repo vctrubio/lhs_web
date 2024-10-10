@@ -5,7 +5,6 @@ import { Property } from "@/types/property";
 import { getRooms } from "@/lib/utils";
 import { Logo } from "@/lib/utils";
 import { useSharedQueryState } from '@/lib/queries';
-import { SearchProperties } from "./sidebar";
 
 //for server side {params, searchParams} as props
 export const SNF = ({ entries }: { entries: Property[] }) => {
