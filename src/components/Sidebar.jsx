@@ -8,7 +8,7 @@ import { useSharedQueryState } from '@/lib/queries';
 import { Slider, TextField, Select, MenuItem, Checkbox, FormControlLabel, Button } from '@mui/material';
 import { SearchBar } from './SearchBar';
 
-const Logo = () => {
+export const Logo = () => {
     return (
         <div className="logo">
             LHS

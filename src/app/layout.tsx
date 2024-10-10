@@ -10,6 +10,7 @@ import "@/css/property-card.css";
 import "@/css/airbnb.css";
 import "@/css/sidebar.css";
 import "@/css/layout.css";
+import "@/css/searchbar.css";
 
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';

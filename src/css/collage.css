@@ -1,9 +1,11 @@
 .photo-collage {
     display: grid;
-    gap: 10px;
+    gap: 18px;
     padding: 20px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-auto-rows: 200px;
+    max-height: 72vh;
+    overflow-y: scroll;
 }
 
 .photo-wrapper {
@@ -54,16 +56,17 @@
     /* Equivalent to mx-auto */
     margin-top: 0.5rem;
     /* Equivalent to mt-2 */
-    background-color: white;
-    /* Equivalent to bg-white */
-    border-radius: 0.5rem;
-    /* Equivalent to rounded-lg */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    /* Equivalent to shadow-lg */
     overflow: hidden;
     /* Equivalent to overflow-hidden */
 }
 
+.page-id-desc{
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    margin: 24px 0;
+}
 
 .property-prices{
     display: flex;
@@ -88,9 +91,6 @@
     margin-top: 1em;
 }
 
-.property-characteristics{
-
-}
 
 .pro-flex{
     display: flex;

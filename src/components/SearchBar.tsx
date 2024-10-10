@@ -44,10 +44,14 @@ const RenderView: React.FC<RenderViewProps> = ({ header, min, max, value, setVal
         step={step}
         marks={marks}
         disableSwap
+        valueLabelDisplay="auto"
+      // style={{border: '1px solid black '}}
       />
     </div>
   );
 };
+
+
 
 export const SearchBar = () => {
   const {
@@ -77,15 +81,15 @@ export const SearchBar = () => {
 
   const handleReformadoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFlagReformado(event.target.checked ? '' : 'no');
-};
+  };
 
-const handleSinReformarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSinReformarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFlagSinReformar(event.target.checked ? '' : 'no');
-};
+  };
 
-  return (
-    <div className='p-4' style={{ width: 365 }}>
-      <div>
+  const TitleSearchBar = () => {
+    return (
+      <>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -93,9 +97,15 @@ const handleSinReformarChange = (event: React.ChangeEvent<HTMLInputElement>) => 
           placeholder='Propiedades'
           className='w-full mb-4'
         />
-      </div>
+      </>
+    )
+  }
 
-      <div style={{ display: 'flex', gap: '5px' }}>
+  return (
+    <div className="search-bar">
+        <TitleSearchBar/> 
+
+      {/* <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
           control={<Switch defaultChecked onChange={handleReformadoChange} />}
           label="Reformado"
@@ -106,7 +116,7 @@ const handleSinReformarChange = (event: React.ChangeEvent<HTMLInputElement>) => 
           label="Sin Reformar"
           labelPlacement='start'
         />
-      </div>
+      </div> */}
 
       <div>
         <RenderView header="Precio" min={priceRange[0]} max={priceRange[1]} value={priceValue} setValue={setPriceValue} />

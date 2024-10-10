@@ -12,6 +12,7 @@ import { Property, Amentities, PropiedadCharacteristics } from '@/types/property
 import { faBuilding } from '@fortawesome/free-regular-svg-icons';
 import { LeftSideBar } from '@/app/test/page';
 import { getRooms } from '@/lib/utils';
+import Layout from '../layout';
 
 /* MetaData for SEO */
 const MetaData = ({ property }) => (
@@ -113,11 +114,11 @@ const CharacteristicsIcons: React.FC<CharacteristicsIconsProps> = ({ characteris
     );
 };
 
+
 const CardIdPage = ({ params }) => {
     const [property, setProperty] = useState<Property | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [photoIndex, setPhotoIndex] = useState(0);
-    const [isPlanoOpen, setIsPlanoOpen] = useState(false);
 
     const { slug } = params;
 
@@ -130,59 +131,68 @@ const CardIdPage = ({ params }) => {
     }, [slug]);
 
     if (!property) {
-        return <div>Not found... Loading...</div>;
+        return <div>Loading...</div>;
     }
 
-    console.log("🚀 ~ CardIdPage ~ property:", property)
     const images = property.cover_url.map(photo => ({
         src: photo
     }));
 
-    if (!property)
-        return <div>Loading...</div>;
     return (
         <>
-            <div className="page-id">
+            {console.log("Property before passing to Layout:", property)} {/* Log here */}
+
+            <Layout property={property}>
+                <div className="page-id">
+                    {/*                 
                 <div className={`photo-collage ${property.photos_url.length < 5 ? 'few-photos' : ''}`}>
-                    {property.photos_url.map((photo, idx) => (
-                        <div
-                            key={idx}
-                            className={`photo-wrapper photo-${idx}`}
-                            onClick={() => {
-                                setPhotoIndex(idx);
-                                setIsOpen(true);
-                            }} // Open lightbox on click
+                {property.photos_url.map((photo, idx) => (
+                    <div
+                    key={idx}
+                    className={`photo-wrapper photo-${idx}`}
+                    onClick={() => {
+                        setPhotoIndex(idx);
+                        setIsOpen(true);
+                        }}
                         >
-                            <Image
-                                src={photo}
-                                alt={property.title}
-                                layout="fill"
-                                objectFit="cover"
-                                loading="lazy"
-                                quality={100}
-                            />
+                        <Image
+                        src={photo}
+                        alt={property.title}
+                        layout="fill"
+                        objectFit="cover"
+                        loading="lazy"
+                        quality={100}
+                        />
                         </div>
-                    ))}
+                        ))}
+                        </div>
+                        
+                        {isOpen && (
+                            <Lightbox
+                            open={isOpen}
+                            close={() => setIsOpen(false)}
+                            slides={images}
+                            index={photoIndex}
+                            />
+                            )} */}
+
+                    {/* Property Info */}
+                    <div className="page-id-desc">
+                        {property.description}
+                    </div>
                 </div>
+            </Layout>
+        </>
+    );
+};
 
-                {isOpen && (
-                    <Lightbox
-                        open={isOpen}
-                        close={() => setIsOpen(false)}
-                        slides={images}
-                        index={photoIndex} // Start from the clicked image
-                    />
-                )}
+export default CardIdPage;
 
-                {/* Property Info */}
-                <div className="p-6">
-                    <div className='flex justify-between'>
-                        <h1 className="text-3xl font-bold">{property.title}</h1>
-                        <div className='flex items-center gap-4'>
-                            <div onClick={() => setIsPlanoOpen(true)} className="cursor-pointer flex items-center border p-2">
-                                <FontAwesomeIcon icon={faBuilding} />
-                            </div>
-                            {property.plano_url && (
+
+/*
+lightbox open plano
+
+{property.plano_url && (
                                 <Lightbox
                                     open={isPlanoOpen}
                                     close={() => setIsPlanoOpen(false)}
@@ -190,17 +200,11 @@ const CardIdPage = ({ params }) => {
 
                                 />
                             )}
-                            <div className='flex gap-2 items-center'>
-                                <span>{property.charRef.metrosCuadradros} m<sup>2</sup></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='property-description'>
-                        {property.description}
-                    </div>
 
-                    {/* Property Price and Area */}
-                    <div className='pro-flex'>
+
+precios
+
+ <div className='pro-flex'>
                         <div className="property-prices">
                             <div>
                                 <span className="text-2xl font-semibold">
@@ -209,10 +213,10 @@ const CardIdPage = ({ params }) => {
                             </div>
                             <div>
                                 {
-                                    property.precioIbi !== 0 && 
-                                        <div>
-                                            IBI: ${property.precioIbi.toLocaleString()}
-                                        </div>
+                                    property.precioIbi !== 0 &&
+                                    <div>
+                                        IBI: ${property.precioIbi.toLocaleString()}
+                                    </div>
                                 }
                             </div>
                             <div>
@@ -224,13 +228,22 @@ const CardIdPage = ({ params }) => {
                                     ) : <div></div>
                                 }
                             </div>
-                            <span>
+
+                        </div>
+
+                    </div>
+
+                    */
+
+/*
+
+             <span>
                                 {
                                     property.reformado ? 'Reformado' : 'Para reformar'
                                 }
                             </span>
-                        </div>
-                        <div className="property-characteristics">
+                            
+                <div className="property-characteristics">
                             <div>
                                 {property.charRef && <CharacteristicsIcons characteristics={property.charRef} />}
                             </div>
@@ -239,23 +252,4 @@ const CardIdPage = ({ params }) => {
                             </div>
                         </div>
 
-
-                    </div>
-
-                    {
-                        property.barrioRef &&
-                        <div className="flex justify-end p-4">
-                            <h2 className="text-xl font-semibold">
-                                {property.barrioRef.name}
-                            </h2>
-                            {/* <p className="text-gray-600">{property.barrioRef.description}</p> */}
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </>
-    );
-};
-
-export default CardIdPage;
+*/
