@@ -1,5 +1,5 @@
 import React from "react";
-import { Content } from "@/components/PropertyDesc";
+import { Content } from "@/components/ContentProperty";
 import { Property } from "@/types/property";
 
 interface LayoutProps {

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getBathrooms } from "@/lib/utils";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRulerCombined, faBed, faMapMarkerAlt, faBath } from '@fortawesome/free-solid-svg-icons'; // Import icons
+
 import { Property } from "@/types/property";
 import { formatCurrency } from "@/lib/utils";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { iconRulerCombined, iconBed, iconBath, iconMapMarkerAlt } from '@/lib/fontawesome';
 
 interface DescBoxProps {
     text: string;
@@ -43,10 +44,10 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
                         priority
                     />
                     <div className="property-desc">
-                        <DescBox text={`${area} m²`} icon={faRulerCombined} /> {/* Square meters */}
-                        {bedrooms && <DescBox text={String(bedrooms)} icon={faBed} />}
-                        {bathrooms && <DescBox text={String(bathrooms)} icon={faBath} />}
-                        <DescBox text={String(property.barrioRef?.name)} icon={faMapMarkerAlt} /> {/* Location */}
+                        <DescBox text={`${area} m²`} icon={iconRulerCombined} /> {/* Square meters */}
+                        {bedrooms && <DescBox text={String(bedrooms)} icon={iconBed} />}
+                        {bathrooms && <DescBox text={String(bathrooms)} icon={iconBath} />}
+                        <DescBox text={String(property.barrioRef?.name)} icon={iconMapMarkerAlt} /> {/* Location */}
                     </div>
                 </div>
             </Link>

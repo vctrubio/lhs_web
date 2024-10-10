@@ -13,9 +13,11 @@ export const Logo = () => {
 export function formatCurrency(value: number, rent: boolean = false): any {
   let formattedValue;
   if (value >= 1_000_000) {
-    formattedValue = (value / 1_000_000).toFixed(1) + 'M';
+    const millionValue = value / 1_000_000;
+    formattedValue = millionValue + 'M';
   } else if (value >= 1_000) {
-    formattedValue = (value / 1_000).toFixed(0) + 'K';
+    const thousandValue = value / 1_000;
+    formattedValue = Number.isInteger(thousandValue) ? thousandValue + 'K' : thousandValue.toFixed(0) + 'K';
   } else {
     formattedValue = value.toLocaleString('de-DE');
   }

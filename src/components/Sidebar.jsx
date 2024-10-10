@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { SearchBar } from './SearchBar';
-import { Content } from './PropertyDesc';
+import { Content } from './ContentProperty';
 import Link from 'next/link';
 
 const Logo = () => {
