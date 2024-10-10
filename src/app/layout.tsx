@@ -15,7 +15,7 @@ import "@/css/searchbar.css";
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
-import { SideBar } from "@/components/sidebar";
+import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
