@@ -90,7 +90,7 @@ export const SideBar = () => {
                 {/* <Navigation /> */}
             </div>
             <div className="middle">
-                <Content/>
+                <Content />
             </div>
             <div className="footer">
                 <Footer />

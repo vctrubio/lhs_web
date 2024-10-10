@@ -87,9 +87,8 @@ export const SearchBar = () => {
     setFlagSinReformar(event.target.checked ? '' : 'no');
   };
 
-  const TitleSearchBar = () => {
-    return (
-      <>
+  return (
+    <div className="search-bar">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -97,13 +96,6 @@ export const SearchBar = () => {
           placeholder='Propiedades'
           className='w-full mb-4'
         />
-      </>
-    )
-  }
-
-  return (
-    <div className="search-bar">
-        <TitleSearchBar/> 
 
       {/* <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
