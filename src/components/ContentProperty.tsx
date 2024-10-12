@@ -4,36 +4,55 @@ import { usePathname } from 'next/navigation';
 import { SearchBar } from './SearchBar';
 import { fetchPropertyByID } from '@/lib/bridges';
 import { Property } from '@/types/property';
-import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconRulerCombined, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
+import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconRulerCombined, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
+import Slider from '@mui/material/Slider';
 
 interface SectionProps {
-    title: string;
-    number: number;
+    title: string | undefined;
+    number?: number | null; // Make number optional
+    disabled: boolean;
     icon: React.ReactNode; // Use React.ReactNode to allow any valid JSX
-    navigationBar: React.ReactNode;
-    children: React.ReactNode;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; // New onChange prop
 }
 
-export const Section: React.FC<SectionProps> = ({ title, number, icon, navigationBar, children }) => {
+
+export const Section: React.FC<SectionProps> = ({
+    title,
+    disabled,
+    number = null,
+    icon,
+    onChange = () => { } // Default to a no-op function
+}) => {
     return (
         <div className='menu'>
             <div>
-                <h2>{title}</h2>
-                <div className='gap-1' style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>{number && number.toLocaleString('de-DE')} </div>
-                    <div>
-                        {icon} {/* Render the icon here */}
-                    </div>
-                </div>
+                <input
+                    value={title}
+                    onChange={onChange} // Use the onChange prop here
+                    disabled={disabled}
+                    placeholder={disabled ? '' : 'Buscador'}  // Optional placeholder
+                />
+                {icon}
             </div>
-            <div>{children}</div>
+            {number &&
+                <div>
+                    <Slider
+                        value={number}
+                        disabled={disabled}
+                        valueLabelDisplay="auto"
+                        style={{ color: 'var(--color-green-dark)' }}
+                    />
+                </div>
+            }
         </div>
     );
 };
 
 export const Content = () => {
-    const [property, setProperty] = useState<Property | null>(null);
+    const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data
+    const [loading, setLoading] = useState(true); // Track loading state
     const pathname = usePathname();
+    const flagPathname = pathname.split('/').length === 2;
 
     useEffect(() => {
         const ptrFetch = async () => {
@@ -42,42 +61,58 @@ export const Content = () => {
             const property = await fetchPropertyByID(lastPart);
             console.log("🚀 ~ ptrFetch ~ property:", property);
             setProperty(property);
+            setLoading(false); // Set loading to false when data is fetched
         };
 
+        // Call the data-fetching function
         ptrFetch();
     }, [pathname]);
 
-    if (pathname.split('/').length === 2) {
-        return <SearchBar />;
-    }
-
     return (
         <div className='content'>
-            {property && (
+            {!flagPathname ? (
                 <>
-                    <Section title={property.title} icon={<IconPlano />} navigationBar={null}>
-                        <div></div>
-                    </Section>
-                    <Section title="Precio" number={property.precio} icon={<IconPrice />} navigationBar={null}>
-                        <div className='flex flex-col' style={{ fontSize: 14 }}>
-                            <div>Precio de Comunidad: 18000 </div>
-                            <div>Precio IBI: 2100 </div>
-                        </div>
-                    </Section>
-                    <Section title="Baños" number={property.charRef.banos} icon={<IconBath />} navigationBar={null}>
-                        <div>number of bathrooms</div>
-                    </Section>
-                    <Section title="Dormitorios" number={property.charRef.dormitorios} icon={<IconBed />} navigationBar={null}>
-                        <div>number of bedrooms</div>
-                    </Section>
-                    <Section title="Metros" number={property.charRef.metrosCuadradros} icon={<IconMeasure />} navigationBar={null}>
-                        <div>square meters</div>
-                    </Section>
-                    <Section title="Barrio" icon={<IconLocation />} navigationBar={null}>
-                        <div>{property.barrioRef.name}</div>
-                    </Section>
+                    <Section
+                        title={loading ? '' : property?.title}
+                        icon={loading ? null : <IconPlano />}
+                        disabled={loading} // Disable inputs while loading
+                    />
                 </>
+            ) : (
+                <SearchBar />
             )}
+            <div>
+                <button className="border border-white rounded-2xl">BTN DESC</button>
+            </div>
         </div>
     );
 };
+
+/*
+
+                    <Section title="Precio" number={property.precio} icon={<IconPrice />}>
+                    </Section>
+                    <Section title="Baños" number={property.charRef.banos} icon={<IconBath />}>
+                    </Section>
+                    <Section title="Dormitorios" number={property.charRef.dormitorios} icon={<IconBed />}>
+                    </Section>
+                    <Section title="Metros" number={property.charRef.metrosCuadradros} icon={<IconMeasure />}>
+                    </Section>
+                    <Section title="Barrio" icon={<IconLocation />}>
+                    </Section>
+
+                     <div>{property.barrioRef.name}</div> 
+
+
+      <div className='flex flex-col' style={{ fontSize: 14 }}>
+                            <div>Precio de Comunidad: 18000 </div>
+                            <div>Precio IBI: 2100 </div>
+                        </div>
+
+
+        <div className='gap-1' style={{ display: 'flex', alignItems: 'center' }}>
+                    <div>{number && number.toLocaleString('de-DE')} </div>
+                    <div>
+                        {icon} {/* Render the icon here
+
+*/

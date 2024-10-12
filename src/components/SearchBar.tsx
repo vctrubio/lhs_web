@@ -10,6 +10,8 @@ import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useSharedQueryState } from '@/lib/queries';
+import { IconSearch } from "@/lib/svgs";
+import { Section } from '@/components/ContentProperty';
 
 interface RenderViewProps {
   header: string;
@@ -53,7 +55,6 @@ const RenderView: React.FC<RenderViewProps> = ({ header, min, max, value, setVal
 };
 
 
-
 export const SearchBar = () => {
   const {
     priceRange, priceValue, setPriceValue,
@@ -89,16 +90,48 @@ export const SearchBar = () => {
   };
 
   return (
-    <div className="search-bar">
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        type='text'
-        placeholder='Propiedades'
-        className='w-full mb-4'
+    <>
+      <Section
+        title={title} // Bind the title from shared state
+        icon={<IconSearch />}
+        disabled={false}
+        onChange={(e) => setTitle(e.target.value)} // Update title on change
       />
+    </>
+  );
+}
 
-      {/* <div style={{ display: 'flex', gap: '5px' }}>
+/*
+
+      <div>
+        <RenderView header="Precio" min={priceRange[0]} max={priceRange[1]} value={priceValue} setValue={setPriceValue} />
+        <RenderView header="Baños" min={bathroomRange[0]} max={bathroomRange[1]} value={bathroomValue} setValue={setBathroomValue} />
+        <RenderView header="Dormitorios" min={bedroomRange[0]} max={bedroomRange[1]} value={bedroomValue} setValue={setBedroomValue} />
+        <RenderView header="Metros" min={metersSquareRange[0]} max={metersSquareRange[1]} value={metersSquareValue} setValue={setMetersSquareValue} />
+      </div>
+
+
+
+      <div className='flex flex-col gap-4 mt-2'>
+        <Autocomplete
+          multiple
+          disableCloseOnSelect
+          options={barrios}
+          value={selectedBarrios}
+          filterSelectedOptions
+          onChange={handleBarrioChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Barrios"
+            />
+          )}
+        />
+      </div>
+
+
+
+  <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
           control={<Switch defaultChecked onChange={handleReformadoChange} />}
           label="Reformado"
@@ -109,18 +142,10 @@ export const SearchBar = () => {
           label="Sin Reformar"
           labelPlacement='start'
         />
-      </div> */}
-
-      <div>
-        <RenderView header="Precio" min={priceRange[0]} max={priceRange[1]} value={priceValue} setValue={setPriceValue} />
-        <RenderView header="Baños" min={bathroomRange[0]} max={bathroomRange[1]} value={bathroomValue} setValue={setBathroomValue} />
-        <RenderView header="Dormitorios" min={bedroomRange[0]} max={bedroomRange[1]} value={bedroomValue} setValue={setBedroomValue} />
-        <RenderView header="Metros" min={metersSquareRange[0]} max={metersSquareRange[1]} value={metersSquareValue} setValue={setMetersSquareValue} />
-      </div>
+      </div> 
 
 
-      <div className='flex flex-col gap-4 mt-2'>
-        {/* <FormControl fullWidth>
+     {/* <FormControl fullWidth>
           <InputLabel id="amenities-select-label"
             shrink={false}
             style={{
@@ -146,28 +171,6 @@ export const SearchBar = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl> */}
+        </FormControl> 
 
-        <Autocomplete
-          multiple
-          disableCloseOnSelect
-          options={barrios}
-          value={selectedBarrios}
-          filterSelectedOptions
-          onChange={handleBarrioChange}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Barrios"
-            />
-          )}
-        />
-      </div>
-
-
-      <div>
-        <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
-      </div>
-    </div>
-  );
-}
+*/
