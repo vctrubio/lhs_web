@@ -59,18 +59,21 @@ export const Content = () => {
                         <div></div>
                     </Section>
                     <Section title="Precio" number={property.precio} icon={<IconPrice />} navigationBar={null}>
-                        <div>render price bar with marks</div>
+                        <div className='flex flex-col' style={{ fontSize: 14 }}>
+                            <div>Precio de Comunidad: 18000 </div>
+                            <div>Precio IBI: 2100 </div>
+                        </div>
                     </Section>
-                    <Section title="Baño" number={property.charRef.banos} icon={<IconBath />} navigationBar={null}>
+                    <Section title="Baños" number={property.charRef.banos} icon={<IconBath />} navigationBar={null}>
                         <div>number of bathrooms</div>
                     </Section>
-                    <Section title="Dormitorio" number={property.charRef.dormitorios} icon={<IconBed />} navigationBar={null}>
+                    <Section title="Dormitorios" number={property.charRef.dormitorios} icon={<IconBed />} navigationBar={null}>
                         <div>number of bedrooms</div>
                     </Section>
                     <Section title="Metros" number={property.charRef.metrosCuadradros} icon={<IconMeasure />} navigationBar={null}>
                         <div>square meters</div>
                     </Section>
-                    <Section title="Barrio" icon={<IconLocation/>} navigationBar={null}>
+                    <Section title="Barrio" icon={<IconLocation />} navigationBar={null}>
                         <div>{property.barrioRef.name}</div>
                     </Section>
                 </>

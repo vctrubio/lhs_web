@@ -45,6 +45,7 @@ const RenderView: React.FC<RenderViewProps> = ({ header, min, max, value, setVal
         marks={marks}
         disableSwap
         valueLabelDisplay="auto"
+        style={{ color: 'var(--color-green-dark)' }}
       // style={{border: '1px solid black '}}
       />
     </div>
@@ -89,13 +90,13 @@ export const SearchBar = () => {
 
   return (
     <div className="search-bar">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type='text'
-          placeholder='Propiedades'
-          className='w-full mb-4'
-        />
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        type='text'
+        placeholder='Propiedades'
+        className='w-full mb-4'
+      />
 
       {/* <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel

@@ -1,4 +1,5 @@
 import { Property } from '@/types/property';
+import { IconPrice } from '@/lib/svgs'; // Ensure these are imported correctly
 
 export const Logo = () => {
   return (
@@ -9,6 +10,7 @@ export const Logo = () => {
     </div>
   )
 }
+
 
 export function formatCurrency(value: number, rent: boolean = false): any {
   let formattedValue;
@@ -23,9 +25,9 @@ export function formatCurrency(value: number, rent: boolean = false): any {
   }
 
   return (
-    <>
-      {formattedValue} <span className="italic">€{rent ? '' : '/mes'}</span>
-    </>
+    <div className='flex mb-2'>
+      <span style={{paddingTop: '4px'}}>{formattedValue}</span><IconPrice/><span className="italic">{rent ? '' : '/mes'}</span>
+    </div>
   );
 }
 

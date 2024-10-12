@@ -51,8 +51,9 @@
 
 input{
   padding: 10px;
-  border: 1px solid #4c4c4c98;
-  border-radius: 12px;
+  border-bottom: 1px solid #4c4c4c98;
+  border-top: 1px solid #4c4c4c98;
+  background-color: transparent;
 }
 
 input:focus{
