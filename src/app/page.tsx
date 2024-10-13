@@ -15,10 +15,20 @@ export default async function MainPage() {
 
 
 /*
-create left side bar
 make mobile responsive
-show properties all page
-show property by id page
 
+
+LAYOUT -- ipad and up -- 
+Logo
+navigation
+Filter bars
+Content on the side
+
+
+LAYOUT -- IPHONE  -- 
+LOGO with burger bar dropdown
+searchbar and sort
+click to go dropwdown filter ...
+Content
 
 */

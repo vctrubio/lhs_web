@@ -4,7 +4,7 @@ import { PropertyCard } from '@/components/Property';
 import { Property } from "@/types/property";
 import { getBathrooms, getRooms } from "@/lib/utils";
 import { Logo } from "@/lib/utils";
-import { useSharedQueryState } from '@/lib/queries';
+import { useSharedQueryState } from '@/lib/nuqs';
 import { SearchBar } from "./SearchBar";
 
 //for server side {params, searchParams} as props

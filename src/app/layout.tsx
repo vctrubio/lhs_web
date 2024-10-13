@@ -2,23 +2,20 @@ import type { Metadata } from "next";
 import "@/css/globals.css";
 import "@/css/pages.css";
 import "@/css/components.css";
-import "@/css/search-filter.css";
 import "@/css/lhs.css";
 import "@/css/collage.css";
 import "@/css/test.css";
 import "@/css/property-card.css";
-import "@/css/airbnb.css";
 import "@/css/sidebar.css";
 import "@/css/layout.css";
-import "@/css/searchbar.css";
 
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
-config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 export const metadata: Metadata = {
   title: "LHS Concept",

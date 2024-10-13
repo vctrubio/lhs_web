@@ -117,3 +117,28 @@ export async function fetchEntriesContentful(): Promise<{ properties: Property[]
     return { properties, barrios, listings }
 
 }
+
+
+
+/*
+seperate property buy and rent to distinguish price
+get Entries by id needs to check local storage first
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/

@@ -2,16 +2,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faSort, faNoteSticky, faFile, faBook } from "@fortawesome/free-solid-svg-icons";
 
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from '@mui/material/Slider';
 import { FormControl, InputLabel, MenuItem, Select, Checkbox, ListItemText } from '@mui/material';
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useSharedQueryState } from '@/lib/queries';
-import { IconSearch } from "@/lib/svgs";
-import { Section } from '@/components/ContentProperty';
+
+
+import { useSharedQueryState } from '@/lib/nuqs';
+import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconRulerCombined, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
+import { Section } from '@/components/SideBarContentProperty';
 
 interface RenderViewProps {
   header: string;
@@ -48,7 +50,6 @@ const RenderView: React.FC<RenderViewProps> = ({ header, min, max, value, setVal
         disableSwap
         valueLabelDisplay="auto"
         style={{ color: 'var(--color-green-dark)' }}
-      // style={{border: '1px solid black '}}
       />
     </div>
   );
@@ -96,6 +97,18 @@ export const SearchBar = () => {
         icon={<IconSearch />}
         disabled={false}
         onChange={(e) => setTitle(e.target.value)} // Update title on change
+      />
+
+      <Section
+        title="Precio"
+        icon={<IconPrice />}
+        disabled={false}
+        slider={{
+          min: priceRange[0],
+          max: priceRange[1],
+          value: priceValue,
+          setValue: setPriceValue,
+        }}
       />
     </>
   );
