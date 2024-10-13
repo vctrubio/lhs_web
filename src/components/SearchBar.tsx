@@ -90,24 +90,59 @@ export const SearchBar = () => {
     setFlagSinReformar(event.target.checked ? '' : 'no');
   };
 
+  const disabledFlag = false;
   return (
     <>
       <Section
         title={title} // Bind the title from shared state
         icon={<IconSearch />}
-        disabled={false}
+        disabled={disabledFlag}
         onChange={(e) => setTitle(e.target.value)} // Update title on change
       />
 
       <Section
         title="Precio"
         icon={<IconPrice />}
-        disabled={false}
+        disabled={disabledFlag}
         slider={{
           min: priceRange[0],
           max: priceRange[1],
           value: priceValue,
           setValue: setPriceValue,
+        }}
+      />
+
+      <Section
+        title="Dormitorios"
+        icon={<IconBed />}
+        disabled={disabledFlag}
+        slider={{
+          min: bedroomRange[0],
+          max: bedroomRange[1],
+          value: bedroomValue,
+          setValue: setBedroomValue,
+        }}
+      />
+      <Section
+        title="Baños"
+        icon={<IconBath />}
+        disabled={disabledFlag}
+        slider={{
+          min: bathroomRange[0],
+          max: bathroomRange[1],
+          value: bathroomValue,
+          setValue: setBathroomValue,
+        }}
+      />
+      <Section
+        title="Metros"
+        icon={<IconMeasure />}
+        disabled={disabledFlag}
+        slider={{
+          min: metersSquareRange[0],
+          max: metersSquareRange[1],
+          value: metersSquareValue,
+          setValue: setMetersSquareValue,
         }}
       />
     </>

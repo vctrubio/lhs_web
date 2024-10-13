@@ -7,12 +7,13 @@ import { Property } from '@/types/property';
 import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconRulerCombined, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
 import Slider from '@mui/material/Slider';
 import { formatPrice } from '@/lib/utils';
+import { useSharedQueryState } from '@/lib/nuqs';
 
 interface SliderProps {
     min: number;
     max: number;
     value: number[];
-    setValue: (value: number[]) => void;
+    setValue?: ((value: number[]) => void) | null; // Make setValue optional and allow null
 }
 
 interface SectionProps {
@@ -37,7 +38,7 @@ export const Section: React.FC<SectionProps> = ({
             { value: slider.min, label: title === 'Precio' ? `${slider.min}M €` : slider.min.toString() },
             { value: slider.max, label: title === 'Precio' ? `${slider.max}M €` : slider.max.toString() },
             ...(markValue !== null && markValue !== undefined
-                ? [{ value: markValue, label: <span style={{ fontWeight: 'bold' }}>{markValue.toString()}</span> }]
+                ? [{ value: markValue, label: title !== 'Precio' && <span style={{ fontWeight: 'bold' }}>{markValue.toString()}</span> }]
                 : []),
         ]
         : [];
@@ -51,6 +52,7 @@ export const Section: React.FC<SectionProps> = ({
                     disabled={disabled}
                     placeholder={disabled ? '' : 'Buscador'}
                 />
+                {title == 'Precio' && <div>{markValue}</div>}
                 {icon}
             </div>
             {slider && (
@@ -91,9 +93,13 @@ export const Content = () => {
     const pathname = usePathname();
     const flagPathname = pathname.split('/').length === 2;
 
+    const {
+        priceRange, priceValue,
+        bathroomRange, bathroomValue,
+        bedroomRange, bedroomValue,
+        metersSquareRange
+    } = useSharedQueryState();
 
-    const [priceValue, setPriceValue] = useState<number[]>([0, 8]); // Default value for slider, adapt it as per your property structure
-    const [banoValue, setBanoValue] = useState<number[]>([0, 5]); // Default value for slider, adapt it as per your property structure
 
     useEffect(() => {
         const ptrFetch = async () => {
@@ -122,24 +128,48 @@ export const Content = () => {
                         icon={loading ? null : <IconPrice />}
                         disabled={disableFlag}
                         slider={{
-                            min: priceValue[0],
-                            max: priceValue[1],
+                            min: priceRange[0],
+                            max: priceRange[1],
                             value: priceValue,
-                            setValue: setPriceValue,
+                            setValue: null,
                         }}
                         markValue={formatPrice(property?.precio)}
-                        
-                    />  
+
+                    />
+                    <Section
+                        title="Dormitorios"
+                        markValue={property?.charRef.dormitorios}
+                        icon={<IconBed />}
+                        disabled={true}
+                        slider={{
+                            min: bedroomRange[0],
+                            max: bedroomRange[1],
+                            value: bedroomValue,
+                            setValue: null, // Pass null to setValue
+                        }}
+                    />
                     <Section
                         title="Baños"
                         markValue={property?.charRef.banos}
                         icon={<IconBath />}
                         disabled={true}
                         slider={{
-                            min: banoValue[0],
-                            max: banoValue[1],
-                            value: banoValue,
-                            setValue: setBanoValue,
+                            min: bathroomRange[0],
+                            max: bathroomRange[1],
+                            value: bathroomValue,
+                            setValue: null, // Pass null to setValue
+                        }}
+                    />
+                    <Section
+                        title="Metros"
+                        markValue={property?.charRef.metrosCuadradros}
+                        icon={<IconMeasure />}
+                        disabled={true}
+                        slider={{
+                            min: metersSquareRange[0],
+                            max: metersSquareRange[1],
+                            value: [property?.charRef.metrosCuadradros],
+                            setValue: null,
                         }}
                     />
 
