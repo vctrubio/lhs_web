@@ -82,6 +82,7 @@ export const Content = () => {
                 min: metersSquareRange[0],
                 max: metersSquareRange[1],
                 value: property?.charRef.metrosCuadradros,
+                setValue: null,
             },
             disabled: true,
             markValue: property?.charRef.metrosCuadradros,
