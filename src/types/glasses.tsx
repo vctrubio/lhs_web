@@ -4,7 +4,6 @@ import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch } from '@/lib/svg
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
 
 class SideBarPropComponent extends Component {
-    // Class properties (data)
     state = {
         title: this.props.title,
         slider: this.props.slider,
@@ -13,7 +12,6 @@ class SideBarPropComponent extends Component {
         onChange: this.props.onChange,
     };
 
-    // Map of section titles to icons
     icons = {
         Precio: <IconPrice />,
         Dormitorios: <IconBed />,
@@ -22,7 +20,6 @@ class SideBarPropComponent extends Component {
         Buscador: <IconSearch />,
     };
 
-    // Marks logic for sliders
     getMarks = () => {
         const { slider, markValue } = this.state;
         return slider
@@ -45,13 +42,11 @@ class SideBarPropComponent extends Component {
         return markValue;
     };
 
-    // Render method to return JSX
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
         const icon = this.icons[title]; // Get the icon based on the title
         const formattedMarkValue = this.getFormattedMarkValue(); // Get formatted markValue
 
-        // If title is 'Precio', we format markValue with toLocaleString
         const precioValue = title === 'Precio' && markValue
             ? markValue.toLocaleString('de-DE')
             : null;
@@ -66,7 +61,6 @@ class SideBarPropComponent extends Component {
                         placeholder={disabled ? '' : 'Buscador'}
                     />
                     <div className='flex items-center'>
-                        {/* Display the formatted price if it's the 'Precio' section */}
                         {precioValue && (
                             <span id='price-color'>
                                 {precioValue}

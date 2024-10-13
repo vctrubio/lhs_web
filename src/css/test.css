@@ -23,14 +23,14 @@
         height: 50px;
     }
 
-    >*:last-child {
+    /* >*:last-child {
         border: none;
         box-shadow: none;
         border-radius: 0px;
         height: 50px;
         margin: 0 auto;
 
-    }
+    } */
 
     h2{
         font-size: 24px;
