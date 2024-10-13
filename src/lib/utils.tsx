@@ -11,7 +11,6 @@ export const Logo = () => {
   )
 }
 
-
 export function formatCurrency(value: number, rent: boolean = false): any {
   let formattedValue;
   if (value >= 1_000_000) {

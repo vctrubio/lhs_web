@@ -6,8 +6,9 @@ import { fetchPropertyByID } from '@/lib/bridges';
 import { Property } from '@/types/property';
 import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconRulerCombined, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
 import Slider from '@mui/material/Slider';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatPriceMilToEuro } from '@/lib/utils';
 import { useSharedQueryState } from '@/lib/nuqs';
+import { useRouter } from 'next/router'; // Import useRouter
 
 interface SliderProps {
     min: number;
@@ -43,6 +44,9 @@ export const Section: React.FC<SectionProps> = ({
         ]
         : [];
 
+    const precioValue = title === 'Precio' ? markValue?.toLocaleString('de-DE') : null;
+    markValue = title === 'Precio' ? formatPrice(markValue) : markValue;
+
     return (
         <div className='menu'>
             <div className='px-1'>
@@ -52,8 +56,16 @@ export const Section: React.FC<SectionProps> = ({
                     disabled={disabled}
                     placeholder={disabled ? '' : 'Buscador'}
                 />
-                {title == 'Precio' && <div>{markValue}</div>}
-                {icon}
+                <div className='flex items-center'>
+                    {precioValue && (
+                        <span id='price-color'>
+                            {precioValue}
+                        </span>
+                    )}
+                    <div className=''>
+                        {icon}
+                    </div>
+                </div>
             </div>
             {slider && (
                 <div className='px-5'>
@@ -78,13 +90,21 @@ export const Section: React.FC<SectionProps> = ({
     );
 };
 
-const ButtonBottom = ({ lettering, action }: { lettering: string, action: void | undefined }) => {
+export const ButtonBottom = ({ lettering, action }: { lettering: string, action?: () => void }) => {
+    const handleClick = () => {
+        if (lettering === 'arrow-key-back') {
+            // router.back(); // Navigate to the previous page
+        } else if (action) {
+            action(); // Call the action if defined
+        }
+    };
+
     return (
-        <button onClick={action} className="border border-white rounded-2xl">{lettering}</button>
-    )
-}
-
-
+        <button onClick={handleClick} className="border border-white rounded-2xl">
+            {lettering}
+        </button>
+    );
+};
 
 export const Content = () => {
     const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data
@@ -97,16 +117,15 @@ export const Content = () => {
         priceRange, priceValue,
         bathroomRange, bathroomValue,
         bedroomRange, bedroomValue,
-        metersSquareRange
+        metersSquareRange,
     } = useSharedQueryState();
-
 
     useEffect(() => {
         const ptrFetch = async () => {
             const pathParts = pathname.split('/');
             const lastPart = pathParts[pathParts.length - 1];
             const property = await fetchPropertyByID(lastPart);
-            // console.log("🚀 ~ ptrFetch ~ property:", property);
+            console.log("🚀 ~ ptrFetch ~ property:", property)
             setProperty(property);
             setLoading(false);
         };
@@ -133,8 +152,7 @@ export const Content = () => {
                             value: priceValue,
                             setValue: null,
                         }}
-                        markValue={formatPrice(property?.precio)}
-
+                        markValue={(property?.precio)}
                     />
                     <Section
                         title="Dormitorios"
@@ -172,21 +190,15 @@ export const Content = () => {
                             setValue: null,
                         }}
                     />
-
+                    <ButtonBottom lettering='arrow-key-back' />
                 </>
             ) : (
                 <SearchBar />
             )}
-            {!flagPathname ? (<>
-                <ButtonBottom lettering='arrow-key-back' />
-            </>) : (<>
-                <ButtonBottom lettering='Reset Filters' action={() => console.log('hello clickable')} />
-            </>)
-            }
+
         </div>
     );
 };
-
 
 /*
 
