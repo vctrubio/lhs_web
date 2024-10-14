@@ -20,12 +20,20 @@ class SideBarPropComponent extends Component {
         Buscador: <IconSearch />,
     };
 
+    addMilToSlider = (value: number) => {
+        const formattedValue = value.toLocaleString();
+        if (this.props.title === 'Precio') {
+            return `${formattedValue}M`;
+        }
+        return formattedValue;
+    }
+
     getMarks = () => {
         const { slider, markValue } = this.state;
         return slider
             ? [
-                { value: slider.min, label: slider.min.toString() },
-                { value: slider.max, label: slider.max.toString() },
+                { value: slider.min, label: this.addMilToSlider(slider.min) },
+                { value: slider.max, label: this.addMilToSlider(slider.max) },
                 ...(markValue !== null && markValue !== undefined
                     ? [{ value: markValue, label: markValue.toString() }]
                     : []),

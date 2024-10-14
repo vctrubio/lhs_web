@@ -18,7 +18,7 @@ export const Content = () => {
         priceRange, priceValue,
         bathroomRange, bathroomValue,
         bedroomRange, bedroomValue,
-        metersSquareRange,
+        metersSquareRange, metersSquareValue,
     } = useSharedQueryState();
 
     useEffect(() => {
@@ -75,13 +75,12 @@ export const Content = () => {
             disabled: true,
             markValue: property?.charRef.banos,
         }),
-
         new SideBarPropComponent({
             title: "Metros",
             slider: {
                 min: metersSquareRange[0],
                 max: metersSquareRange[1],
-                value: property?.charRef.metrosCuadradros,
+                value: metersSquareValue,
                 setValue: null,
             },
             disabled: true,
