@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Slider } from '@mui/material';
-import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch } from '@/lib/svgs'; // Example icons
+import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
 
 class SideBarPropComponent extends Component {
@@ -52,7 +52,7 @@ class SideBarPropComponent extends Component {
 
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
-        const icon = this.icons[title]; // Get the icon based on the title
+        const icon = this.icons[title] || <IconPlano />; // Get the icon based on the title, default to IconsPlano if not found   
         const formattedMarkValue = this.getFormattedMarkValue(); // Get formatted markValue
 
         const precioValue = title === 'Precio' && markValue
