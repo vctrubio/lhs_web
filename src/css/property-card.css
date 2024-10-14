@@ -12,9 +12,10 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 2px 8px;
-
+    align-items: center;
+    
     h1 {
-        font-size: 18px;
+        font-size: 26px;
         font-weight: 600;
         letter-spacing: 1px;
     }
