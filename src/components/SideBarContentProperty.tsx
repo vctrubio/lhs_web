@@ -46,7 +46,7 @@ export const Content = () => {
                 min: priceRange[0],
                 max: priceRange[1],
                 value: priceValue,
-                setValue: null, 
+                setValue: null,
             },
             disabled: disableFlag,
             markValue: property?.precio,
@@ -86,6 +86,11 @@ export const Content = () => {
             disabled: true,
             markValue: property?.charRef.metrosCuadradros,
         }),
+        new SideBarPropComponent({
+            title: "Barrio",
+            barrio: property?.barrioRef, 
+            disabled: true,
+        }),
     ];
 
     return (
@@ -101,7 +106,6 @@ export const Content = () => {
 };
 
 /*
-
 Value can also be an array : ie: 
 Price 200
 IBI 400
@@ -110,23 +114,12 @@ Comunidad 230
 ||
 Baños 4
 Aseos 1
-
 */
 
 
 
 /*
 
-
-
-                    <Section title="Baños" number={property.charRef.banos} icon={<IconBath />}>
-                    </Section>
-                    <Section title="Dormitorios" number={property.charRef.dormitorios} icon={<IconBed />}>
-                    </Section>
-                    <Section title="Metros" number={property.charRef.metrosCuadradros} icon={<IconMeasure />}>
-                    </Section>
-                    <Section title="Barrio" icon={<IconLocation />}>
-                    </Section>
 
                      <div>{property.barrioRef.name}</div> 
 

@@ -25,6 +25,7 @@ export const SearchBar = () => {
     new SideBarPropComponent({
       title: "Buscador",
       disabled: false,
+      value: title,
       onChange: (e) => setTitle(e.target.value), // Update title on change
     }),
     new SideBarPropComponent({
@@ -71,6 +72,11 @@ export const SearchBar = () => {
       disabled: false,
     }),
 
+    new SideBarPropComponent({
+      title: "Barrio",
+      description: ["Barrio 1", "Barrio 2", "Barrio 3"], // List of barrios
+      disabled: true,
+  }),
 
   ];
 

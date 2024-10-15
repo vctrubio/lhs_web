@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Slider } from '@mui/material';
-import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano } from '@/lib/svgs'; // Example icons
+import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano, IconLocation } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
-
+import { Barrio } from '@/types/property'; // Import Barrio type
 class SideBarPropComponent extends Component {
     state = {
         title: this.props.title,
         slider: this.props.slider,
         markValue: this.props.markValue,
         disabled: this.props.disabled,
+        barrio: this.props.barrio || null,
         onChange: this.props.onChange,
     };
 
@@ -17,6 +18,7 @@ class SideBarPropComponent extends Component {
         Dormitorios: <IconBed />,
         Baños: <IconBath />,
         Metros: <IconMeasure />,
+        Barrio: <IconLocation />,
         Buscador: <IconSearch />,
     };
 
@@ -50,6 +52,14 @@ class SideBarPropComponent extends Component {
         return markValue;
     };
 
+    renderDescription = () => {
+        const { barrio } = this.state;
+        if (barrio)
+            return barrio.description;
+
+        return 'error not found.';
+    };
+
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
         const icon = this.icons[title] || <IconPlano />; // Get the icon based on the title, default to IconsPlano if not found   
@@ -74,12 +84,13 @@ class SideBarPropComponent extends Component {
                                 {precioValue}
                             </span>
                         )}
-                        <div className=''>
+                        {this.state.barrio && <span>{this.state.barrio.name}</span>} {/* Display barrio name */}
+                        <div>
                             {icon}
                         </div>
                     </div>
                 </div>
-                {slider && (
+                {slider ? (
                     <div className='px-5'>
                         <Slider
                             value={formattedMarkValue ? formattedMarkValue : slider.value}
@@ -97,7 +108,11 @@ class SideBarPropComponent extends Component {
                             }}
                         />
                     </div>
-                )}
+                ) : this.state.barrio ? (
+                    <div style={{fontSize: '1.2rem', padding: '0 4px'}}>
+                        {this.renderDescription()}
+                    </div>
+                ) : null}
             </div>
         );
     }

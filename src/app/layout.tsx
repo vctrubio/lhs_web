@@ -4,7 +4,7 @@ import "@/css/pages.css";
 import "@/css/components.css";
 import "@/css/lhs.css";
 import "@/css/collage.css";
-import "@/css/test.css";
+import "@/css/content-menu.css";
 import "@/css/property-card.css";
 import "@/css/sidebar.css";
 import "@/css/layout.css";

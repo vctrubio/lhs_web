@@ -25,7 +25,7 @@ export function formatCurrency(value: number, rent: boolean = false): any {
 
   return (
     <div className='flex mb-2'>
-      <span style={{paddingTop: '4px'}}>{formattedValue}</span><IconPrice/><span className="italic">{rent ? '' : '/mes'}</span>
+      <span style={{ paddingBottom: '0px', fontSize: '22px' }}>{formattedValue}</span><IconPrice /><span className="italic">{rent ? '' : '/mes'}</span>
     </div>
   );
 }
