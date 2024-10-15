@@ -5,7 +5,7 @@ import { SearchBar } from './SearchBar';
 import { fetchPropertyByID } from '@/lib/bridges';
 import { Property } from '@/types/property';
 import { useSharedQueryState } from '@/lib/nuqs';
-import { SideBarPropComponent, SideBarBarrioProp } from '@/types/glasses';
+import { SideBarPropComponent  } from '@/types/glasses';
 
 export const Content = () => {
     const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data

@@ -32,6 +32,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 38px;
+  gap: 6px;
+  margin: 4px 0;
 }
 
 
@@ -85,5 +88,13 @@
     /* Uncomment if you want to hide the sidebar on mobile */
     /* display: none; */
     border: 1px solid red;
+  }
+}
+
+@media (max-width: 650px) {
+  .sidebar-level {
+    /* Uncomment if you want to hide the sidebar on mobile */
+    /* display: none; */
+    border: 1px solid green;
   }
 }

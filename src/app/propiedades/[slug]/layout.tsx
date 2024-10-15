@@ -8,11 +8,9 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div className="layout-div">
-            <main style={{ flex: 1, paddingTop: '24px' }}>
-                {children}
-            </main>
-        </div>
+        <main style={{ flex: 1}}>
+            {children}
+        </main>
     );
 };
 

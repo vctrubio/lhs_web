@@ -10,7 +10,7 @@ import { useSharedQueryState } from '@/lib/nuqs';
 import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
 import { Section, ButtonBottom } from '@/components/SideBarContentProperty';
 
-import SideBarPropComponent from '@/types/glasses'; // Import SideBarPropComponent from glasses.tsx
+import { SideBarPropComponent  } from '@/types/glasses';
 
 export const SearchBar = () => {
   const {
@@ -88,11 +88,7 @@ export const SearchBar = () => {
   return (
     <>
       {filterSections.map((section, index) => section.render())}
-      {selectedBarrios.map((barrio, index) => (
-        <div key={index}>
-          {barrio.name}
-        </div>
-      ))}
+
     </>
   );
 };
