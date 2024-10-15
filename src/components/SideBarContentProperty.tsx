@@ -5,7 +5,7 @@ import { SearchBar } from './SearchBar';
 import { fetchPropertyByID } from '@/lib/bridges';
 import { Property } from '@/types/property';
 import { useSharedQueryState } from '@/lib/nuqs';
-import SideBarPropComponent from '@/types/glasses';
+import { SideBarPropComponent, SideBarBarrioProp } from '@/types/glasses';
 
 export const Content = () => {
     const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data
@@ -86,10 +86,18 @@ export const Content = () => {
             disabled: true,
             markValue: property?.charRef.metrosCuadradros,
         }),
+
         new SideBarPropComponent({
             title: "Barrio",
-            barrio: property?.barrioRef, 
+            barrio: {
+                barrios: property?.barrioRef || [],
+                selectedBarrios: null,
+                setSelectedBarrios: null,
+            },
             disabled: true,
+            markValue: null,
+            slider: null,
+            onChange: () => {}, 
         }),
     ];
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchEntriesContentful } from './bridges';
 import { formatPrice } from './utils';
 import { parseAsInteger, useQueryState } from 'nuqs'
+import {Barrio} from '@/types/property'
 
 export const useSharedQueryState = () => {
     const [priceRange, setPriceRange] = useState([0, 0]);
@@ -25,8 +26,8 @@ export const useSharedQueryState = () => {
     const [metrosCuadradosMinimo, setMetrosCuadradosMinimo] = useQueryState('metrosMin', { defaultValue: '' });
     const [metrosCuadradosMaximo, setMetrosCuadradosMaximo] = useQueryState('metrosMax', { defaultValue: '' });
 
-    const [selectedBarrios, setSelectedBarrios] = useState<string[]>([]);
-    const [barrios, setBarrios] = useState<string[]>([]);
+    const [selectedBarrios, setSelectedBarrios] = useState<Barrio[]>([]);
+    const [barrios, setBarrios] = useState<Barrio[]>([]);
     const [includeBarrios, setIncludeBarrios] = useQueryState('barrios', { defaultValue: '' });
 
     const [flagReformado, setFlagReformado] = useQueryState('reformado', { defaultValue: '' });
@@ -108,7 +109,7 @@ export const useSharedQueryState = () => {
         if (selectedBarrios.length === 0)
             setIncludeBarrios(null);
 
-        if (selectedBarrios.length === barrios.length )
+        if (selectedBarrios.length === barrios.length)
             setIncludeBarrios(null);
 
         if (flagReformado === '')
@@ -116,7 +117,7 @@ export const useSharedQueryState = () => {
 
         if (flagSinReformar === '')
             setFlagSinReformar(null);
-        
+
     }, [title, priceValue, bathroomValue, bedroomValue, metersSquareValue, selectedBarrios, flagReformado, flagSinReformar]);
 
 
@@ -128,7 +129,7 @@ export const useSharedQueryState = () => {
             let maxBathrooms = 0, minBathrooms = Infinity;
             let maxBedrooms = 0, minBedrooms = Infinity;
             let maxMetersSquare = 0, minMetersSquare = Infinity;
-            let barrios = new Set<string>();
+            let barrios = new Set<Barrio>();
             properties.forEach(property => {
                 const { precio, charRef: { banos, dormitorios, metrosCuadradros } } = property;
 
@@ -144,7 +145,7 @@ export const useSharedQueryState = () => {
                 if (metrosCuadradros > maxMetersSquare) maxMetersSquare = metrosCuadradros;
                 if (metrosCuadradros < minMetersSquare) minMetersSquare = metrosCuadradros;
 
-                barrios.add(property.barrioRef?.name);
+                barrios.add(property.barrioRef);
             });
 
             setPriceRange([formatPrice(minPrice), formatPrice(maxPrice)]);
@@ -157,6 +158,7 @@ export const useSharedQueryState = () => {
             setBedroomValue([minBedrooms, maxBedrooms]);
             setMetersSquareValue([minMetersSquare, maxMetersSquare]);
             setBarrios(Array.from(barrios));
+            setSelectedBarrios(Array.from(barrios));
         };
 
         fetchData();

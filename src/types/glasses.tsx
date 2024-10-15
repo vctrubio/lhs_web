@@ -2,14 +2,39 @@ import React, { Component } from 'react';
 import { Slider } from '@mui/material';
 import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano, IconLocation } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
-import { Barrio } from '@/types/property'; // Import Barrio type
-class SideBarPropComponent extends Component {
+import { Barrio } from '@/types/property'; // Import the Barrio type from the property file
+
+interface SliderType {
+    min: number;
+    max: number;
+    value: number;
+    setValue: (value: number) => void;
+    step: number;
+}
+
+interface SideBarBarrioProps {
+    barrios: Barrio | Barrio[];
+    selectedBarrios: Barrio | Barrio[] | null;  // Selected barrios (could be same type as barrios)
+    setSelectedBarrios: ((selected: Barrio | Barrio[]) => void) | null; // Function to update selected barrios
+}
+
+interface SideBarPropComponentProps {
+    title: string;
+    slider?: SliderType | null; // Slider is optional
+    markValue: number | null; // Or use the correct type
+    disabled: boolean;
+    barrio: SideBarBarrioProps; // Use the interface here for barrio
+    onChange: () => void;
+}
+
+
+export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
     state = {
         title: this.props.title,
-        slider: this.props.slider,
+        slider: this.props.slider || null,
         markValue: this.props.markValue,
         disabled: this.props.disabled,
-        barrio: this.props.barrio || null,
+        barrio: this.props.barrio,
         onChange: this.props.onChange,
     };
 
@@ -52,13 +77,44 @@ class SideBarPropComponent extends Component {
         return markValue;
     };
 
+    toggleBarrioSelection = (barrio: Barrio) => {
+        const { selectedBarrios, setSelectedBarrios } = this.props.barrio;
+        const isSelected = Array.isArray(selectedBarrios)
+            ? selectedBarrios.some((selected) => selected.name === barrio.name)
+            : selectedBarrios.name === barrio.name;
+
+        if (isSelected) {
+            setSelectedBarrios(
+                Array.isArray(selectedBarrios)
+                    ? selectedBarrios.filter((selected) => selected.name !== barrio.name)
+                    : []
+            );
+        } else {
+            setSelectedBarrios(
+                Array.isArray(selectedBarrios) ? [...selectedBarrios, barrio] : [barrio]
+            );
+        }
+    };
+
+
     renderDescription = () => {
         const { barrio } = this.state;
-        if (barrio)
-            return barrio.description;
-
-        return 'error not found.';
+        if (barrio && barrio.barrios) {
+            // Check if barrio.barrios is an object and has a description
+            if (typeof barrio.barrios === 'object' && barrio.barrios.description) {
+                return barrio.barrios.description || 'No description available';
+            } else if (Array.isArray(barrio.barrios)) {
+                // Render all barrios.name and make them clickable to toggle selectedBarrios
+                return barrio.barrios.map((barrioItem, index) => (
+                    <div key={index} onClick={() => this.toggleBarrioSelection(barrioItem)}>
+                        {barrioItem.name}
+                    </div>
+                ));
+            }
+        }
+        return 'No barrios available....';
     };
+
 
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
@@ -84,7 +140,9 @@ class SideBarPropComponent extends Component {
                                 {precioValue}
                             </span>
                         )}
-                        {this.state.barrio && <span>{this.state.barrio.name}</span>} {/* Display barrio name */}
+                        {this.state.barrio && (
+                            <span>{this.state.barrio.barrios.name}</span>
+                        )}
                         <div>
                             {icon}
                         </div>
@@ -109,7 +167,7 @@ class SideBarPropComponent extends Component {
                         />
                     </div>
                 ) : this.state.barrio ? (
-                    <div style={{fontSize: '1.2rem', padding: '0 4px'}}>
+                    <div className='override-max-height' style={{ fontSize: '1.2rem', padding: '0 4px' }}>
                         {this.renderDescription()}
                     </div>
                 ) : null}
@@ -118,4 +176,3 @@ class SideBarPropComponent extends Component {
     }
 }
 
-export default SideBarPropComponent;

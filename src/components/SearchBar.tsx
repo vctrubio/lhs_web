@@ -18,8 +18,9 @@ export const SearchBar = () => {
     bathroomRange, bathroomValue, setBathroomValue,
     bedroomRange, bedroomValue, setBedroomValue,
     metersSquareRange, metersSquareValue, setMetersSquareValue,
-    title, setTitle,
+    title, setTitle, barrios, selectedBarrios, setSelectedBarrios,
   } = useSharedQueryState();
+
 
   const filterSections = [
     new SideBarPropComponent({
@@ -72,11 +73,11 @@ export const SearchBar = () => {
       disabled: false,
     }),
 
-    new SideBarPropComponent({
-      title: "Barrio",
-      description: ["Barrio 1", "Barrio 2", "Barrio 3"], // List of barrios
-      disabled: true,
-  }),
+    // new SideBarPropComponent({
+    //   title: "Barrio",
+    //   description: ["Barrio 1", "Barrio 2", "Barrio 3"], // List of barrios
+    //   disabled: true,
+    // }),
 
   ];
 
@@ -87,6 +88,11 @@ export const SearchBar = () => {
   return (
     <>
       {filterSections.map((section, index) => section.render())}
+      {selectedBarrios.map((barrio, index) => (
+        <div key={index}>
+          {barrio.name}
+        </div>
+      ))}
     </>
   );
 };

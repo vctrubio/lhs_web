@@ -12,7 +12,7 @@
         box-shadow: 0 4px 8px var(--color-green-dark-opec);
         border-radius: 12px;
         /* height: 100px; */
-        padding: 12px;
+        padding: 8px 10px;
     }
 
     >*:first-child {
@@ -47,6 +47,7 @@
     }
 }
 
-.override-min-height {
-    min-height: 100px !important;
+.override-max-height {
+    max-height: 250px !important;
+    overflow-y: scroll;
 }
