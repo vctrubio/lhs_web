@@ -9,26 +9,44 @@
 
     >* {
         &:hover {
-            fill: var(--color-green-light);
             animation: bounce .8s ease-in-out 1;
+            >* {
+                fill: var(--color-green-light);
+            }
         }
     }
 }
 
-.footer-placeholder{
+.footer-placeholder {
     opacity: 0.8;
     text-align: center;
 
     font-family: 'Courier New', Courier, monospace;
+
+    >* {
+        text-align: center;
+    }
+}
+
+@keyframes move-up-g {
+    0% {
+        transform: translateY(+20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @keyframes bounce {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-5px);
     }
+
     100% {
         transform: translateY(0);
     }

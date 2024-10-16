@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
-import "@/css/globals.css";
-import "@/css/pages.css";
-import "@/css/components.css";
-import "@/css/lhs.css";
 import "@/css/collage.css";
+import "@/css/components.css";
 import "@/css/content-menu.css";
+import "@/css/footer.css";
+import "@/css/globals.css";
+import "@/css/layout.css";
+import "@/css/lhs.css";
+import "@/css/pages.css";
 import "@/css/property-card.css";
 import "@/css/sidebar.css";
-import "@/css/layout.css";
-import "@/css/footer.css";
 
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
-import {Footer} from "@/components/Footer";
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
