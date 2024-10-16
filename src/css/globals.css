@@ -74,6 +74,7 @@ input::placeholder {
 body:hover {
   scrollbar-width: thin;
   scrollbar-color: var(--color-green-scroll) var(--color-beigh-darkish);
+  /* Set scrollbar colors */
 }
 
 

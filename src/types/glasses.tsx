@@ -96,7 +96,6 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         }
     };
 
-
     renderDescription = () => {
         const { barrio } = this.state;
         if (barrio && barrio.barrios) {
@@ -105,14 +104,24 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                 return barrio.barrios.description || 'No description available';
             } else if (Array.isArray(barrio.barrios)) {
                 // Render all barrios.name and make them clickable to toggle selectedBarrios
-                return barrio.barrios.map((barrioItem, index) => (
-                    <div key={index} onClick={() => this.toggleBarrioSelection(barrioItem)}>
-                        {barrioItem.name}
-                    </div>
-                ));
+                return barrio.barrios.map((barrioItem, index) => {
+                    const isSelected = Array.isArray(barrio.selectedBarrios)
+                        ? barrio.selectedBarrios.some((selected) => selected.name === barrioItem.name)
+                        : barrio.selectedBarrios && barrio.selectedBarrios.name === barrioItem.name;
+
+                    return (
+                        <div
+                            key={index}
+                            onClick={() => this.toggleBarrioSelection(barrioItem)}
+                            style={{ textDecoration: isSelected ? '' : 'line-through', cursor: 'pointer' }}
+                        >
+                            {barrioItem.name}
+                        </div>
+                    );
+                });
             }
         }
-        return 'No barrios available....';
+        return '...';
     };
 
 
@@ -167,7 +176,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                         />
                     </div>
                 ) : this.state.barrio ? (
-                    <div className='override-max-height' style={{ fontSize: '1.2rem', padding: '0 4px' }}>
+                    <div className='override-max-height flex flex-col' style={{ fontSize: '1.2rem', padding: '0 4px' }}>
                         {this.renderDescription()}
                     </div>
                 ) : null}

@@ -63,7 +63,6 @@
 }
 
 .page-id-desc {
-    /* border: 1px solid var(--color--green); */
     box-shadow: 2px 1px 8px -1px #15423bb6;
     border-radius: 0rem;
     padding: 1.2rem 2rem;
@@ -72,6 +71,11 @@
     margin: 12px 0;
     text-align: justify;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.page-id-desc::first-letter {
+    /* font-size: 2rem; Adjust the size as needed */
+    /* font-weight:500; Optional: make the first letter bold */
 }
 
 .property-prices {

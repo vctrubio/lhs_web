@@ -10,7 +10,7 @@ import { useSharedQueryState } from '@/lib/nuqs';
 import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
 import { Section, ButtonBottom } from '@/components/SideBarContentProperty';
 
-import { SideBarPropComponent  } from '@/types/glasses';
+import { SideBarPropComponent } from '@/types/glasses';
 
 export const SearchBar = () => {
   const {
@@ -73,17 +73,19 @@ export const SearchBar = () => {
       disabled: false,
     }),
 
-    // new SideBarPropComponent({
-    //   title: "Barrio",
-    //   description: ["Barrio 1", "Barrio 2", "Barrio 3"], // List of barrios
-    //   disabled: true,
-    // }),
+    new SideBarPropComponent({
+      title: "Barrio",
+      barrio: {
+        barrios: barrios,
+        selectedBarrios: selectedBarrios,
+        setSelectedBarrios: setSelectedBarrios,
+      },
+      disabled: false,
+      markValue: null,
+      slider: null,
+    }),
 
   ];
-
-  const handleReset = () => {
-    // Implement reset logic
-  };
 
   return (
     <>

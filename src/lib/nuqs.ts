@@ -104,7 +104,7 @@ export const useSharedQueryState = () => {
             setMetrosCuadradosMaximo(null);
 
         if (selectedBarrios.length > 0 && selectedBarrios.length !== barrios.length)
-            setIncludeBarrios(selectedBarrios.join(''));
+            setIncludeBarrios(selectedBarrios.map(barrio => barrio.name).join(''));
 
         if (selectedBarrios.length === 0)
             setIncludeBarrios(null);
