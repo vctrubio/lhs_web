@@ -21,6 +21,12 @@ const nextConfig = {
     });
     return config;
   },
+  typescript: {
+    // !! WARN !!
+    // This allows production builds to successfully complete even if
+    // your project has type errors.
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;

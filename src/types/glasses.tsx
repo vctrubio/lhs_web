@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Slider } from '@mui/material';
-import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano, IconLocation, IconRulerMeters } from '@/lib/svgs'; // Example icons
+import { IconPrice, IconBed, IconBath, IconSearch, IconPlano, IconLocation, IconRulerMeters } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
 import { Barrio } from '@/types/property'; // Import the Barrio type from the property file
 
 interface SliderType {
     min: number;
     max: number;
-    value: number;
-    setValue: (value: number) => void;
+    value: number[];
+    setValue: (value: number[]) => void;
     step: number;
 }
 
 interface SideBarBarrioProps {
     barrios: Barrio | Barrio[];
     selectedBarrios: Barrio | Barrio[] | null;  // Selected barrios (could be same type as barrios)
-    setSelectedBarrios: ((selected: Barrio | Barrio[]) => void) | null; // Function to update selected barrios
+    setSelectedBarrios: React.Dispatch<React.SetStateAction<Barrio[]>>;
 }
 
 interface SideBarPropComponentProps {
@@ -23,8 +23,8 @@ interface SideBarPropComponentProps {
     slider?: SliderType | null; // Slider is optional
     markValue: number | null; // Or use the correct type
     disabled: boolean;
-    barrio: SideBarBarrioProps; // Use the interface here for barrio
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    barrio: SideBarBarrioProps | null; // Use the interface here for barrio
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | null;
 }
 
 

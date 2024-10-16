@@ -1,14 +1,7 @@
 'use client'
-import React, { useEffect } from 'react';
-import { FormControl, InputLabel, MenuItem, Select, Checkbox, ListItemText } from '@mui/material';
-import { FormGroup, FormControlLabel, Switch } from '@mui/material';
-
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import React from 'react';
 
 import { useSharedQueryState } from '@/lib/nuqs';
-import { IconPlano, IconPrice, IconBath, IconBed, IconMeasure, IconSearch, IconLocation } from '@/lib/svgs'; // Ensure these are imported correctly
-import { Section, ButtonBottom } from '@/components/SideBarContentProperty';
 
 import { SideBarPropComponent } from '@/types/glasses';
 
@@ -27,6 +20,8 @@ export const SearchBar = () => {
       title: 'Buscador',
       disabled: false,
       onChange: (e) => setTitle(e.target.value),
+      markValue: null,
+      barrio: null,
     }),
 
     new SideBarPropComponent({
@@ -36,8 +31,12 @@ export const SearchBar = () => {
         max: priceRange[1],
         value: priceValue,
         setValue: setPriceValue,
+        step: 0.1,
       },
       disabled: false,
+      markValue: null,
+      barrio: null,
+      onChange: () => { },
     }),
 
     new SideBarPropComponent({
@@ -47,8 +46,12 @@ export const SearchBar = () => {
         max: bedroomRange[1],
         value: bedroomValue,
         setValue: setBedroomValue,
+        step: 1,
       },
       disabled: false,
+      markValue: null,
+      barrio: null,
+      onChange: () => { },
     }),
 
     new SideBarPropComponent({
@@ -58,8 +61,12 @@ export const SearchBar = () => {
         max: bathroomRange[1],
         value: bathroomValue,
         setValue: setBathroomValue,
+        step: 1,
       },
       disabled: false,
+      markValue: null,
+      barrio: null,
+      onChange: () => { },
     }),
 
     new SideBarPropComponent({
@@ -69,8 +76,12 @@ export const SearchBar = () => {
         max: metersSquareRange[1],
         value: metersSquareValue,
         setValue: setMetersSquareValue,
+        step: 1,
       },
       disabled: false,
+      markValue: null,
+      barrio: null,
+      onChange: () => { },
     }),
 
     new SideBarPropComponent({
@@ -83,6 +94,7 @@ export const SearchBar = () => {
       disabled: false,
       markValue: null,
       slider: null,
+      onChange: () => { },
     }),
 
   ];
