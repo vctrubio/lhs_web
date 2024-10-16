@@ -19,6 +19,10 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'), // Ensure this matches the tsconfig alias
+    };
     return config;
   },
   typescript: {
