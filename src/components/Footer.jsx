@@ -11,9 +11,10 @@ import {
     IconRulerCombined,
     IconBath,
     IconBed,
-    IconBathTop
+    IconBathTop,
+    IconFindUs,
+    IconShare
 } from '@/lib/svgs'
-
 
 const Svgs = () => {
     return (
@@ -73,6 +74,7 @@ const Svgs = () => {
         </div>
     );
 }
+
 export const Footer = () => {
     const handleWhatsAppClick = () => {
         window.open('https://wa.me/34686516248', '_blank');
@@ -89,8 +91,17 @@ export const Footer = () => {
     };
 
     return (
-        <div className='flexy'>
-            <div>[s]</div>
+        <div className='flex flex-col'>
+            <div className='text-center'>
+                {/* //placeholder */}
+                Encuentranos en Google
+            </div>
+            <div className='footer-bar'>
+                <IconWhatsapp onClick={handleWhatsAppClick} />
+                <IconMail onClick={handleEmailClick} />
+                <IconFindUs onClick={handleShareClick} />
+                {/* <IconShare onClick={handleShareClick} /> */}
+            </div>
         </div>
     );
 };

@@ -28,13 +28,20 @@
   }
 }
 
-.flexy{
+.footer-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 38px;
-  gap: 6px;
+  border-top: 1px solid var(--color-green-dark-opec);
+  width: 362px;
   margin: 4px 0;
+  padding: 12px 22px 0 22px;
+
+  >* {
+    &:hover {
+      fill: var(--color-green-light);
+    }
+  }
 }
 
 
@@ -43,7 +50,7 @@
   font-weight: bold;
   letter-spacing: 1px;
   font-family: 'Times New Roman', Times, serif;
-  line-height: 1; /* Adjust line-height to reduce space */
+  line-height: 1;
   padding: 4px 0;
 }
 

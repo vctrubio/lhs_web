@@ -7,7 +7,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { SearchBar } from './SearchBar';
 import { Content } from './SideBarContentProperty';
 import Link from 'next/link';
-import {Footer} from '@/components/Footer'
+import { Footer } from '@/components/Footer'
 
 const Logo = () => {
     return (
@@ -63,9 +63,7 @@ export const SideBar = () => {
             <div className="middle">
                 <Content />
             </div>
-            <div className="footer">
-                <Footer />
-            </div>
+            <Footer />
         </div>
     );
 };
