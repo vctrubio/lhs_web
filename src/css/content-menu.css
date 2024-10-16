@@ -12,7 +12,7 @@
         box-shadow: 0 4px 8px var(--color-green-dark-opec);
         border-radius: 12px;
         /* height: 100px; */
-        padding: 8px 10px;
+        padding: 8px 8px 4px 8px;
     }
 
     >*:first-child {
@@ -29,7 +29,6 @@
         border-radius: 0px;
         height: 50px;
         margin: 0 auto;
-
     } */
 
     h2{
