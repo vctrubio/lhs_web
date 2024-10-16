@@ -1,6 +1,4 @@
 import React from "react";
-import { Content } from "@/components/SideBarContentProperty";
-import { Property } from "@/types/property";
 
 interface LayoutProps {
     children: React.ReactNode;
