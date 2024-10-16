@@ -8,6 +8,7 @@ import "@/css/content-menu.css";
 import "@/css/property-card.css";
 import "@/css/sidebar.css";
 import "@/css/layout.css";
+import "@/css/footer.css";
 
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';

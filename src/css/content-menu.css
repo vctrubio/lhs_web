@@ -36,14 +36,20 @@
         font-weight: bold;
     }
 
+    input{
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.7rem;
+    }
+    
 }
 
 .menu{
     >*{
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-between;   
     }
+
 }
 
 .override-max-height {
