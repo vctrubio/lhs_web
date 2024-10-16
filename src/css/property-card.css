@@ -94,13 +94,20 @@
 .desc-box {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
+    font-size: 28px;
+    font-weight: lighter;
 }
 
 .desc-icon {
     font-size: 18px;
     color: #fff;
 }
+
+.icon-white svg {
+    fill: white; /* Set the SVG icon color to white */
+}
+
 
 .property:hover .property-desc {
     opacity: 1;

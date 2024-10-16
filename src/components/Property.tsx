@@ -4,21 +4,30 @@ import { getBathrooms } from "@/lib/utils";
 
 import { Property } from "@/types/property";
 import { formatCurrency } from "@/lib/utils";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { iconRulerCombined, iconBed, iconBath, iconMapMarkerAlt } from '@/lib/fontawesome';
+
+import {
+    IconRulerMeters,
+    IconBath,
+    IconBed,
+    IconBathTop,
+    IconLocation
+} from '@/lib/svgs'
 
 interface DescBoxProps {
-    text: string;
-    icon: any;
+    text: string | number;
+    icon: React.ComponentType; // Use React.ComponentType for the icon prop
+    fillWhite?: boolean;
 }
-const DescBox: React.FC<DescBoxProps> = ({ text, icon }) => {
+
+const DescBox: React.FC<DescBoxProps> = ({ text, icon: Icon, fillWhite = true }) => {
     return (
         <div className="desc-box">
-            <FontAwesomeIcon icon={icon} className="desc-icon" />
+            <span className={fillWhite ? 'icon-white' : ''}><Icon /></span>
             <span>{text}</span>
         </div>
     );
 };
+
 
 export const PropertyCard = ({ property, cssStateHover }: { property: Property, cssStateHover: boolean }) => {
     const coverPhoto = property ? property.cover_url[0] : '/images/placeholder.jpg';
@@ -44,13 +53,19 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
                         priority
                     />
                     <div className="property-desc">
-                        <DescBox text={`${area} m²`} icon={iconRulerCombined} /> {/* Square meters */}
-                        {bedrooms && <DescBox text={String(bedrooms)} icon={iconBed} />}
-                        {bathrooms && <DescBox text={String(bathrooms)} icon={iconBath} />}
-                        <DescBox text={String(property.barrioRef?.name)} icon={iconMapMarkerAlt} /> {/* Location */}
+                        <DescBox text={area} icon={IconRulerMeters} />
+                        <DescBox text={String(bedrooms)} icon={IconBed} />
+                        <DescBox text={String(bathrooms)} icon={IconBathTop} />
+                        <DescBox text={String(property.barrioRef?.name)} icon={IconLocation} fillWhite={false} />
                     </div>
                 </div>
             </Link>
         </div >
     );
 };
+
+
+/*
+ m²
+
+*/

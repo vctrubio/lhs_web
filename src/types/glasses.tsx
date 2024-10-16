@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Slider } from '@mui/material';
-import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano, IconLocation } from '@/lib/svgs'; // Example icons
+import { IconPrice, IconBed, IconBath, IconMeasure, IconSearch, IconPlano, IconLocation, IconRulerMeters } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
 import { Barrio } from '@/types/property'; // Import the Barrio type from the property file
 
@@ -42,7 +42,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         Precio: <IconPrice />,
         Dormitorios: <IconBed />,
         Baños: <IconBath />,
-        Metros: <IconMeasure />,
+        Metros: <IconRulerMeters flag={-1}/>,
         Barrio: <IconLocation />,
         Buscador: <IconSearch />,
     };

@@ -14,6 +14,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
+import {Footer} from "@/components/Footer";
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 

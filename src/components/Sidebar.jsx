@@ -7,6 +7,7 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { SearchBar } from './SearchBar';
 import { Content } from './SideBarContentProperty';
 import Link from 'next/link';
+import {Footer} from '@/components/Footer'
 
 const Logo = () => {
     return (
@@ -47,36 +48,6 @@ const Navigation = () => {
                     <div onClick={() => handleSelect('Lifestyle')}>Lifestyle</div>
                 </div>
             )}
-        </div>
-    );
-};
-
-const Footer = () => {
-    const handleWhatsAppClick = () => {
-        window.open('https://wa.me/34686516248', '_blank');
-    };
-
-    const handleEmailClick = () => {
-        window.location.href = 'mailto:lhsconcept@lhsconcept.com';
-    };
-
-    const handleShareClick = () => {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('URL copied to clipboard!');
-        });
-    };
-
-    return (
-        <div className='flexy'>
-            <div onClick={handleWhatsAppClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faWhatsapp} />
-            </div>
-            <div onClick={handleEmailClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faEnvelope} />
-            </div>
-            <div onClick={handleShareClick} style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <FontAwesomeIcon icon={faShareAlt} />
-            </div>
         </div>
     );
 };
