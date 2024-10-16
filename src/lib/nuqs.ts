@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchEntriesContentful } from './bridges';
 import { formatPrice } from './utils';
-import { parseAsInteger, useQueryState } from 'nuqs'
+import { useQueryState } from 'nuqs'
 import {Barrio} from '@/types/property'
 
 export const useSharedQueryState = () => {

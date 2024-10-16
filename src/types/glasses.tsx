@@ -24,7 +24,7 @@ interface SideBarPropComponentProps {
     markValue: number | null; // Or use the correct type
     disabled: boolean;
     barrio: SideBarBarrioProps; // Use the interface here for barrio
-    onChange: () => void;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 
@@ -42,7 +42,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         Precio: <IconPrice />,
         Dormitorios: <IconBed />,
         Baños: <IconBath />,
-        Metros: <IconRulerMeters flag={-1}/>,
+        Metros: <IconRulerMeters flag={-1} />,
         Barrio: <IconLocation />,
         Buscador: <IconSearch />,
     };
@@ -68,11 +68,10 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
             : [];
     };
 
-    // Format the markValue if it's the 'Precio' section
     getFormattedMarkValue = () => {
         const { title, markValue } = this.state;
         if (title === 'Precio') {
-            return formatPrice(markValue); // Apply formatting if 'Precio'
+            return formatPrice(markValue);
         }
         return markValue;
     };
@@ -124,7 +123,6 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         return '...';
     };
 
-
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
         const icon = this.icons[title] || <IconPlano />; // Get the icon based on the title, default to IconsPlano if not found   
@@ -138,7 +136,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
             <div className='menu'>
                 <div className='px-1'>
                     <input
-                        value={title}
+                        value={(title && title !== 'Buscador') ? title : null}
                         onChange={onChange}
                         disabled={disabled}
                         placeholder={disabled ? '' : 'Buscador'}

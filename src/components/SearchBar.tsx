@@ -18,17 +18,17 @@ export const SearchBar = () => {
     bathroomRange, bathroomValue, setBathroomValue,
     bedroomRange, bedroomValue, setBedroomValue,
     metersSquareRange, metersSquareValue, setMetersSquareValue,
-    title, setTitle, barrios, selectedBarrios, setSelectedBarrios,
+    setTitle, barrios, selectedBarrios, setSelectedBarrios,
   } = useSharedQueryState();
 
 
   const filterSections = [
     new SideBarPropComponent({
-      title: "Buscador",
+      title: 'Buscador',
       disabled: false,
-      value: title,
-      onChange: (e) => setTitle(e.target.value), // Update title on change
+      onChange: (e) => setTitle(e.target.value),
     }),
+
     new SideBarPropComponent({
       title: "Precio",
       slider: {
@@ -89,8 +89,7 @@ export const SearchBar = () => {
 
   return (
     <>
-      {filterSections.map((section, index) => section.render())}
-
+      {filterSections.map((section, _index) => section.render())}
     </>
   );
 };
@@ -98,25 +97,7 @@ export const SearchBar = () => {
 
 
 /*
-      <div className='flex flex-col gap-4 mt-2'>
-        <Autocomplete
-          multiple
-          disableCloseOnSelect
-          options={barrios}
-          value={selectedBarrios}
-          filterSelectedOptions
-          onChange={handleBarrioChange}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Barrios"
-            />
-          )}
-        />
-      </div>
-
-
-
+  
   <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
           control={<Switch defaultChecked onChange={handleReformadoChange} />}
