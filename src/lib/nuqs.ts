@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchEntriesContentful } from './bridges';
 import { formatPrice } from './utils';
 import { useQueryState } from 'nuqs'
-import {Barrio} from '@/types/property'
+import { Barrio } from '@/types/property'
 
 export const useSharedQueryState = () => {
     const [priceRange, setPriceRange] = useState([0, 0]);
@@ -153,12 +153,41 @@ export const useSharedQueryState = () => {
             setBedroomRange([minBedrooms, maxBedrooms]);
             setMetersSquareRange([minMetersSquare, maxMetersSquare]);
 
-            setPriceValue([formatPrice(minPrice), formatPrice(maxPrice)]);
-            setBathroomValue([minBathrooms, maxBathrooms]);
-            setBedroomValue([minBedrooms, maxBedrooms]);
-            setMetersSquareValue([minMetersSquare, maxMetersSquare]);
+            // Set the range states from the fetched data
+            setPriceRange([formatPrice(minPrice), formatPrice(maxPrice)]);
+            setBathroomRange([minBathrooms, maxBathrooms]);
+            setBedroomRange([minBedrooms, maxBedrooms]);
+            setMetersSquareRange([minMetersSquare, maxMetersSquare]);
+
+            // Now conditionally set values based on query parameters
+            setPriceValue([
+                precioMinimo ? parseInt(precioMinimo) : formatPrice(minPrice),
+                precioMaximo ? parseInt(precioMaximo) : formatPrice(maxPrice)
+            ]);
+
+            setBathroomValue([
+                banosMinimo ? parseInt(banosMinimo) : minBathrooms,
+                banosMaximo ? parseInt(banosMaximo) : maxBathrooms
+            ]);
+
+            setBedroomValue([
+                dormitoriosMinimo ? parseInt(dormitoriosMinimo) : minBedrooms,
+                dormitoriosMaximo ? parseInt(dormitoriosMaximo) : maxBedrooms
+            ]);
+
+            setMetersSquareValue([
+                metrosCuadradosMinimo ? parseInt(metrosCuadradosMinimo) : minMetersSquare,
+                metrosCuadradosMaximo ? parseInt(metrosCuadradosMaximo) : maxMetersSquare
+            ]);
+
+            // Barrios: if query param exists, set the barrios accordingly
             setBarrios(Array.from(barrios));
-            setSelectedBarrios(Array.from(barrios));
+            if (includeBarrios) {
+                const selected = Array.from(barrios).filter(barrio => includeBarrios.includes(barrio.name));
+                setSelectedBarrios(selected);
+            } else {
+                setSelectedBarrios(Array.from(barrios));
+            }
         };
 
         fetchData();
