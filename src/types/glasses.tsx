@@ -54,7 +54,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
     getMarks = () => {
         const { slider, markValue } = this.state;
         if (!slider) return [];
-        
+
         const marks = [
             { value: slider.min, label: this.addMilToSlider(slider.min) },
             { value: slider.max, label: this.addMilToSlider(slider.max) },
@@ -132,7 +132,8 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
             <div className='menu'>
                 <div className='px-1'>
                     <input
-                        value={title !== 'Buscador' ? title : ''}
+                        // Warning: `value` prop on `input` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.
+                        value={title !== 'Buscador' ? title : null as any}
                         onChange={onChange}
                         disabled={disabled}
                         placeholder={disabled ? '' : 'Buscador'}
