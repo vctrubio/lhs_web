@@ -8,12 +8,13 @@ import { SearchBar } from './SearchBar';
 import { Content } from './SideBarContentProperty';
 import Link from 'next/link';
 import { Footer } from '@/components/Footer'
+import { Logo } from '@/lib/utils';
 
-const Logo = () => {
+const LogoLink = () => {
     return (
-        <div className="logo">
+        <div className='w-full'>
             <Link href="/">
-                LHS
+                <Logo />
             </Link>
         </div>
     );
@@ -57,7 +58,7 @@ export const SideBar = () => {
     return (
         <div className="sidebar-level">
             <div className="top">
-                <Logo />
+                <LogoLink />
                 {/* <Navigation /> */}
             </div>
             <div className="middle">

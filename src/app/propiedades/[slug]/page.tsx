@@ -135,7 +135,7 @@ const CardIdPage = ({ params }: { params: { [key: string]: string } }) => {
     }, [slug]);
 
     if (!property) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     const images = property.cover_url.map(photo => ({

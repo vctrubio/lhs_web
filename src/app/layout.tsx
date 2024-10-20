@@ -15,6 +15,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
+import LHSLoader from "@/components/LHSLoader"; // Add this import
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
@@ -63,7 +64,7 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <PropertyProvider>
-          <Suspense fallback={<div>Loading432...</div>}>
+          <Suspense fallback={<LHSLoader />}>
             <div className="layout-div">
               <SideBar />
               <main style={{ flex: 1, padding: '1rem' }}>

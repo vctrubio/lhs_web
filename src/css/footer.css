@@ -10,7 +10,8 @@
     >* {
         &:hover {
             animation: bounce .8s ease-in-out 1;
-            >* {
+
+            >*:last-child {
                 fill: var(--color-green-light);
             }
         }

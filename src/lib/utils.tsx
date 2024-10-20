@@ -3,7 +3,7 @@ import { IconPrice } from '@/lib/svgs'; // Ensure these are imported correctly
 
 export const Logo = () => {
   return (
-    <div id="logo">
+    <div className="logo">
       <div>L</div>
       <div>H</div>
       <div>S</div>

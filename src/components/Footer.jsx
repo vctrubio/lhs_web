@@ -5,11 +5,13 @@ import {
     IconWhatsapp,
     IconMail,
     IconFindUs,
+    IconInstagram,
 } from '@/lib/svgs';
 
-const whatsappNumber = '+34 686 516 248';
+const whatsappNumber = '+34 616 746 971';
 const email = 'lhsconcept@lhsconcept.com';
 const findUsText = 'Encuentranos en Google';
+const instagramHandle = 'lhsconcept';
 
 export const Footer = () => {
     const [targetText, setTargetText] = useState('');
@@ -18,6 +20,7 @@ export const Footer = () => {
         whatsapp: String(whatsappNumber),
         email: String(email),
         findus: findUsText,
+        instagram: `@${instagramHandle}`,
     };
 
     const handleWhatsAppClick = () => {
@@ -33,6 +36,11 @@ export const Footer = () => {
     const handleFindUsClick = () => {
         console.log('Find Us icon clicked');
         window.open('https://www.google.com/maps/search/?api=1&query=lhsconcept', '_blank');
+    };
+
+    const handleInstagramClick = () => {
+        console.log('Instagram icon clicked');
+        window.open(`https://www.instagram.com/${instagramHandle}`, '_blank');
     };
 
     useEffect(() => {
@@ -80,6 +88,13 @@ export const Footer = () => {
                     onMouseEnter={() => handleMouseEnter('email')}
                 >
                     <IconMail />
+                </div>
+                <div
+                    onClick={handleInstagramClick}
+                    onMouseEnter={() => handleMouseEnter('instagram')}
+                    className="footer-icon"
+                >
+                    <IconInstagram/>
                 </div>
                 <div
                     onClick={handleFindUsClick}
