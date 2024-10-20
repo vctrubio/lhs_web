@@ -16,92 +16,108 @@ export const SearchBar = () => {
 
 
   const filterSections = [
-    new SideBarPropComponent({
-      title: 'Buscador',
-      disabled: false,
-      onChange: (e) => setTitle(e.target.value),
-      markValue: null,
-      barrio: null,
-    }),
-
-    new SideBarPropComponent({
-      title: "Precio",
-      slider: {
-        min: priceRange[0],
-        max: priceRange[1],
-        value: priceValue,
-        setValue: setPriceValue,
-        step: 0.1,
-      },
-      disabled: false,
-      markValue: null,
-      barrio: null,
-      onChange: () => { },
-    }),
-
-    new SideBarPropComponent({
-      title: "Dormitorios",
-      slider: {
-        min: bedroomRange[0],
-        max: bedroomRange[1],
-        value: bedroomValue,
-        setValue: setBedroomValue,
-        step: 1,
-      },
-      disabled: false,
-      markValue: null,
-      barrio: null,
-      onChange: () => { },
-    }),
-
-    new SideBarPropComponent({
-      title: "Baños",
-      slider: {
-        min: bathroomRange[0],
-        max: bathroomRange[1],
-        value: bathroomValue,
-        setValue: setBathroomValue,
-        step: 1,
-      },
-      disabled: false,
-      markValue: null,
-      barrio: null,
-      onChange: () => { },
-    }),
-
-    new SideBarPropComponent({
-      title: "Metros",
-      slider: {
-        min: metersSquareRange[0],
-        max: metersSquareRange[1],
-        value: metersSquareValue,
-        setValue: setMetersSquareValue,
-        step: 1,
-      },
-      disabled: false,
-      markValue: null,
-      barrio: null,
-      onChange: () => { },
-    }),
-
-    new SideBarPropComponent({
-      title: "Barrio",
-      barrio: {
-        barrios: barrios,
-        selectedBarrios: selectedBarrios,
-        setSelectedBarrios: setSelectedBarrios,
-      },
-      disabled: false,
-      markValue: null,
-      slider: null,
-      onChange: () => { },
-    }),
-
+    {
+      key: 'search',
+      component: new SideBarPropComponent({
+        title: 'Buscador',
+        disabled: false,
+        onChange: (e) => setTitle(e.target.value),
+        markValue: null,
+        barrio: null,
+      })
+    },
+    {
+      key: 'price',
+      component: new SideBarPropComponent({
+        title: "Precio",
+        slider: {
+          min: priceRange[0],
+          max: priceRange[1],
+          value: priceValue,
+          setValue: setPriceValue,
+          step: 0.1,
+        },
+        disabled: false,
+        markValue: null,
+        barrio: null,
+        onChange: () => { },
+      })
+    },
+    {
+      key: 'bedrooms',
+      component: new SideBarPropComponent({
+        title: "Dormitorios",
+        slider: {
+          min: bedroomRange[0],
+          max: bedroomRange[1],
+          value: bedroomValue,
+          setValue: setBedroomValue,
+          step: 1,
+        },
+        disabled: false,
+        markValue: null,
+        barrio: null,
+        onChange: () => { },
+      })
+    },
+    {
+      key: 'bathrooms',
+      component: new SideBarPropComponent({
+        title: "Baños",
+        slider: {
+          min: bathroomRange[0],
+          max: bathroomRange[1],
+          value: bathroomValue,
+          setValue: setBathroomValue,
+          step: 1,
+        },
+        disabled: false,
+        markValue: null,
+        barrio: null,
+        onChange: () => { },
+      })
+    },
+    {
+      key: 'meters',
+      component: new SideBarPropComponent({
+        title: "Metros",
+        slider: {
+          min: metersSquareRange[0],
+          max: metersSquareRange[1],
+          value: metersSquareValue,
+          setValue: setMetersSquareValue,
+          step: 1,
+        },
+        disabled: false,
+        markValue: null,
+        barrio: null,
+        onChange: () => { },
+      })
+    },
+    {
+      key: 'neighborhood',
+      component: new SideBarPropComponent({
+        title: "Barrio",
+        barrio: {
+          barrios: barrios,
+          selectedBarrios: selectedBarrios,
+          setSelectedBarrios: setSelectedBarrios,
+        },
+        disabled: false,
+        markValue: null,
+        slider: null,
+        onChange: () => { },
+      })
+    },
   ];
 
   return (
     <>
-      {filterSections.map((section, _index) => section.render())}
+      {filterSections.map((section) => (
+        <React.Fragment key={section.key}>
+          {section.component.render()}
+        </React.Fragment>
+      ))}
     </>
   );
 };

@@ -8,11 +8,11 @@ import { useSharedQueryState } from '@/lib/nuqs';
 import { SideBarPropComponent } from '@/types/glasses';
 
 export const Content = () => {
-    const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data
-    const [loading, setLoading] = useState(true); // Track loading state
+    const [property, setProperty] = useState<Property | null>(null);
+    const [loading, setLoading] = useState(true);
     const disableFlag = true;
     const pathname = usePathname();
-    const flagPathname = pathname.split('/').length === 2;
+    const flagPathname = pathname?.split('/').length === 2;
 
     const {
         priceRange, priceValue,
@@ -23,96 +23,117 @@ export const Content = () => {
 
     useEffect(() => {
         const ptrFetch = async () => {
-            const pathParts = pathname.split('/');
-            const lastPart = pathParts[pathParts.length - 1];
-            const property = await fetchPropertyByID(lastPart);
-            console.log("🚀 ~ ptrFetch ~ property:", property)
-            setProperty(property);
-            setLoading(false);
+            if (pathname) {
+                const pathParts = pathname.split('/');
+                const lastPart = pathParts[pathParts.length - 1];
+                const property = await fetchPropertyByID(lastPart);
+                console.log("🚀 ~ ptrFetch ~ property:", property)
+                setProperty(property);
+                setLoading(false);
+            }
         };
 
         ptrFetch();
     }, [pathname]);
 
     const filterSections = [
-        new SideBarPropComponent({
-            title: loading ? '' : property?.title,
-            disabled: disableFlag,
-        }),
-
-        new SideBarPropComponent({
-            title: "Precio",
-            slider: {
-                min: priceRange[0],
-                max: priceRange[1],
-                value: priceValue,
-                setValue: null,
-            },
-            disabled: disableFlag,
-            markValue: property?.precio,
-        }),
-
-        new SideBarPropComponent({
-            title: "Dormitorios",
-            slider: {
-                min: bedroomRange[0],
-                max: bedroomRange[1],
-                value: bedroomValue,
-                setValue: null, // Read-only slider
-            },
-            disabled: true,
-            markValue: property?.charRef.dormitorios,
-        }),
-
-        new SideBarPropComponent({
-            title: "Baños",
-            slider: {
-                min: bathroomRange[0],
-                max: bathroomRange[1],
-                value: bathroomValue,
-                setValue: null, // Read-only slider
-            },
-            disabled: true,
-            markValue: property?.charRef.banos,
-        }),
-        new SideBarPropComponent({
-            title: "Metros",
-            slider: {
-                min: metersSquareRange[0],
-                max: metersSquareRange[1],
-                value: metersSquareValue,
-                setValue: null,
-            },
-            disabled: true,
-            markValue: property?.charRef.metrosCuadradros,
-        }),
-
-        new SideBarPropComponent({
-            title: "Barrio",
-            barrio: {
-                barrios: property?.barrioRef || [],
-                selectedBarrios: null,
-                setSelectedBarrios: null,
-            },
-            disabled: true,
-            markValue: null,
-            slider: null,
-            onChange: () => { },
-        }),
+        {
+            key: 'title',
+            component: new SideBarPropComponent({
+                title: loading ? '' : property?.title || '',
+                disabled: disableFlag,
+                markValue: null,
+            })
+        },
+        {
+            key: 'price',
+            component: new SideBarPropComponent({
+                title: "Precio",
+                slider: {
+                    min: priceRange[0],
+                    max: priceRange[1],
+                    value: priceValue,
+                    setValue: null,
+                    step: 1,
+                },
+                disabled: disableFlag,
+                markValue: property?.precio || null,
+            })
+        },
+        {
+            key: 'bedrooms',
+            component: new SideBarPropComponent({
+                title: "Dormitorios",
+                slider: {
+                    min: bedroomRange[0],
+                    max: bedroomRange[1],
+                    value: bedroomValue,
+                    setValue: null,
+                    step: 1,
+                },
+                disabled: true,
+                markValue: property?.charRef.dormitorios || null,
+            })
+        },
+        {
+            key: 'bathrooms',
+            component: new SideBarPropComponent({
+                title: "Baños",
+                slider: {
+                    min: bathroomRange[0],
+                    max: bathroomRange[1],
+                    value: bathroomValue,
+                    setValue: null,
+                    step: 1,
+                },
+                disabled: true,
+                markValue: property?.charRef.banos || null,
+            })
+        },
+        {
+            key: 'meters',
+            component: new SideBarPropComponent({
+                title: "Metros",
+                slider: {
+                    min: metersSquareRange[0],
+                    max: metersSquareRange[1],
+                    value: metersSquareValue,
+                    setValue: null,
+                    step: 1,
+                },
+                disabled: true,
+                markValue: property?.charRef.metrosCuadradros || null,
+            })
+        },
+        {
+            key: 'neighborhood',
+            component: new SideBarPropComponent({
+                title: "Barrio",
+                barrio: {
+                    barrios: property?.barrioRef || [],
+                    selectedBarrios: null,
+                    setSelectedBarrios: null,
+                },
+                disabled: true,
+                markValue: null,
+            })
+        },
     ];
 
     return (
         <div className='content'>
             {!flagPathname ? (
-                filterSections.map((section) => section.render())
+                filterSections.map((section) => (
+                    <React.Fragment key={section.key}>
+                        {section.component.render()}
+                    </React.Fragment>
+                ))
             ) : (
                 <SearchBar />
             )}
-
         </div>
     );
 };
-
 
 /*
 Value can also be an array : ie: 

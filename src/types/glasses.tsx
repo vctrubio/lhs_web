@@ -8,25 +8,24 @@ interface SliderType {
     min: number;
     max: number;
     value: number[];
-    setValue: (value: number[]) => void;
+    setValue: ((value: number[]) => void) | null;
     step: number;
 }
 
 interface SideBarBarrioProps {
     barrios: Barrio | Barrio[];
-    selectedBarrios: Barrio | Barrio[] | null;  // Selected barrios (could be same type as barrios)
-    setSelectedBarrios: React.Dispatch<React.SetStateAction<Barrio[]>>;
+    selectedBarrios: Barrio | Barrio[] | null;
+    setSelectedBarrios: React.Dispatch<React.SetStateAction<Barrio[]>> | null;
 }
 
 interface SideBarPropComponentProps {
     title: string;
-    slider?: SliderType | null; // Slider is optional
-    markValue: number | null; // Or use the correct type
+    slider?: SliderType | null;
+    markValue: number | null;
     disabled: boolean;
-    barrio: SideBarBarrioProps | null; // Use the interface here for barrio
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | null;
+    barrio?: SideBarBarrioProps | null;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
 
 export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
     state = {
@@ -38,7 +37,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         onChange: this.props.onChange,
     };
 
-    icons = {
+    icons: { [key: string]: JSX.Element } = {
         Precio: <IconPrice />,
         Dormitorios: <IconBed />,
         Baños: <IconBath />,
@@ -49,38 +48,38 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
 
     addMilToSlider = (value: number) => {
         const formattedValue = value.toLocaleString();
-        if (this.props.title === 'Precio') {
-            return `${formattedValue}M`;
-        }
-        return formattedValue;
+        return this.props.title === 'Precio' ? `${formattedValue}M` : formattedValue;
     }
 
     getMarks = () => {
         const { slider, markValue } = this.state;
-        return slider
-            ? [
-                { value: slider.min, label: this.addMilToSlider(slider.min) },
-                { value: slider.max, label: this.addMilToSlider(slider.max) },
-                ...(markValue !== null && markValue !== undefined
-                    ? [{ value: markValue, label: markValue.toString() }]
-                    : []),
-            ]
-            : [];
+        if (!slider) return [];
+        
+        const marks = [
+            { value: slider.min, label: this.addMilToSlider(slider.min) },
+            { value: slider.max, label: this.addMilToSlider(slider.max) },
+        ];
+
+        if (markValue !== null && markValue !== undefined) {
+            marks.push({ value: markValue, label: markValue.toString() });
+        }
+
+        return marks;
     };
 
     getFormattedMarkValue = () => {
         const { title, markValue } = this.state;
-        if (title === 'Precio') {
-            return formatPrice(markValue);
-        }
-        return markValue;
+        return title === 'Precio' && markValue !== null ? formatPrice(markValue) : markValue;
     };
 
     toggleBarrioSelection = (barrio: Barrio) => {
-        const { selectedBarrios, setSelectedBarrios } = this.props.barrio;
+        const { barrio: barrioProps } = this.props;
+        if (!barrioProps || !barrioProps.setSelectedBarrios) return;
+
+        const { selectedBarrios, setSelectedBarrios } = barrioProps;
         const isSelected = Array.isArray(selectedBarrios)
             ? selectedBarrios.some((selected) => selected.name === barrio.name)
-            : selectedBarrios.name === barrio.name;
+            : selectedBarrios?.name === barrio.name;
 
         if (isSelected) {
             setSelectedBarrios(
@@ -97,36 +96,33 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
 
     renderDescription = () => {
         const { barrio } = this.state;
-        if (barrio && barrio.barrios) {
-            // Check if barrio.barrios is an object and has a description
-            if (typeof barrio.barrios === 'object' && barrio.barrios.description) {
-                return barrio.barrios.description || 'No description available';
-            } else if (Array.isArray(barrio.barrios)) {
-                // Render all barrios.name and make them clickable to toggle selectedBarrios
-                return barrio.barrios.map((barrioItem, index) => {
-                    const isSelected = Array.isArray(barrio.selectedBarrios)
-                        ? barrio.selectedBarrios.some((selected) => selected.name === barrioItem.name)
-                        : barrio.selectedBarrios && barrio.selectedBarrios.name === barrioItem.name;
+        if (!barrio || !barrio.barrios) return '...';
 
-                    return (
-                        <div
-                            key={index}
-                            onClick={() => this.toggleBarrioSelection(barrioItem)}
-                            style={{ textDecoration: isSelected ? '' : 'line-through', cursor: 'pointer' }}
-                        >
-                            {barrioItem.name}
-                        </div>
-                    );
-                });
-            }
+        if (Array.isArray(barrio.barrios)) {
+            return barrio.barrios.map((barrioItem, index) => {
+                const isSelected = Array.isArray(barrio.selectedBarrios)
+                    ? barrio.selectedBarrios.some((selected) => selected.name === barrioItem.name)
+                    : barrio.selectedBarrios?.name === barrioItem.name;
+
+                return (
+                    <div
+                        key={`barrio-${index}`}
+                        onClick={() => this.toggleBarrioSelection(barrioItem)}
+                        style={{ textDecoration: isSelected ? '' : 'line-through', cursor: 'pointer' }}
+                    >
+                        {barrioItem.name}
+                    </div>
+                );
+            });
         }
-        return '...';
+
+        return barrio.barrios.description || 'No description available';
     };
 
     render() {
         const { title, slider, markValue, disabled, onChange } = this.state;
-        const icon = this.icons[title] || <IconPlano />; // Get the icon based on the title, default to IconsPlano if not found   
-        const formattedMarkValue = this.getFormattedMarkValue(); // Get formatted markValue
+        const icon = this.icons[title] || <IconPlano />;
+        const formattedMarkValue = this.getFormattedMarkValue();
 
         const precioValue = title === 'Precio' && markValue
             ? markValue.toLocaleString('de-DE')
@@ -136,7 +132,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
             <div className='menu'>
                 <div className='px-1'>
                     <input
-                        value={(title && title !== 'Buscador') ? title : null}
+                        value={title !== 'Buscador' ? title : ''}
                         onChange={onChange}
                         disabled={disabled}
                         placeholder={disabled ? '' : 'Buscador'}
@@ -147,7 +143,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                                 {precioValue}
                             </span>
                         )}
-                        {this.state.barrio && (
+                        {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
                             <span>{this.state.barrio.barrios.name}</span>
                         )}
                         <div>
@@ -158,8 +154,8 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                 {slider ? (
                     <div className='px-5'>
                         <Slider
-                            value={formattedMarkValue ? formattedMarkValue : slider.value}
-                            onChange={(e, newValue) => slider.setValue(newValue)}
+                            value={formattedMarkValue !== null ? formattedMarkValue : slider.value}
+                            onChange={(e, newValue) => slider.setValue && slider.setValue(newValue as number[])}
                             min={slider.min}
                             max={slider.max}
                             step={slider.step}
@@ -182,4 +178,3 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         );
     }
 }
-
