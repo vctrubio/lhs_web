@@ -10,7 +10,7 @@ export const SearchBar = () => {
     priceRange, priceValue, setPriceValue,
     bathroomRange, bathroomValue, setBathroomValue,
     bedroomRange, bedroomValue, setBedroomValue,
-    metersSquareRange, metersSquareValue, setMetersSquareValue,
+    metersSquareRange, metersSquareValue, setMetersSquareValue, title,
     setTitle, barrios, selectedBarrios, setSelectedBarrios,
   } = useSharedQueryState();
 
@@ -19,7 +19,7 @@ export const SearchBar = () => {
     {
       key: 'search',
       component: new SideBarPropComponent({
-        title: 'Buscador',
+        title: title,
         disabled: false,
         onChange: (e) => setTitle(e.target.value),
         markValue: null,
