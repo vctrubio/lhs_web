@@ -51,6 +51,8 @@ export const useSharedQueryState = () => {
         setIncludeBarrios(null);
         setFlagReformado(null);
         setFlagSinReformar(null);
+
+        // Update the slider values to their initial ranges
         setPriceValue([priceRange[0], priceRange[1]]);
         setBathroomValue([bathroomRange[0], bathroomRange[1]]);
         setBedroomValue([bedroomRange[0], bedroomRange[1]]);

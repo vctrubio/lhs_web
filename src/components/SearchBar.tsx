@@ -12,6 +12,7 @@ export const SearchBar = () => {
     bedroomRange, bedroomValue, setBedroomValue,
     metersSquareRange, metersSquareValue, setMetersSquareValue, title,
     setTitle, barrios, selectedBarrios, setSelectedBarrios,
+    handleReset,
   } = useSharedQueryState();
 
 
@@ -24,6 +25,7 @@ export const SearchBar = () => {
         onChange: (e) => setTitle(e.target.value),
         markValue: null,
         barrio: null,
+        //icon triger = handlreset
       })
     },
     {
@@ -118,14 +120,12 @@ export const SearchBar = () => {
           {section.component.render()}
         </React.Fragment>
       ))}
+      <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
     </>
   );
 };
 
-
-
 /*
-  
   <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
           control={<Switch defaultChecked onChange={handleReformadoChange} />}
@@ -169,3 +169,5 @@ export const SearchBar = () => {
         </FormControl> 
 
 */
+
+

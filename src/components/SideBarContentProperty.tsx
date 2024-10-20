@@ -19,6 +19,7 @@ export const Content = () => {
         bathroomRange, bathroomValue,
         bedroomRange, bedroomValue,
         metersSquareRange, metersSquareValue,
+        handleReset
     } = useSharedQueryState();
 
     useEffect(() => {
@@ -36,6 +37,11 @@ export const Content = () => {
         ptrFetch();
     }, [pathname]);
 
+    const handleIconClick = () => {
+        console.log("Icon clicked: Resetting filters");
+        handleReset();
+    };
+
     const filterSections = [
         {
             key: 'title',
@@ -43,6 +49,7 @@ export const Content = () => {
                 title: loading ? '' : property?.title || '',
                 disabled: disableFlag,
                 markValue: null,
+                onIconClick: handleIconClick,
             })
         },
         {

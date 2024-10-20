@@ -132,7 +132,6 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
             <div className='menu'>
                 <div className='px-1'>
                     <input
-                        // Warning: `value` prop on `input` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.
                         value={title}
                         onChange={onChange}
                         disabled={disabled}
