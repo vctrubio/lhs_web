@@ -5,7 +5,7 @@ import { SearchBar } from './SearchBar';
 import { fetchPropertyByID } from '@/lib/bridges';
 import { Property } from '@/types/property';
 import { useSharedQueryState } from '@/lib/nuqs';
-import { SideBarPropComponent  } from '@/types/glasses';
+import { SideBarPropComponent } from '@/types/glasses';
 
 export const Content = () => {
     const [property, setProperty] = useState<Property | null>(null); // Holds the actual property data
@@ -97,7 +97,7 @@ export const Content = () => {
             disabled: true,
             markValue: null,
             slider: null,
-            onChange: () => {}, 
+            onChange: () => { },
         }),
     ];
 
@@ -113,23 +113,12 @@ export const Content = () => {
     );
 };
 
+
 /*
 Value can also be an array : ie: 
 Price 200
 IBI 400
 Comunidad 230
-
-||
-Baños 4
-Aseos 1
-*/
-
-
-
-/*
-
-
-                     <div>{property.barrioRef.name}</div> 
 
 
       <div className='flex flex-col' style={{ fontSize: 14 }}>
@@ -137,10 +126,5 @@ Aseos 1
                             <div>Precio IBI: 2100 </div>
                         </div>
 
-
-        <div className='gap-1' style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>{number && number.toLocaleString('de-DE')} </div>
-                    <div>
-                        {icon} {/* Render the icon here
 
 */
