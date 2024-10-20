@@ -35,7 +35,7 @@ export const Footer = () => {
 
     const handleFindUsClick = () => {
         console.log('Find Us icon clicked');
-        window.open('https://www.google.com/maps/search/?api=1&query=lhsconcept', '_blank');
+        window.open('https://maps.app.goo.gl/x4h97NBSPtJitp3n7', '_blank');
     };
 
     const handleInstagramClick = () => {

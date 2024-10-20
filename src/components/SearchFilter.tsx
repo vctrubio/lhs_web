@@ -30,13 +30,37 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
     const [cssUniqueBoy, setUniqueBoy] = useState(false);
 
     useEffect(() => {
-        if (title.length > 0)
-            setCssStateHover(true);
-        else
-            setCssStateHover(false);
-    }, [title])
+        // Update cssStateHover based on any filter being active
+        const isAnyFilterActive = [
+            title,
+            banosMaximo,
+            banosMinimo,
+            dormitoriosMaximo,
+            dormitoriosMinimo,
+            metrosCuadradosMaximo,
+            metrosCuadradosMinimo,
+            precioMaximo,
+            precioMinimo,
+            includeBarrios,
+            flagReformado,
+            flagSinReformar
+        ].some(filter => filter !== undefined && filter !== '' && filter !== false);
 
-
+        setCssStateHover(isAnyFilterActive);
+    }, [
+        title,
+        banosMaximo,
+        banosMinimo,
+        dormitoriosMaximo,
+        dormitoriosMinimo,
+        metrosCuadradosMaximo,
+        metrosCuadradosMinimo,
+        precioMaximo,
+        precioMinimo,
+        includeBarrios,
+        flagReformado,
+        flagSinReformar
+    ]);
 
     useEffect(() => {
         let updateProperty = [...entries];
@@ -72,33 +96,23 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         }
 
         if (precioMinimo) {
-            updateProperty = updateProperty.filter(property => {
-                return property.precio >= parseInt(precioMinimo) * 1000000;
-            });
+            updateProperty = updateProperty.filter(property => property.precio >= parseInt(precioMinimo) * 1000000);
         }
 
         if (precioMaximo) {
-            updateProperty = updateProperty.filter(property => {
-                return property.precio <= parseInt(precioMaximo) * 1000000;
-            });
+            updateProperty = updateProperty.filter(property => property.precio <= parseInt(precioMaximo) * 1000000);
         }
 
-        if (includeBarrios) {
-            updateProperty = updateProperty.filter(property => {
-                return includeBarrios.includes(property.barrioRef?.name);
-            });
+        if (includeBarrios && includeBarrios.length > 0) {
+            updateProperty = updateProperty.filter(property => includeBarrios.includes(property.barrioRef?.name));
         }
 
         if (flagReformado) {
-            updateProperty = updateProperty.filter(property => {
-                return !property.reformado;
-            });
+            updateProperty = updateProperty.filter(property => property.reformado);
         }
 
         if (flagSinReformar) {
-            updateProperty = updateProperty.filter(property => {
-                return property.reformado;
-            });
+            updateProperty = updateProperty.filter(property => !property.reformado);
         }
 
         setFilterProperties(updateProperty);
@@ -116,8 +130,8 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         includeBarrios,
         flagReformado,
         flagSinReformar,
+        entries
     ]);
-
 
     return (
         <>
