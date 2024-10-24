@@ -143,9 +143,9 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
             <div className="property-container" last-man-standing={cssUniqueBoy ? 'on' : ''}>
                 {filterProperties.length === 0 ? (
                     <div className="flex justify-center flex-col m-auto">
-                        <Logo />
+                        {/* <Logo /> */}
                         <p className="text-center">No encontramos lo que buscas</p>
-                        <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
+                        {/* <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button> */}
                     </div>
                 ) : (
                     filterProperties.map((entry: Property) => (

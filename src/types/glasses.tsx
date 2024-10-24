@@ -128,7 +128,6 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
         const { hasQueryParams } = this.props; // Assuming you pass this prop when creating the component
 
-        // Determine which icon to use based on componentKey and hasQueryParams flag
         let icon;
         if (componentKey === 'title') {
             icon = <IconPlano />;
@@ -163,8 +162,8 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                             <span>{this.state.barrio.barrios.name}</span>
                         )}
                         <div onClick={() => {
-                            if (componentKey === 'search') {
-                                this.props.onReset(); // Call the onReset prop
+                            if (componentKey === 'search' && this.props.onReset) {
+                                this.props.onReset();
                             }
                         }}>
                             {icon}

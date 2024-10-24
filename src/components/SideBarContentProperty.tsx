@@ -19,7 +19,6 @@ export const Content = () => {
         bathroomRange, bathroomValue,
         bedroomRange, bedroomValue,
         metersSquareRange, metersSquareValue,
-        handleReset
     } = useSharedQueryState();
 
     useEffect(() => {
@@ -39,17 +38,16 @@ export const Content = () => {
 
     const filterSections = [
         {
-            key: 'title',
             component: new SideBarPropComponent({
                 title: loading ? '' : property?.title || '',
                 disabled: disableFlag,
                 markValue: null,
                 componentKey: 'title',
                 onChange: () => {}, // Add onChange if needed
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
         {
-            key: 'price',
             component: new SideBarPropComponent({
                 title: "Precio",
                 slider: {
@@ -62,10 +60,10 @@ export const Content = () => {
                 disabled: disableFlag,
                 markValue: property?.precio || null,
                 componentKey: 'price',
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
         {
-            key: 'bedrooms',
             component: new SideBarPropComponent({
                 title: "Dormitorios",
                 slider: {
@@ -78,10 +76,10 @@ export const Content = () => {
                 disabled: true,
                 markValue: property?.charRef.dormitorios || null,
                 componentKey: 'bedrooms',
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
         {
-            key: 'bathrooms',
             component: new SideBarPropComponent({
                 title: "Baños",
                 slider: {
@@ -94,10 +92,10 @@ export const Content = () => {
                 disabled: true,
                 markValue: property?.charRef.banos || null,
                 componentKey: 'bathrooms',
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
         {
-            key: 'meters',
             component: new SideBarPropComponent({
                 title: "Metros",
                 slider: {
@@ -110,10 +108,10 @@ export const Content = () => {
                 disabled: true,
                 markValue: property?.charRef.metrosCuadradros || null,
                 componentKey: 'meters',
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
         {
-            key: 'neighborhood',
             component: new SideBarPropComponent({
                 title: "Barrio",
                 barrio: {
@@ -124,6 +122,7 @@ export const Content = () => {
                 disabled: true,
                 markValue: null,
                 componentKey: 'neighborhood',
+                hasQueryParams: false, // Add hasQueryParams
             })
         },
     ];

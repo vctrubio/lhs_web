@@ -14,8 +14,9 @@ export const SearchBar = () => {
     setTitle, barrios, selectedBarrios, setSelectedBarrios,
     handleReset,
     hasQueryParams,
+    sortOption, setSortOption, // Add sortOption and setSortOption
+    properties, // Get the sorted properties
   } = useSharedQueryState();
-
 
   const filterSections = [
     {
@@ -45,6 +46,7 @@ export const SearchBar = () => {
         barrio: null,
         onChange: () => { },
         componentKey: 'price',
+        hasQueryParams, // Add hasQueryParams
       })
     },
     {
@@ -62,6 +64,7 @@ export const SearchBar = () => {
         barrio: null,
         onChange: () => { },
         componentKey: 'bedrooms',
+        hasQueryParams, // Add hasQueryParams
       })
     },
     {
@@ -79,6 +82,7 @@ export const SearchBar = () => {
         barrio: null,
         onChange: () => { },
         componentKey: 'bathrooms',
+        hasQueryParams, // Add hasQueryParams
       })
     },
     {
@@ -96,6 +100,7 @@ export const SearchBar = () => {
         barrio: null,
         onChange: () => { },
         componentKey: 'meters',
+        hasQueryParams, // Add hasQueryParams
       })
     },
     {
@@ -111,9 +116,14 @@ export const SearchBar = () => {
         slider: null,
         onChange: () => { },
         componentKey: 'neighborhood',
+        hasQueryParams, // Add hasQueryParams
       })
     },
   ];
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(event.target.value);
+  };
 
   return (
     <>
@@ -122,7 +132,28 @@ export const SearchBar = () => {
           {section.component.render()}
         </React.Fragment>
       ))}
-      <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button>
+      <div className="sort-component">
+        <label htmlFor="sort">Sort by: </label>
+        <select id="sort" value={sortOption} onChange={handleSortChange}>
+          <option value="default">Default</option>
+          <option value="priceAsc">Price: Low to High</option>
+          <option value="priceDesc">Price: High to Low</option>
+          <option value="bedroomsAsc">Bedrooms: Low to High</option>
+          <option value="bedroomsDesc">Bedrooms: High to Low</option>
+          {/* Add more sorting options as needed */}
+        </select>
+      </div>
+      <div className="property-list">
+        {properties.map(property => (
+          <div key={property.id}>
+            {/* Render property details */}
+            <h3>{property.title}</h3>
+            <p>Price: {property.precio}</p>
+            <p>Bedrooms: {property.charRef.dormitorios}</p>
+            {/* Add more property details as needed */}
+          </div>
+        ))}
+      </div>
     </>
   );
 };

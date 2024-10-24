@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchEntriesContentful } from './bridges';
 import { formatPrice } from './utils';
 import { useQueryState } from 'nuqs'
-import { Barrio } from '@/types/property'
+import { Barrio, Property } from '@/types/property'
 
 export const useSharedQueryState = () => {
     const [priceRange, setPriceRange] = useState([0, 0]);
@@ -37,6 +37,26 @@ export const useSharedQueryState = () => {
 
     const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
     const amenitiesOptions = ['Atico', 'Garaje', 'Balcones', 'Portero'];
+
+    // Add this line to your state declarations
+    const [sortOption, setSortOption] = useState<string>('default');
+
+    const [properties, setProperties] = useState<Property[]>([]);
+
+    const sortProperties = (properties: Property[], sortOption: string) => {
+        switch (sortOption) {
+            case 'priceAsc':
+                return properties.sort((a, b) => a.precio - b.precio);
+            case 'priceDesc':
+                return properties.sort((a, b) => b.precio - a.precio);
+            case 'bedroomsAsc':
+                return properties.sort((a, b) => a.charRef.dormitorios - b.charRef.dormitorios);
+            case 'bedroomsDesc':
+                return properties.sort((a, b) => b.charRef.dormitorios - a.charRef.dormitorios);
+            default:
+                return properties; // Default sorting logic
+        }
+    };
 
     const handleReset = () => {
         setTitle(null);
@@ -197,10 +217,15 @@ export const useSharedQueryState = () => {
             } else {
                 setSelectedBarrios(Array.from(barrios));
             }
+
+            // Sort properties based on the current sort option
+            const sortedProperties = sortProperties(properties, sortOption);
+            setProperties(sortedProperties);
         };
 
         fetchData();
-    }, []);
+    }, [sortOption]); // Re-run the effect when sortOption changes
+
 
     const hasQueryParams = [
         precioMinimo, precioMaximo,
@@ -232,5 +257,7 @@ export const useSharedQueryState = () => {
         flagSinReformar, setFlagSinReformar,
         handleReset,
         hasQueryParams,
+        sortOption, setSortOption,
+        properties, // Return the sorted properties
     };
 };
