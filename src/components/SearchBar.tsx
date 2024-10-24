@@ -18,18 +18,17 @@ export const SearchBar = () => {
 
   const filterSections = [
     {
-      key: 'search',
       component: new SideBarPropComponent({
         title: title,
         disabled: false,
         onChange: (e) => setTitle(e.target.value),
         markValue: null,
         barrio: null,
+        componentKey: 'search',
         //icon triger = handlreset
       })
     },
     {
-      key: 'price',
       component: new SideBarPropComponent({
         title: "Precio",
         slider: {
@@ -43,10 +42,10 @@ export const SearchBar = () => {
         markValue: null,
         barrio: null,
         onChange: () => { },
+        componentKey: 'price',
       })
     },
     {
-      key: 'bedrooms',
       component: new SideBarPropComponent({
         title: "Dormitorios",
         slider: {
@@ -60,10 +59,10 @@ export const SearchBar = () => {
         markValue: null,
         barrio: null,
         onChange: () => { },
+        componentKey: 'bedrooms',
       })
     },
     {
-      key: 'bathrooms',
       component: new SideBarPropComponent({
         title: "Baños",
         slider: {
@@ -77,10 +76,10 @@ export const SearchBar = () => {
         markValue: null,
         barrio: null,
         onChange: () => { },
+        componentKey: 'bathrooms',
       })
     },
     {
-      key: 'meters',
       component: new SideBarPropComponent({
         title: "Metros",
         slider: {
@@ -94,10 +93,10 @@ export const SearchBar = () => {
         markValue: null,
         barrio: null,
         onChange: () => { },
+        componentKey: 'meters',
       })
     },
     {
-      key: 'neighborhood',
       component: new SideBarPropComponent({
         title: "Barrio",
         barrio: {
@@ -109,6 +108,7 @@ export const SearchBar = () => {
         markValue: null,
         slider: null,
         onChange: () => { },
+        componentKey: 'neighborhood',
       })
     },
   ];
@@ -116,7 +116,7 @@ export const SearchBar = () => {
   return (
     <>
       {filterSections.map((section) => (
-        <React.Fragment key={section.key}>
+        <React.Fragment key={section.component.props.componentKey}>
           {section.component.render()}
         </React.Fragment>
       ))}

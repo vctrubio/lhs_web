@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Slider } from '@mui/material';
-import { IconPrice, IconBed, IconBath, IconSearch, IconPlano, IconLocation, IconRulerMeters } from '@/lib/svgs'; // Example icons
+import { IconPrice, IconBed, IconBath, IconSearch, IconPlano, IconLocation, IconRulerMeters, IconRepeatClassic } from '@/lib/svgs'; // Example icons
 import { formatPrice } from '@/lib/utils'; // Assuming formatPrice is a utility function for price formatting
 import { Barrio } from '@/types/property'; // Import the Barrio type from the property file
 
@@ -20,6 +20,7 @@ interface SideBarBarrioProps {
 
 interface SideBarPropComponentProps {
     title: string;
+    componentKey: string;
     slider?: SliderType | null;
     markValue: number | null;
     disabled: boolean;
@@ -29,6 +30,7 @@ interface SideBarPropComponentProps {
 
 export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
     state = {
+        componentKey: this.props.componentKey,
         title: this.props.title,
         slider: this.props.slider || null,
         markValue: this.props.markValue,
@@ -44,6 +46,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         Metros: <IconRulerMeters flag={-1} />,
         Barrio: <IconLocation />,
         Buscador: <IconSearch />,
+        Reset: <IconRepeatClassic />,
     };
 
     addMilToSlider = (value: number) => {
@@ -120,8 +123,11 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
     };
 
     render() {
-        const { title, slider, markValue, disabled, onChange } = this.state;
-        const icon = this.icons[title] || <IconPlano />;
+        const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
+        
+        // Map icons based on componentKey
+        const icon = componentKey === 'title' ? <IconPlano /> : componentKey === 'search' ? <IconRepeatClassic /> : this.icons[title];
+
         const formattedMarkValue = this.getFormattedMarkValue();
 
         const precioValue = title === 'Precio' && markValue
@@ -146,7 +152,11 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                         {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
                             <span>{this.state.barrio.barrios.name}</span>
                         )}
-                        <div>
+                        <div onClick={() => {
+                            if (componentKey === 'search') {
+                                console.log('Icon clicked');
+                            }
+                        }}>
                             {icon}
                         </div>
                     </div>

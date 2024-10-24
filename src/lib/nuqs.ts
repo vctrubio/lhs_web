@@ -127,9 +127,6 @@ export const useSharedQueryState = () => {
         if (title === '') {
             setTitle(null);
         }
-
-        console.log('hellowlrd');
-        console.log('Dependencies:', { title, priceValue, bathroomValue, bedroomValue, metersSquareValue, selectedBarrios, flagReformado, flagSinReformar });
     }, [title, priceValue, bathroomValue, bedroomValue, metersSquareValue, selectedBarrios, flagReformado, flagSinReformar]);
 
 

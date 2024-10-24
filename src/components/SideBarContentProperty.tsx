@@ -37,11 +37,6 @@ export const Content = () => {
         ptrFetch();
     }, [pathname]);
 
-    const handleIconClick = () => {
-        console.log("Icon clicked: Resetting filters");
-        handleReset();
-    };
-
     const filterSections = [
         {
             key: 'title',
@@ -49,7 +44,8 @@ export const Content = () => {
                 title: loading ? '' : property?.title || '',
                 disabled: disableFlag,
                 markValue: null,
-                onIconClick: handleIconClick,
+                componentKey: 'title',
+                onChange: () => {}, // Add onChange if needed
             })
         },
         {
@@ -65,6 +61,7 @@ export const Content = () => {
                 },
                 disabled: disableFlag,
                 markValue: property?.precio || null,
+                componentKey: 'price',
             })
         },
         {
@@ -80,6 +77,7 @@ export const Content = () => {
                 },
                 disabled: true,
                 markValue: property?.charRef.dormitorios || null,
+                componentKey: 'bedrooms',
             })
         },
         {
@@ -95,6 +93,7 @@ export const Content = () => {
                 },
                 disabled: true,
                 markValue: property?.charRef.banos || null,
+                componentKey: 'bathrooms',
             })
         },
         {
@@ -110,6 +109,7 @@ export const Content = () => {
                 },
                 disabled: true,
                 markValue: property?.charRef.metrosCuadradros || null,
+                componentKey: 'meters',
             })
         },
         {
@@ -123,6 +123,7 @@ export const Content = () => {
                 },
                 disabled: true,
                 markValue: null,
+                componentKey: 'neighborhood',
             })
         },
     ];
@@ -131,7 +132,7 @@ export const Content = () => {
         <div className='content'>
             {!flagPathname ? (
                 filterSections.map((section) => (
-                    <React.Fragment key={section.key}>
+                    <React.Fragment key={section.component.props.componentKey}>
                         {section.component.render()}
                     </React.Fragment>
                 ))

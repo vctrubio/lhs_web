@@ -44,7 +44,12 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
             includeBarrios,
             flagReformado,
             flagSinReformar
-        ].some(filter => filter !== undefined && filter !== '' && filter !== false);
+        ].some(filter => {
+            if (typeof filter === 'boolean') {
+                return filter;
+            }
+            return filter !== undefined && filter !== '';
+        });
 
         setCssStateHover(isAnyFilterActive);
     }, [
