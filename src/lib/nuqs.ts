@@ -62,64 +62,74 @@ export const useSharedQueryState = () => {
     };
 
     useEffect(() => {
-        if (title === '')
-            setTitle(null);
-
-        if (priceValue[0] > priceRange[0])
+        if (priceValue[0] > priceRange[0]) {
             setPrecioMinimo(priceValue[0].toString());
-        if (priceValue[0] === priceRange[0] && precioMinimo)
+        } else if (priceValue[0] === priceRange[0] && precioMinimo) {
             setPrecioMinimo(null);
+        }
 
-        if (priceValue[1] < priceRange[1])
+        if (priceValue[1] < priceRange[1]) {
             setPrecioMaximo(priceValue[1].toString());
-        if (priceValue[1] === priceRange[1] && precioMaximo)
+        } else if (priceValue[1] === priceRange[1] && precioMaximo) {
             setPrecioMaximo(null);
+        }
 
-        if (bathroomValue[0] > bathroomRange[0])
+        if (bathroomValue[0] > bathroomRange[0]) {
             setBanosMinimo(bathroomValue[0].toString());
-        if (bathroomValue[0] === bathroomRange[0] && banosMinimo)
+        } else if (bathroomValue[0] === bathroomRange[0] && banosMinimo) {
             setBanosMinimo(null);
+        }
 
-        if (bathroomValue[1] < bathroomRange[1])
+        if (bathroomValue[1] < bathroomRange[1]) {
             setBanosMaximo(bathroomValue[1].toString());
-        if (bathroomValue[1] === bathroomRange[1] && banosMaximo)
+        } else if (bathroomValue[1] === bathroomRange[1] && banosMaximo) {
             setBanosMaximo(null);
+        }
 
-        if (bedroomValue[0] > bedroomRange[0])
+        if (bedroomValue[0] > bedroomRange[0]) {
             setDormitoriosMinimo(bedroomValue[0].toString());
-        if (bedroomValue[0] === bedroomRange[0] && dormitoriosMinimo)
+        } else if (bedroomValue[0] === bedroomRange[0] && dormitoriosMinimo) {
             setDormitoriosMinimo(null);
+        }
 
-        if (bedroomValue[1] < bedroomRange[1])
+        if (bedroomValue[1] < bedroomRange[1]) {
             setDormitoriosMaximo(bedroomValue[1].toString());
-        if (bedroomValue[1] === bedroomRange[1] && dormitoriosMaximo)
+        } else if (bedroomValue[1] === bedroomRange[1] && dormitoriosMaximo) {
             setDormitoriosMaximo(null);
+        }
 
-        if (metersSquareValue[0] > metersSquareRange[0])
+        if (metersSquareValue[0] > metersSquareRange[0]) {
             setMetrosCuadradosMinimo(metersSquareValue[0].toString());
-        if (metersSquareValue[0] === metersSquareRange[0] && metrosCuadradosMinimo)
+        } else if (metersSquareValue[0] === metersSquareRange[0] && metrosCuadradosMinimo) {
             setMetrosCuadradosMinimo(null);
+        }
 
-        if (metersSquareValue[1] < metersSquareRange[1])
+        if (metersSquareValue[1] < metersSquareRange[1]) {
             setMetrosCuadradosMaximo(metersSquareValue[1].toString());
-        if (metersSquareValue[1] === metersSquareRange[1] && metrosCuadradosMaximo)
+        } else if (metersSquareValue[1] === metersSquareRange[1] && metrosCuadradosMaximo) {
             setMetrosCuadradosMaximo(null);
+        }
 
-        if (selectedBarrios.length > 0 && selectedBarrios.length !== barrios.length)
+        if (selectedBarrios.length > 0 && selectedBarrios.length !== barrios.length) {
             setIncludeBarrios(selectedBarrios.map(barrio => barrio.name).join(''));
-
-        if (selectedBarrios.length === 0)
+        } else if (selectedBarrios.length === 0 || selectedBarrios.length === barrios.length) {
             setIncludeBarrios(null);
+        }
 
-        if (selectedBarrios.length === barrios.length)
-            setIncludeBarrios(null);
-
-        if (flagReformado === '')
+        if (flagReformado === '') {
             setFlagReformado(null);
+        }
 
-        if (flagSinReformar === '')
+        if (flagSinReformar === '') {
             setFlagSinReformar(null);
+        }
 
+        if (title === '') {
+            setTitle(null);
+        }
+
+        console.log('hellowlrd');
+        console.log('Dependencies:', { title, priceValue, bathroomValue, bedroomValue, metersSquareValue, selectedBarrios, flagReformado, flagSinReformar });
     }, [title, priceValue, bathroomValue, bedroomValue, metersSquareValue, selectedBarrios, flagReformado, flagSinReformar]);
 
 
