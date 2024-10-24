@@ -28,6 +28,8 @@ interface SideBarPropComponentProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     hasQueryParams: boolean; // New prop to handle query parameters
     onReset?: () => void; // New prop to handle reset
+    sortOption: string;
+    setSortOption: (sortOption: string) => void;
 }
 
 export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
@@ -39,6 +41,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         disabled: this.props.disabled,
         barrio: this.props.barrio,
         onChange: this.props.onChange,
+        isIconActive: false,
     };
 
     icons: { [key: string]: JSX.Element } = {
@@ -124,9 +127,39 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         return barrio.barrios.description || 'No description available';
     };
 
+    handleIconClick = () => {
+        const { componentKey, sortOption, setSortOption, onReset } = this.props;
+
+        if (componentKey === 'search') {
+            // Trigger handleReset for the search component
+            if (onReset) {
+                onReset();
+            }
+        } else {
+            // Handle sorting for other components
+            const sortKeyMap: { [key: string]: string } = {
+                price: 'price',
+                bedrooms: 'bedrooms',
+                bathrooms: 'bathrooms',
+                meters: 'meters',
+                neighborhood: 'barrio',
+            };
+
+            const sortKey = sortKeyMap[componentKey];
+
+            if (sortKey) {
+                const isAsc = sortOption === `${sortKey}Asc`;
+                const newSortOption = isAsc ? `${sortKey}Desc` : `${sortKey}Asc`;
+                setSortOption(newSortOption);
+            }
+        }
+
+        this.setState(prevState => ({ isIconActive: !prevState.isIconActive }));
+    };
+
     render() {
         const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
-        const { hasQueryParams } = this.props; // Assuming you pass this prop when creating the component
+        const { hasQueryParams } = this.props;
 
         let icon;
         if (componentKey === 'title') {
@@ -161,11 +194,10 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                         {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
                             <span>{this.state.barrio.barrios.name}</span>
                         )}
-                        <div onClick={() => {
-                            if (componentKey === 'search' && this.props.onReset) {
-                                this.props.onReset();
-                            }
-                        }}>
+                        <div
+                            onClick={this.handleIconClick}
+                            style={{ fill: this.state.isIconActive ? 'red' : 'black' }}
+                        >
                             {icon}
                         </div>
                     </div>

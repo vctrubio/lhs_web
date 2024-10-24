@@ -39,7 +39,7 @@ export const useSharedQueryState = () => {
     const amenitiesOptions = ['Atico', 'Garaje', 'Balcones', 'Portero'];
 
     // Use useQueryState for sortOption to manage it as a query parameter
-    const [sortOption, setSortOption] = useQueryState('sort', { defaultValue: 'default' });
+    const [sortOption, setSortOption] = useQueryState('sort', { defaultValue: '' });
 
     const [properties, setProperties] = useState<Property[]>([]);
 
@@ -75,6 +75,9 @@ export const useSharedQueryState = () => {
         setIncludeBarrios(null);
         setFlagReformado(null);
         setFlagSinReformar(null);
+
+        // Reset the sort option to null to remove it from the URL
+        setSortOption(null);
 
         // Update the slider values to their initial ranges
         setPriceValue([priceRange[0], priceRange[1]]);
@@ -231,12 +234,14 @@ export const useSharedQueryState = () => {
     }, [sortOption]); // Re-run the effect when sortOption changes
 
 
+    // Calculate hasQueryParams based on active query parameters, including sortOption
     const hasQueryParams = [
         precioMinimo, precioMaximo,
         banosMinimo, banosMaximo,
         dormitoriosMinimo, dormitoriosMaximo,
         metrosCuadradosMinimo, metrosCuadradosMaximo,
-        includeBarrios, flagReformado, flagSinReformar, title
+        includeBarrios, flagReformado, flagSinReformar, title,
+        sortOption && sortOption !== '' // Check if sortOption is not empty
     ].some(param => param !== null && param !== '');
 
     return {
@@ -260,7 +265,7 @@ export const useSharedQueryState = () => {
         flagReformado, setFlagReformado,
         flagSinReformar, setFlagSinReformar,
         handleReset,
-        hasQueryParams,
+        hasQueryParams, // Return hasQueryParams
         sortOption, setSortOption,
         properties, // Return the sorted properties
     };

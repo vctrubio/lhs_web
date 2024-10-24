@@ -19,6 +19,7 @@ export const Content = () => {
         bathroomRange, bathroomValue,
         bedroomRange, bedroomValue,
         metersSquareRange, metersSquareValue,
+        sortOption, setSortOption,
     } = useSharedQueryState();
 
     useEffect(() => {
@@ -45,6 +46,8 @@ export const Content = () => {
                 componentKey: 'title',
                 onChange: () => {}, // Add onChange if needed
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
         {
@@ -61,6 +64,8 @@ export const Content = () => {
                 markValue: property?.precio || null,
                 componentKey: 'price',
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
         {
@@ -77,6 +82,8 @@ export const Content = () => {
                 markValue: property?.charRef.dormitorios || null,
                 componentKey: 'bedrooms',
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
         {
@@ -93,6 +100,8 @@ export const Content = () => {
                 markValue: property?.charRef.banos || null,
                 componentKey: 'bathrooms',
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
         {
@@ -109,6 +118,8 @@ export const Content = () => {
                 markValue: property?.charRef.metrosCuadradros || null,
                 componentKey: 'meters',
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
         {
@@ -123,6 +134,8 @@ export const Content = () => {
                 markValue: null,
                 componentKey: 'neighborhood',
                 hasQueryParams: false, // Add hasQueryParams
+                sortOption, // Pass sortOption
+                setSortOption, // Pass setSortOption
             })
         },
     ];

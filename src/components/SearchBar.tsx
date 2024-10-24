@@ -13,9 +13,8 @@ export const SearchBar = () => {
     metersSquareRange, metersSquareValue, setMetersSquareValue, title,
     setTitle, barrios, selectedBarrios, setSelectedBarrios,
     handleReset,
-    hasQueryParams,
-    sortOption, setSortOption, // Add sortOption and setSortOption
-    properties, // Get the sorted properties
+    hasQueryParams, // Get hasQueryParams from shared state
+    sortOption, setSortOption,
   } = useSharedQueryState();
 
   const filterSections = [
@@ -28,9 +27,9 @@ export const SearchBar = () => {
         barrio: null,
         componentKey: 'search',
         hasQueryParams, // Pass the flag here
-        onReset: handleReset, // Pass the handleReset function
-        sortOption, // Pass sortOption
-        setSortOption, // Pass setSortOption
+        onReset: handleReset,
+        sortOption,
+        setSortOption,
       })
     },
     {
@@ -49,6 +48,8 @@ export const SearchBar = () => {
         onChange: () => { },
         componentKey: 'price',
         hasQueryParams, // Add hasQueryParams
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
     {
@@ -67,6 +68,8 @@ export const SearchBar = () => {
         onChange: () => { },
         componentKey: 'bedrooms',
         hasQueryParams, // Add hasQueryParams
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
     {
@@ -85,6 +88,8 @@ export const SearchBar = () => {
         onChange: () => { },
         componentKey: 'bathrooms',
         hasQueryParams, // Add hasQueryParams
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
     {
@@ -103,6 +108,8 @@ export const SearchBar = () => {
         onChange: () => { },
         componentKey: 'meters',
         hasQueryParams, // Add hasQueryParams
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
     {
@@ -119,13 +126,11 @@ export const SearchBar = () => {
         onChange: () => { },
         componentKey: 'neighborhood',
         hasQueryParams, // Add hasQueryParams
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
   ];
-
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(event.target.value); // This will update the URL
-  };
 
   return (
     <>
@@ -134,84 +139,6 @@ export const SearchBar = () => {
           {section.component.render()}
         </React.Fragment>
       ))}
-      <div className="sort-component">
-        <label htmlFor="sort">Sort by: </label>
-        <select id="sort" value={sortOption} onChange={handleSortChange}>
-          <option value="default">Default</option>
-          <option value="priceAsc">Price: Low to High</option>
-          <option value="priceDesc">Price: High to Low</option>
-          <option value="bedroomsAsc">Bedrooms: Low to High</option>
-          <option value="bedroomsDesc">Bedrooms: High to Low</option>
-          <option value="bathroomsAsc">Bathrooms: Low to High</option>
-          <option value="bathroomsDesc">Bathrooms: High to Low</option>
-        </select>
-      </div>
     </>
   );
 };
-
-/*
-
- <div className="sort-component">
-        <label htmlFor="sort">Sort by: </label>
-        <select id="sort" value={sortOption} onChange={handleSortChange}>
-          <option value="default">Default</option>
-          <option value="priceAsc">Price: Low to High</option>
-          <option value="priceDesc">Price: High to Low</option>
-          <option value="bedroomsAsc">Bedrooms: Low to High</option>
-          <option value="bedroomsDesc">Bedrooms: High to Low</option>
-          </select>
-          </div>
-          <div className="property-list">
-            {properties.map(property => (
-              <div key={property.id}>
-                <h3>{property.title}</h3>
-                <p>Price: {property.precio}</p>
-                <p>Bedrooms: {property.charRef.dormitorios}</p>
-              </div>
-          </div>
-  <div style={{ display: 'flex', gap: '5px' }}>
-        <FormControlLabel
-          control={<Switch defaultChecked onChange={handleReformadoChange} />}
-          label="Reformado"
-          labelPlacement='start'
-        />
-        <FormControlLabel
-          control={<Switch defaultChecked onChange={handleSinReformarChange} />}
-          label="Sin Reformar"
-          labelPlacement='start'
-        />
-      </div> 
-
-
-     {/* <FormControl fullWidth>
-          <InputLabel id="amenities-select-label"
-            shrink={false}
-            style={{
-              display: selectedAmenities.length > 0 ? 'none' : 'block',
-              position: 'absolute',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              transition: 'top 0.3s, transform 0.3s',
-              padding: '0 4px',
-            }}>Tiene que tener...</InputLabel>
-          <Select
-            labelId="amenities-select-label"
-            id="amenities-select"
-            multiple
-            value={selectedAmenities}
-            onChange={handleAmenitiesChange}
-            renderValue={(selected) => (selected as string[]).join(', ')}
-          >
-            {amenitiesOptions.map((amenity) => (
-              <MenuItem key={amenity} value={amenity}>
-                <Checkbox checked={selectedAmenities.indexOf(amenity) > -1} />
-                <ListItemText primary={amenity} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl> 
-
-*/
-
-
