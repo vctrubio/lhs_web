@@ -38,8 +38,8 @@ export const useSharedQueryState = () => {
     const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
     const amenitiesOptions = ['Atico', 'Garaje', 'Balcones', 'Portero'];
 
-    // Add this line to your state declarations
-    const [sortOption, setSortOption] = useState<string>('default');
+    // Use useQueryState for sortOption to manage it as a query parameter
+    const [sortOption, setSortOption] = useQueryState('sort', { defaultValue: 'default' });
 
     const [properties, setProperties] = useState<Property[]>([]);
 
@@ -53,6 +53,10 @@ export const useSharedQueryState = () => {
                 return properties.sort((a, b) => a.charRef.dormitorios - b.charRef.dormitorios);
             case 'bedroomsDesc':
                 return properties.sort((a, b) => b.charRef.dormitorios - a.charRef.dormitorios);
+            case 'bathroomsAsc':
+                return properties.sort((a, b) => a.charRef.banos - b.charRef.banos);
+            case 'bathroomsDesc':
+                return properties.sort((a, b) => b.charRef.banos - a.charRef.banos);
             default:
                 return properties; // Default sorting logic
         }

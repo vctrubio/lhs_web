@@ -29,6 +29,8 @@ export const SearchBar = () => {
         componentKey: 'search',
         hasQueryParams, // Pass the flag here
         onReset: handleReset, // Pass the handleReset function
+        sortOption, // Pass sortOption
+        setSortOption, // Pass setSortOption
       })
     },
     {
@@ -122,7 +124,7 @@ export const SearchBar = () => {
   ];
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(event.target.value);
+    setSortOption(event.target.value); // This will update the URL
   };
 
   return (
@@ -140,25 +142,34 @@ export const SearchBar = () => {
           <option value="priceDesc">Price: High to Low</option>
           <option value="bedroomsAsc">Bedrooms: Low to High</option>
           <option value="bedroomsDesc">Bedrooms: High to Low</option>
-          {/* Add more sorting options as needed */}
+          <option value="bathroomsAsc">Bathrooms: Low to High</option>
+          <option value="bathroomsDesc">Bathrooms: High to Low</option>
         </select>
-      </div>
-      <div className="property-list">
-        {properties.map(property => (
-          <div key={property.id}>
-            {/* Render property details */}
-            <h3>{property.title}</h3>
-            <p>Price: {property.precio}</p>
-            <p>Bedrooms: {property.charRef.dormitorios}</p>
-            {/* Add more property details as needed */}
-          </div>
-        ))}
       </div>
     </>
   );
 };
 
 /*
+
+ <div className="sort-component">
+        <label htmlFor="sort">Sort by: </label>
+        <select id="sort" value={sortOption} onChange={handleSortChange}>
+          <option value="default">Default</option>
+          <option value="priceAsc">Price: Low to High</option>
+          <option value="priceDesc">Price: High to Low</option>
+          <option value="bedroomsAsc">Bedrooms: Low to High</option>
+          <option value="bedroomsDesc">Bedrooms: High to Low</option>
+          </select>
+          </div>
+          <div className="property-list">
+            {properties.map(property => (
+              <div key={property.id}>
+                <h3>{property.title}</h3>
+                <p>Price: {property.precio}</p>
+                <p>Bedrooms: {property.charRef.dormitorios}</p>
+              </div>
+          </div>
   <div style={{ display: 'flex', gap: '5px' }}>
         <FormControlLabel
           control={<Switch defaultChecked onChange={handleReformadoChange} />}

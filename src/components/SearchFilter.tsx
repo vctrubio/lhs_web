@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { PropertyCard } from '@/components/Property';
 import { Property } from "@/types/property";
 import { getBathrooms } from "@/lib/utils";
-import { Logo } from "@/lib/utils";
 import { useSharedQueryState } from '@/lib/nuqs';
 
 //for server side {params, searchParams} as props
@@ -23,14 +22,13 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         includeBarrios,
         flagReformado,
         flagSinReformar,
-        handleReset
+        sortOption, // Get sortOption from shared state
     } = useSharedQueryState();
 
     const [cssStateHover, setCssStateHover] = useState(false);
     const [cssUniqueBoy, setUniqueBoy] = useState(false);
 
     useEffect(() => {
-        // Update cssStateHover based on any filter being active
         const isAnyFilterActive = [
             title,
             banosMaximo,
@@ -120,6 +118,26 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
             updateProperty = updateProperty.filter(property => !property.reformado);
         }
 
+        // Sort the filtered properties based on the sortOption
+        updateProperty.sort((a, b) => {
+            switch (sortOption) {
+                case 'priceAsc':
+                    return a.precio - b.precio;
+                case 'priceDesc':
+                    return b.precio - a.precio;
+                case 'bedroomsAsc':
+                    return a.charRef.dormitorios - b.charRef.dormitorios;
+                case 'bedroomsDesc':
+                    return b.charRef.dormitorios - a.charRef.dormitorios;
+                case 'bathroomsAsc':
+                    return getBathrooms(a) - getBathrooms(b);
+                case 'bathroomsDesc':
+                    return getBathrooms(b) - getBathrooms(a);
+                default:
+                    return 0; // No sorting
+            }
+        });
+
         setFilterProperties(updateProperty);
         setUniqueBoy(updateProperty.length === 1);
     }, [
@@ -135,6 +153,7 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         includeBarrios,
         flagReformado,
         flagSinReformar,
+        sortOption, // Add sortOption to dependencies
         entries
     ]);
 
