@@ -13,6 +13,7 @@ export const SearchBar = () => {
     metersSquareRange, metersSquareValue, setMetersSquareValue, title,
     setTitle, barrios, selectedBarrios, setSelectedBarrios,
     handleReset,
+    hasQueryParams,
   } = useSharedQueryState();
 
 
@@ -25,7 +26,8 @@ export const SearchBar = () => {
         markValue: null,
         barrio: null,
         componentKey: 'search',
-        //icon triger = handlreset
+        hasQueryParams, // Pass the flag here
+        onReset: handleReset, // Pass the handleReset function
       })
     },
     {

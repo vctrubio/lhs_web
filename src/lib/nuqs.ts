@@ -202,6 +202,14 @@ export const useSharedQueryState = () => {
         fetchData();
     }, []);
 
+    const hasQueryParams = [
+        precioMinimo, precioMaximo,
+        banosMinimo, banosMaximo,
+        dormitoriosMinimo, dormitoriosMaximo,
+        metrosCuadradosMinimo, metrosCuadradosMaximo,
+        includeBarrios, flagReformado, flagSinReformar, title
+    ].some(param => param !== null && param !== '');
+
     return {
         title, setTitle,
         priceRange, priceValue, setPriceValue,
@@ -223,5 +231,6 @@ export const useSharedQueryState = () => {
         flagReformado, setFlagReformado,
         flagSinReformar, setFlagSinReformar,
         handleReset,
+        hasQueryParams,
     };
 };

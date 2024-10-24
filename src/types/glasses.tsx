@@ -26,6 +26,8 @@ interface SideBarPropComponentProps {
     disabled: boolean;
     barrio?: SideBarBarrioProps | null;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    hasQueryParams: boolean; // New prop to handle query parameters
+    onReset?: () => void; // New prop to handle reset
 }
 
 export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
@@ -124,9 +126,17 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
 
     render() {
         const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
-        
-        // Map icons based on componentKey
-        const icon = componentKey === 'title' ? <IconPlano /> : componentKey === 'search' ? <IconRepeatClassic /> : this.icons[title];
+        const { hasQueryParams } = this.props; // Assuming you pass this prop when creating the component
+
+        // Determine which icon to use based on componentKey and hasQueryParams flag
+        let icon;
+        if (componentKey === 'title') {
+            icon = <IconPlano />;
+        } else if (componentKey === 'search') {
+            icon = hasQueryParams ? <IconRepeatClassic /> : <IconSearch />;
+        } else {
+            icon = this.icons[title];
+        }
 
         const formattedMarkValue = this.getFormattedMarkValue();
 
@@ -154,7 +164,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                         )}
                         <div onClick={() => {
                             if (componentKey === 'search') {
-                                console.log('Icon clicked');
+                                this.props.onReset(); // Call the onReset prop
                             }
                         }}>
                             {icon}
