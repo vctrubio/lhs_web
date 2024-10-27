@@ -118,28 +118,48 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
             updateProperty = updateProperty.filter(property => !property.reformado);
         }
 
-        // Sort the filtered properties based on the sortOption
-        updateProperty.sort((a, b) => {
+        // Apply sorting based on sortOption
+        const sortedProperties = [...updateProperty].sort((a, b) => {
             switch (sortOption) {
-                case 'priceAsc':
+                case 'precioAsc':
                     return a.precio - b.precio;
-                case 'priceDesc':
+                case 'precioDesc':
                     return b.precio - a.precio;
-                case 'bedroomsAsc':
+                case 'dormitoriosAsc':
+                    if (a.charRef.dormitorios === b.charRef.dormitorios) {
+                        return getBathrooms(a) - getBathrooms(b);
+                    }
                     return a.charRef.dormitorios - b.charRef.dormitorios;
-                case 'bedroomsDesc':
+                case 'dormitoriosDesc':
+                    if (a.charRef.dormitorios === b.charRef.dormitorios) {
+                        return getBathrooms(b) - getBathrooms(a);
+                    }
                     return b.charRef.dormitorios - a.charRef.dormitorios;
-                case 'bathroomsAsc':
+                case 'banosAsc':
+                    if (getBathrooms(a) === getBathrooms(b)) {
+                        return a.charRef.dormitorios - b.charRef.dormitorios;
+                    }
                     return getBathrooms(a) - getBathrooms(b);
-                case 'bathroomsDesc':
+                case 'banosDesc':
+                    if (getBathrooms(a) === getBathrooms(b)) {
+                        return b.charRef.dormitorios - a.charRef.dormitorios;
+                    }
                     return getBathrooms(b) - getBathrooms(a);
+                case 'metrosAsc':
+                    return a.charRef.metrosCuadradros - b.charRef.metrosCuadradros;
+                case 'metrosDesc':
+                    return b.charRef.metrosCuadradros - a.charRef.metrosCuadradros;
+                case 'barrioAsc':
+                    return (a.barrioRef?.name || '').localeCompare(b.barrioRef?.name || '');
+                case 'barrioDesc':
+                    return (b.barrioRef?.name || '').localeCompare(a.barrioRef?.name || '');
                 default:
                     return 0; // No sorting
             }
         });
 
-        setFilterProperties(updateProperty);
-        setUniqueBoy(updateProperty.length === 1);
+        setFilterProperties(sortedProperties);
+        setUniqueBoy(sortedProperties.length === 1);
     }, [
         title,
         banosMaximo,
@@ -162,9 +182,7 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
             <div className="property-container" last-man-standing={cssUniqueBoy ? 'on' : ''}>
                 {filterProperties.length === 0 ? (
                     <div className="flex justify-center flex-col m-auto">
-                        {/* <Logo /> */}
                         <p className="text-center">No encontramos lo que buscas</p>
-                        {/* <button onClick={handleReset} className="border border-white rounded-2xl">Reset Filters</button> */}
                     </div>
                 ) : (
                     filterProperties.map((entry: Property) => (

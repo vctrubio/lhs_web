@@ -32,14 +32,25 @@ interface SideBarPropComponentProps {
     setSortOption: (sortOption: string) => void;
 }
 
-export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
-    state = {
+interface SideBarPropComponentState {
+    componentKey: string;
+    title: string;
+    slider: SliderType | null;
+    markValue: number | null;
+    disabled: boolean;
+    barrio: SideBarBarrioProps | null;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    isIconActive: boolean;
+}
+
+export class SideBarPropComponent extends Component<SideBarPropComponentProps, SideBarPropComponentState> {
+    state: SideBarPropComponentState = {
         componentKey: this.props.componentKey,
         title: this.props.title,
         slider: this.props.slider || null,
         markValue: this.props.markValue,
         disabled: this.props.disabled,
-        barrio: this.props.barrio,
+        barrio: this.props.barrio || null,
         onChange: this.props.onChange,
         isIconActive: false,
     };
@@ -131,17 +142,15 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
         const { componentKey, sortOption, setSortOption, onReset } = this.props;
 
         if (componentKey === 'search') {
-            // Trigger handleReset for the search component
             if (onReset) {
                 onReset();
             }
         } else {
-            // Handle sorting for other components
             const sortKeyMap: { [key: string]: string } = {
-                price: 'price',
-                bedrooms: 'bedrooms',
-                bathrooms: 'bathrooms',
-                meters: 'meters',
+                price: 'precio',
+                bedrooms: 'dormitorios',
+                bathrooms: 'banos',
+                meters: 'metros',
                 neighborhood: 'barrio',
             };
 
@@ -159,7 +168,19 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
 
     render() {
         const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
-        const { hasQueryParams } = this.props;
+        const { hasQueryParams, sortOption } = this.props;
+
+        const sortKeyMap: { [key: string]: string } = {
+            price: 'precio',
+            bedrooms: 'dormitorios',
+            bathrooms: 'banos',
+            meters: 'metros',
+            neighborhood: 'barrio',
+        };
+        const sortKey = sortKeyMap[componentKey];
+        const isCurrentSort = sortOption.startsWith(sortKey || '');
+
+        const iconColor = isCurrentSort ? 'var(--color-green-dark)' : 'currentColor';
 
         let icon;
         if (componentKey === 'title') {
@@ -196,7 +217,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps> {
                         )}
                         <div
                             onClick={this.handleIconClick}
-                            style={{ fill: this.state.isIconActive ? 'red' : 'black' }}
+                            style={{ color: iconColor }}
                         >
                             {icon}
                         </div>
