@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { usePathname } from 'next/navigation';
 
 import {
     IconWhatsapp,
     IconMail,
     IconFindUs,
     IconInstagram,
+    IconShare,
 } from '@/lib/svgs';
 
 const whatsappNumber = '+34 616 746 971';
 const email = 'lhsconcept@lhsconcept.com';
 const findUsText = 'Encuentranos en Google';
+const shareText = 'Compartir';
 const instagramHandle = 'lhsconcept';
 
 export const Footer = () => {
     const [targetText, setTargetText] = useState('');
+    const pathname = usePathname();
+    const isRootUrl = pathname === '/';
 
     const iconTexts = {
         whatsapp: String(whatsappNumber),
         email: String(email),
-        findus: findUsText,
+        findus: isRootUrl ? findUsText : shareText,
         instagram: `@${instagramHandle}`,
     };
 
@@ -33,14 +38,19 @@ export const Footer = () => {
         window.location.href = `mailto:${email}`;
     };
 
-    const handleFindUsClick = () => {
-        console.log('Find Us icon clicked');
-        window.open('https://maps.app.goo.gl/x4h97NBSPtJitp3n7', '_blank');
-    };
-
     const handleInstagramClick = () => {
         console.log('Instagram icon clicked');
         window.open(`https://www.instagram.com/${instagramHandle}`, '_blank');
+    };
+
+    const handleFindUsOrShareClick = () => {
+        if (isRootUrl) {
+            console.log('Find Us icon clicked');
+            window.open('https://maps.app.goo.gl/x4h97NBSPtJitp3n7', '_blank');
+        } else {
+            console.log('Share icon clicked');
+            // Implement share functionality here
+        }
     };
 
     useEffect(() => {
@@ -54,9 +64,7 @@ export const Footer = () => {
 
     const handleMouseEnter = (iconKey) => {
         if (targetText === iconTexts[iconKey]) return;
-
         setTargetText('');
-
         setTimeout(() => {
             setTargetText(iconTexts[iconKey]);
         }, 300);
@@ -97,10 +105,30 @@ export const Footer = () => {
                     <IconInstagram/>
                 </div>
                 <div
-                    onClick={handleFindUsClick}
+                    onClick={handleFindUsOrShareClick}
                     onMouseEnter={() => handleMouseEnter('findus')}
+                    className="icon-transition-wrapper"
                 >
-                    <IconFindUs />
+                    <CSSTransition
+                        in={isRootUrl}
+                        timeout={300}
+                        classNames="icon-transition"
+                        unmountOnExit
+                    >
+                        <div className="icon-absolute">
+                            <IconFindUs />
+                        </div>
+                    </CSSTransition>
+                    <CSSTransition
+                        in={!isRootUrl}
+                        timeout={300}
+                        classNames="icon-transition"
+                        unmountOnExit
+                    >
+                        <div className="icon-absolute">
+                            <IconShare />
+                        </div>
+                    </CSSTransition>
                 </div>
             </div>
         </div>
