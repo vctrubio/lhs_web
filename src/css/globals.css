@@ -155,3 +155,113 @@ h3 {
     justify-content: center;
     align-items: center;
 }
+
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.share-modal {
+  background-color: var(--color-beigh-light-bg);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+}
+
+.share-modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.share-buttons button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.share-buttons button svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+.copy-link {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.copy-link input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid var(--color-green-dark);
+  border-radius: 4px 0 0 4px;
+}
+
+.copy-link button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--color-green-dark);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.copy-link button svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.copy-success {
+  text-align: center;
+  color: var(--color-green-dark);
+  margin-bottom: 20px;
+}
+
+.close-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-green-dark);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.property-info {
+  background-color: var(--color-beigh);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.property-info h3 {
+  margin-bottom: 10px;
+  color: var(--color-green-dark);
+}
+
+.property-info p {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}

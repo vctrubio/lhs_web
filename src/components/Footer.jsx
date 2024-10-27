@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { usePathname } from 'next/navigation';
+import ShareModal from './ShareModal';
 
 import {
     IconWhatsapp,
@@ -18,6 +19,8 @@ const instagramHandle = 'lhsconcept';
 
 export const Footer = () => {
     const [targetText, setTargetText] = useState('');
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+    const [propertyInfo, setPropertyInfo] = useState(null);
     const pathname = usePathname();
     const isRootUrl = pathname === '/';
 
@@ -49,7 +52,7 @@ export const Footer = () => {
             window.open('https://maps.app.goo.gl/x4h97NBSPtJitp3n7', '_blank');
         } else {
             console.log('Share icon clicked');
-            // Implement share functionality here
+            setIsShareModalOpen(true);
         }
     };
 
@@ -70,67 +73,99 @@ export const Footer = () => {
         }, 300);
     };
 
+    useEffect(() => {
+        const fetchPropertyInfo = async () => {
+            if (!isRootUrl) {
+                const propertyId = pathname.split('/').pop(); // Assuming URL structure like /properties/[id]
+                try {
+                    const response = await fetch(`/api/properties/${propertyId}`);
+                    const data = await response.json();
+                    setPropertyInfo({
+                        title: data.title,
+                        price: data.precio ? `${data.precio}€` : 'Precio no disponible',
+                        bedrooms: data.charRef.dormitorios,
+                        bathrooms: data.charRef.banos + data.charRef.aseo,
+                        size: data.charRef.metrosCuadradros ? `${data.charRef.metrosCuadradros} m²` : 'Tamaño no disponible',
+                        description: data.description || 'No hay descripción disponible',
+                    });
+                } catch (error) {
+                    console.error('Error fetching property info:', error);
+                }
+            }
+        };
+
+        fetchPropertyInfo();
+    }, [pathname]);
+
     return (
-        <div className='flex flex-col'>
-            <div className='footer-placeholder'>
-                <TransitionGroup>
-                    {targetText && (
+        <>
+            <div className='flex flex-col'>
+                <div className='footer-placeholder'>
+                    <TransitionGroup>
+                        {targetText && (
+                            <CSSTransition
+                                key={targetText}
+                                classNames="animate-text"
+                            >
+                                <div>{targetText}</div>
+                            </CSSTransition>
+                        )}
+                    </TransitionGroup>
+                </div>
+                <div className='footer-bar'>
+                    <div
+                        onClick={handleWhatsAppClick}
+                        onMouseEnter={() => handleMouseEnter('whatsapp')}
+                    >
+                        <IconWhatsapp />
+                    </div>
+                    <div
+                        onClick={handleEmailClick}
+                        onMouseEnter={() => handleMouseEnter('email')}
+                    >
+                        <IconMail />
+                    </div>
+                    <div
+                        onClick={handleInstagramClick}
+                        onMouseEnter={() => handleMouseEnter('instagram')}
+                        className="footer-icon"
+                    >
+                        <IconInstagram/>
+                    </div>
+                    <div
+                        onClick={handleFindUsOrShareClick}
+                        onMouseEnter={() => handleMouseEnter('findus')}
+                        className="icon-transition-wrapper"
+                    >
                         <CSSTransition
-                            key={targetText}
-                            classNames="animate-text"
+                            in={isRootUrl}
+                            timeout={300}
+                            classNames="icon-transition"
+                            unmountOnExit
                         >
-                            <div>{targetText}</div>
+                            <div className="icon-absolute">
+                                <IconFindUs />
+                            </div>
                         </CSSTransition>
-                    )}
-                </TransitionGroup>
-            </div>
-            <div className='footer-bar'>
-                <div
-                    onClick={handleWhatsAppClick}
-                    onMouseEnter={() => handleMouseEnter('whatsapp')}
-                >
-                    <IconWhatsapp />
-                </div>
-                <div
-                    onClick={handleEmailClick}
-                    onMouseEnter={() => handleMouseEnter('email')}
-                >
-                    <IconMail />
-                </div>
-                <div
-                    onClick={handleInstagramClick}
-                    onMouseEnter={() => handleMouseEnter('instagram')}
-                    className="footer-icon"
-                >
-                    <IconInstagram/>
-                </div>
-                <div
-                    onClick={handleFindUsOrShareClick}
-                    onMouseEnter={() => handleMouseEnter('findus')}
-                    className="icon-transition-wrapper"
-                >
-                    <CSSTransition
-                        in={isRootUrl}
-                        timeout={300}
-                        classNames="icon-transition"
-                        unmountOnExit
-                    >
-                        <div className="icon-absolute">
-                            <IconFindUs />
-                        </div>
-                    </CSSTransition>
-                    <CSSTransition
-                        in={!isRootUrl}
-                        timeout={300}
-                        classNames="icon-transition"
-                        unmountOnExit
-                    >
-                        <div className="icon-absolute">
-                            <IconShare />
-                        </div>
-                    </CSSTransition>
+                        <CSSTransition
+                            in={!isRootUrl}
+                            timeout={300}
+                            classNames="icon-transition"
+                            unmountOnExit
+                        >
+                            <div className="icon-absolute">
+                                <IconShare />
+                            </div>
+                        </CSSTransition>
+                    </div>
                 </div>
             </div>
-        </div>
+            <ShareModal
+                isOpen={isShareModalOpen}
+                onClose={() => setIsShareModalOpen(false)}
+                url={typeof window !== 'undefined' ? window.location.href : ''}
+                propertyInfo={propertyInfo}
+            />
+        </>
     );
 };
