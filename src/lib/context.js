@@ -11,7 +11,7 @@ export const PropertyProvider = ({ children }) => {
   const [barrios, setBarrios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     const loadEntries = async () => {
       try {
@@ -20,7 +20,7 @@ export const PropertyProvider = ({ children }) => {
         setBarrios(barrios);
         setListings(listings);
       } catch (err) {
-        setError('Failed to fetch data');
+        setError('Failed to fetch data, ', err);
       } finally {
         setLoading(false);
       }

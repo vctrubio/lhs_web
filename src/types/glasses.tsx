@@ -145,7 +145,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
             if (onReset) {
                 onReset();
             }
-        } else {
+        } else if (!this.props.disabled) {
             const sortKeyMap: { [key: string]: string } = {
                 price: 'precio',
                 bedrooms: 'dormitorios',
@@ -224,7 +224,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                                     : 'transparent',
                                 borderRadius: 6,
                                 padding: 2,
-                                cursor: 'pointer'
+                                cursor: (!disabled || componentKey === 'title') ? 'pointer' : 'default'
                             }}
                         >
                             {icon}
