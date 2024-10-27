@@ -178,9 +178,8 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
             neighborhood: 'barrio',
         };
         const sortKey = sortKeyMap[componentKey];
-        const isCurrentSort = sortOption.startsWith(sortKey || '');
-
-        const iconColor = isCurrentSort ? 'var(--color-green-dark)' : 'currentColor';
+        const isCurrentSort = sortKey && sortOption.startsWith(sortKey) && componentKey !== 'search';
+        const isAscending = sortOption.endsWith('Asc');
 
         let icon;
         if (componentKey === 'title') {
@@ -217,7 +216,16 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                         )}
                         <div
                             onClick={this.handleIconClick}
-                            style={{ color: iconColor }}
+                            style={{
+                                backgroundColor: isCurrentSort
+                                    ? isAscending
+                                        ? 'var(--color-green-dark-opec)'
+                                        : 'var(--color-yellow)'
+                                    : 'transparent',
+                                borderRadius: 6,
+                                padding: 2,
+                                cursor: 'pointer'
+                            }}
                         >
                             {icon}
                         </div>
