@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { usePathname } from 'next/navigation';
 import ShareModal from './ShareModal';
+import DefaultShareModal from './DefaultShareModal';
 
 import {
     IconWhatsapp,
@@ -23,6 +24,7 @@ export const Footer = () => {
     const [propertyInfo, setPropertyInfo] = useState(null);
     const pathname = usePathname();
     const isRootUrl = pathname === '/';
+    const [isDefaultShareModalOpen, setIsDefaultShareModalOpen] = useState(false);
 
     const iconTexts = {
         whatsapp: String(whatsappNumber),
@@ -52,7 +54,14 @@ export const Footer = () => {
             window.open('https://maps.app.goo.gl/x4h97NBSPtJitp3n7', '_blank');
         } else {
             console.log('Share icon clicked');
-            setIsShareModalOpen(true);
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                setIsDefaultShareModalOpen(true);
+            }
         }
     };
 
@@ -96,6 +105,17 @@ export const Footer = () => {
 
         fetchPropertyInfo();
     }, [pathname]);
+
+    const handleShareClick = () => {
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                url: window.location.href
+            }).catch(console.error);
+        } else {
+            setIsShareModalOpen(true);
+        }
+    };
 
     return (
         <>
@@ -165,6 +185,11 @@ export const Footer = () => {
                 onClose={() => setIsShareModalOpen(false)}
                 url={typeof window !== 'undefined' ? window.location.href : ''}
                 propertyInfo={propertyInfo}
+            />
+            <DefaultShareModal
+                isOpen={isDefaultShareModalOpen}
+                onClose={() => setIsDefaultShareModalOpen(false)}
+                url={typeof window !== 'undefined' ? window.location.href : ''}
             />
         </>
     );
