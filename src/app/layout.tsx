@@ -14,9 +14,9 @@ import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
+import { Logo } from "@/lib/utils";
 import { Suspense } from "react";
 import LHSLoader from "@/components/LHSLoader"; // Add this import
-
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 export const metadata: Metadata = {
@@ -71,6 +71,11 @@ export default function RootLayout({
                 {children}
               </main>
             </div>
+            {/* <div className="logo-mob">
+              <h1 className="text-3xl font-bold text-center tracking-wide uppercase py-4 px-6">
+                Propiedades En Madrid
+              </h1>
+            </div> */}
           </Suspense>
         </PropertyProvider>
       </body>

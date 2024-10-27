@@ -43,6 +43,8 @@ function parsePropertyFromContentful({ entry }: { entry: any }): Property {
 
     const updatedAt = entry.sys.updatedAt
     const { barrioRef, amentetiesRef, characteristics, habitacionesPaginas, ibi, maintenanceCostmMnthly, photos, plano, title, description, buyOrRent, reformado, precio, url } = entry.fields;
+    const coverUrl = photos ? extractImageUrls(photos)[0] : null;
+    const planoUrl = plano ? ImageToUrl(plano) : null;
 
     return {
         title: title,
@@ -51,22 +53,23 @@ function parsePropertyFromContentful({ entry }: { entry: any }): Property {
         buyOrRent: buyOrRent,
         reformado: reformado,
         precio: precio,
-        precioIbi: ibi ? ibi : 0,
-        precioComunidad: maintenanceCostmMnthly ? maintenanceCostmMnthly : 0,
-        plano_url: plano ? ImageToUrl(plano) : null,
-        cover_url: photos ? extractImageUrls(photos) : null,
-        barrioRef: barrioRef ? barrioRef.fields : null,
-        amentitiesRef: amentetiesRef ? amentetiesRef.fields : null,
-        charRef: characteristics ? characteristics.fields : null,
-        roomsRef: entry.fields.habitacionesPaginas ? entry.fields.habitacionesPaginas.map((h: any) => ({
+        precioIbi: ibi ?? 0,
+        precioComunidad: maintenanceCostmMnthly ?? 0,
+        plano_url: planoUrl ?? null,
+        cover_url: coverUrl ? [coverUrl] : [],
+        barrioRef: barrioRef?.fields ?? null,
+        amentitiesRef: amentetiesRef?.fields ?? null,
+        charRef: characteristics?.fields ?? null,
+        roomsRef: entry.fields.habitacionesPaginas?.map((h: Entry<any>) => ({
             title: h.fields.title,
             description: h.fields.description,
-            photos: h.fields.photos ? h.fields.photos.map((photo: any) => photo.fields.file.url) : []
-        })) : null,
+            photos: h.fields.photos?.map((photo: Entry<any>) => photo.fields.file.url) ?? []
+        })) ?? null,
 
         photos_url: [
+            ...(photos ? extractImageUrls(photos) : []),
             ...(habitacionesPaginas ? getRoomPhotoUrl(habitacionesPaginas) : []),
-            ...(photos ? extractImageUrls(photos) : [])
+            ...(planoUrl ? [planoUrl] : [])
         ],
 
         updatedAt: updatedAt,
@@ -108,9 +111,9 @@ export async function fetchEntriesContentful(): Promise<{ properties: Property[]
         if (entry.sys.contentType.sys.id === 'propiedad') {
             properties.push(parsePropertyFromContentful({ entry }))
         }
-        if (entry.sys.contentType.sys.id === 'homePageBanner') {
-            listings.push(parseBannerListingsFromContentful({ entry }))
-        }
+        // if (entry.sys.contentType.sys.id === 'homePageBanner') {
+        //     listings.push(parseBannerListingsFromContentful({ entry }))
+        // }
 
     });
 

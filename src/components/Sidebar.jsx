@@ -1,10 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faShareAlt } from '@fortawesome/free-solid-svg-icons';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { SearchBar } from './SearchBar';
 import { Content } from './SideBarContentProperty';
 import Link from 'next/link';
 import { Footer } from '@/components/Footer'

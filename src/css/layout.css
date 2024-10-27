@@ -7,6 +7,9 @@
 /* --mobile-width */
 @media (max-width: 950px) {
     .layout-div {
-        flex-direction: column-reverse;
+        flex-direction: column;
+    }
+    .sidebar-level {
+        position: relative !important;
     }
 }

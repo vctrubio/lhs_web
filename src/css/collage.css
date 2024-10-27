@@ -118,19 +118,13 @@
     }
 }
 
-@media (min-height: 968px) {
-    .photo-collage {
-        max-height: 7vh;
-    }
-}
-
-@media (min-width: 968px) {
+@media (min-width: 969px) {
     .photo-collage {
         max-height: 80vh;
     }
 }
 
-@media (min-width: 968px) and (min-height: 968px) {
+@media (min-width: 969px) and (min-height: 969px) {
     .photo-collage {
         max-height: 70vh;
     }
