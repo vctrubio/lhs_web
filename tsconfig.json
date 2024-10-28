@@ -13,6 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "noImplicitAny": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
