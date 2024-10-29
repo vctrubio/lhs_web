@@ -3,8 +3,13 @@
     flex-wrap: wrap;
     justify-content: start;
     gap: 2px;
+    margin: 0 auto;
     min-height: 80vh;
     transition: all 0.5s ease;
+    background-color: var(--color-beigh-light-bg);
+    position: relative;
+    z-index: 2;
+    gap: 18px;
 }
 
 .property-title {
@@ -36,7 +41,6 @@
     /* max-height: 420px;
     max-width: 580px; */
     flex-grow: 1;
-    margin: 14px;
     position: relative;
     opacity: 1;
     transition: opacity 0.5s ease, transform 0.5s ease;

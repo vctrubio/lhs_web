@@ -58,10 +58,9 @@
 @media (max-height: 860px) {
     .footer-placeholder {
         display: none;
-        height: 0px;
     }
 
     .footer-bar {
-        border: 1px solid red;
+        display: none;
     }
 }
