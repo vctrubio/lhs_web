@@ -19,6 +19,8 @@
 }
 
 .footer-placeholder {
+    /* border: 1px solid blue; */
+
     opacity: 0.8;
     text-align: center;
 
@@ -50,5 +52,16 @@
 
     100% {
         transform: translateY(0);
+    }
+}
+
+@media (max-height: 860px) {
+    .footer-placeholder {
+        display: none;
+        height: 0px;
+    }
+
+    .footer-bar {
+        border: 1px solid red;
     }
 }
