@@ -227,7 +227,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                                     <span>{this.state.barrio.barrios.name}</span>
                                 )}
                                 <div className='slider-hide'>
-                                    {slider?.value[0] && title !== 'Precio' ? slider.value[0] : null}
+                                    {title !== 'Precio' && markValue}
                                 </div>
                             </div>
                         }
