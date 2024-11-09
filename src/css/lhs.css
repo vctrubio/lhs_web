@@ -105,7 +105,7 @@
         opacity: 0.6;
     }
 
-    .content {
+    .box-content {
         color: var(--color-sad);
         font-weight: 400;
     }

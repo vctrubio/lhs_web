@@ -206,14 +206,19 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                         placeholder={disabled ? '' : 'Buscador'}
                     />
                     <div className='flex items-center'>
-                        {precioValue && (
-                            <span id='price-color'>
-                                {precioValue}
-                            </span>
-                        )}
-                        {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
-                            <span>{this.state.barrio.barrios.name}</span>
-                        )}
+                        <div className='flex flex-end'>
+                            {precioValue && (
+                                <span id='price-color'>
+                                    {precioValue}
+                                </span>
+                            )}
+                            {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
+                                <span>{this.state.barrio.barrios.name}</span>
+                            )}
+                            <div className='slider-hide'>
+                                {slider?.value[0] && title !== 'Precio' ? slider.value[0] : null}
+                            </div>
+                        </div>
                         <div
                             onClick={this.handleIconClick}
                             style={{
@@ -232,7 +237,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                     </div>
                 </div>
                 {slider ? (
-                    <div className='px-5'>
+                    <div className='slider-show'>
                         <Slider
                             value={formattedMarkValue !== null ? formattedMarkValue : slider.value}
                             onChange={(e, newValue) => slider.setValue && slider.setValue(newValue as number[])}

@@ -7,7 +7,7 @@ export const IconPlano = () => (
 );
 
 export const IconBed = () => (
-    <svg width={xny + 8} height={xny + 2} fill="#000000" viewBox="0 0 512 512" id="Layer_1" enableBackground="new 0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <svg width={xny + 2} height={xny + 2} fill="#000000" viewBox="0 0 512 512" id="Layer_1" enableBackground="new 0 0 512 512" xmlns="http://www.w3.org/2000/svg">
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="m496 320c0-13.1 0-239.28 0-248 0-8.836-7.164-16-16-16s-16 7.164-16 16v16h-416v-16c0-8.836-7.164-16-16-16s-16 7.164-16 16v248c-8.836 0-16 7.164-16 16v104c0 8.836 7.164 16 16 16h40c5.036 0 9.778-2.371 12.8-6.4l19.2-25.6h336l19.2 25.6c3.021 4.029 7.764 6.4 12.8 6.4h40c8.836 0 16-7.164 16-16v-104c0-8.836-7.164-16-16-16zm-32-71.39c-17.206-9.979-30.797-8.61-48-8.61v-32c0-26.467-21.533-48-48-48h-80c-12.284 0-23.501 4.644-32 12.261-8.499-7.617-19.716-12.261-32-12.261h-80c-26.467 0-48 21.533-48 48v32c-17.989 0-30.887-1.315-48 8.61v-128.61h416zm-336-8.61v-32c0-8.822 7.178-16 16-16h80c8.822 0 16 7.178 16 16v32zm144-32c0-8.822 7.178-16 16-16h80c8.822 0 16 7.178 16 16v32h-112zm-224 96c0-17.645 14.355-32 32-32h352c17.645 0 32 14.355 32 32v16h-416zm432 120h-16l-19.2-25.6c-3.021-4.029-7.764-6.4-12.8-6.4h-352c-5.036 0-9.778 2.371-12.8 6.4l-19.2 25.6h-16v-72h448z"></path> </g> </g></svg>
 
 );
@@ -40,13 +40,13 @@ export const IconBath = () => (
 )
 
 export const IconBathTop = () => (
-    <svg width={xny - 2} height={xny + 6} fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg width={xny} height={xny + 6} fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
         <g id="SVGRepo_iconCarrier"><path d="M11 2L11 4.3066406L4.296875 6.8203125C3.5201129 7.1118161 3 7.8628266 3 8.6933594L3 10L21 10L21 9L21 8.6933594C21 7.8628266 20.479887 7.1118161 19.703125 6.8203125L19.701172 6.8203125L13 4.3066406L13 2L11 2 z M 12 11 A 1 1 0 0 0 11 12 A 1 1 0 0 0 12 13 A 1 1 0 0 0 13 12 A 1 1 0 0 0 12 11 z M 10 14 A 1 1 0 0 0 9 15 A 1 1 0 0 0 10 16 A 1 1 0 0 0 11 15 A 1 1 0 0 0 10 14 z M 14 14 A 1 1 0 0 0 13 15 A 1 1 0 0 0 14 16 A 1 1 0 0 0 15 15 A 1 1 0 0 0 14 14 z M 8 17 A 1 1 0 0 0 7 18 A 1 1 0 0 0 8 19 A 1 1 0 0 0 9 18 A 1 1 0 0 0 8 17 z M 12 17 A 1 1 0 0 0 11 18 A 1 1 0 0 0 12 19 A 1 1 0 0 0 13 18 A 1 1 0 0 0 12 17 z M 16 17 A 1 1 0 0 0 15 18 A 1 1 0 0 0 16 19 A 1 1 0 0 0 17 18 A 1 1 0 0 0 16 17 z M 6 20 A 1 1 0 0 0 5 21 A 1 1 0 0 0 6 22 A 1 1 0 0 0 7 21 A 1 1 0 0 0 6 20 z M 10 20 A 1 1 0 0 0 9 21 A 1 1 0 0 0 10 22 A 1 1 0 0 0 11 21 A 1 1 0 0 0 10 20 z M 14 20 A 1 1 0 0 0 13 21 A 1 1 0 0 0 14 22 A 1 1 0 0 0 15 21 A 1 1 0 0 0 14 20 z M 18 20 A 1 1 0 0 0 17 21 A 1 1 0 0 0 18 22 A 1 1 0 0 0 19 21 A 1 1 0 0 0 18 20 z"></path></g></svg>
 )
 
 export const IconPrice = () => (
-    <svg width={xny + 2} height={xny + 2} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" strokeWidth="3" stroke="#000000" fill="none">
+    <svg width={xny + 8} height={xny + 8} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" strokeWidth="3" stroke="#000000" fill="none">
         <path d="M43.12,58H20.88a2.33,2.33,0,0,1-2.33-2.33V28.89a1.15,1.15,0,0,1,.37-.85L30.73,17a1.16,1.16,0,0,1,1.56,0L45.05,28a1.18,1.18,0,0,1,.4.88V55.7A2.33,2.33,0,0,1,43.12,58Z" strokeLinecap="round" />
         <path d="M32,25.2c-4.39,0-7.95-4.31-7.95-9.62S27.61,6,32,6s8,4.3,8,9.61" strokeLinecap="round" />
         <path d="M39.78,46.88a8.1,8.1,0,1,1-1.53-13.8" />
@@ -81,7 +81,6 @@ export const IconFindUs = () => (
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M296.617,280.182L265.83,172.286c-1.222-4.28-5.133-7.231-9.583-7.231h-90.605l9.651-48.255 c19.809-9.612,33.501-29.929,33.501-53.385c0-32.696-26.6-59.298-59.297-59.298c-32.697,0-59.298,26.602-59.298,59.298 c0,23.456,13.691,43.772,33.501,53.385l9.651,48.255H40.753c-4.45,0-8.361,2.951-9.583,7.231L0.383,280.182 c-0.857,3.006-0.256,6.241,1.628,8.737c1.883,2.496,4.828,3.964,7.955,3.964h277.068c3.127,0,6.072-1.468,7.955-3.964 C296.873,286.423,297.475,283.187,296.617,280.182z M110.131,63.415c0-21.706,17.659-39.365,39.366-39.365 c21.706,0,39.365,17.659,39.365,39.365c0,21.706-17.659,39.366-39.365,39.366C127.79,102.781,110.131,85.121,110.131,63.415z M149.497,122.713c1.454,0,2.893-0.071,4.321-0.174l-4.321,21.61l-4.322-21.61C146.603,122.642,148.042,122.713,149.497,122.713z M137.338,184.986l2.387,11.935c0.931,4.659,5.021,8.012,9.772,8.012c4.75,0,8.841-3.352,9.771-8.012l2.387-11.935h87.071 l2.77,9.708l-38.549,32.124L45.048,196.292l3.226-11.306H137.338z M76.247,272.95v-50.727l116.743,21.226l-35.401,29.501H76.247z M39.552,215.553l16.763,3.047v54.351H23.174L39.552,215.553z M188.723,272.95l68.754-57.295l16.349,57.295H188.723z"></path> </g></svg>
 )
 
-// transform="matrix(1, 0, 0, 1, 0, 5)rotate(0)"
 export const IconWhatsapp = () => (
     <div style={{ paddingTop: 2 }}>
         <svg width={xny + 16} height={xny + 16} viewBox="-19.2 -19.2 230.40 230.40" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" strokeWidth="0.0019200000000000003"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -128,7 +127,6 @@ export const IconSendUp = () => (
 export const IconMail = () => (
     <svg width={xny + 12} height={xny + 12} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="mail"> <g> <polyline fill="none" points="4 8.2 12 14.1 20 8.2" stroke="#000000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1"></polyline> <rect fill="none" height="14" rx="2" ry="2" stroke="#000000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" width="18" x="3" y="6.5"></rect> </g> </g> </g> </g></svg>
-
 )
 
 export const IconShare = () => (

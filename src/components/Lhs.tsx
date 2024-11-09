@@ -55,7 +55,7 @@ export const LHSCard = ({ tv = lhsTitle }: LHSCardProps) => {
                 <h1>
                     {tv.title}
                 </h1>
-                <div className='content'>
+                <div className='box-content'>
                     {tv.content.split('--').map((part: any, index: number) => (
                         <div key={index}>{part}</div>
                     ))}
