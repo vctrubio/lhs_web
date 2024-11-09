@@ -5,11 +5,9 @@ import Image from 'next/image';
 import { fetchPropertyByID } from '@/lib/bridges';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css'; // Import the lightbox styles
-import { Property, Amentities, PropiedadCharacteristics } from '@/types/property';
+import { Property } from '@/types/property';
 
-// Remove or comment out unused components if they're not used elsewhere
-// const AmentitiesIcons = ...
-// const CharacteristicsIcons = ...
+
 
 const CardIdPage = ({ params }: { params: { [key: string]: string } }) => {
     const [property, setProperty] = useState<Property | null>(null);
@@ -35,7 +33,6 @@ const CardIdPage = ({ params }: { params: { [key: string]: string } }) => {
         return <div></div>;
     }
 
-    // Use photos_url for both rendering and lightbox
     const images = property.photos_url.map(photo => ({
         src: photo
     }));
