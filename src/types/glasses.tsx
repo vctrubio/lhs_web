@@ -41,6 +41,7 @@ interface SideBarPropComponentState {
     barrio: SideBarBarrioProps | null;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     isIconActive: boolean;
+    searchKey: boolean;
 }
 
 export class SideBarPropComponent extends Component<SideBarPropComponentProps, SideBarPropComponentState> {
@@ -53,6 +54,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
         barrio: this.props.barrio || null,
         onChange: this.props.onChange,
         isIconActive: false,
+        searchKey: true,
     };
 
     icons: { [key: string]: JSX.Element } = {
@@ -167,7 +169,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
     };
 
     render() {
-        const { componentKey, title, slider, markValue, disabled, onChange } = this.state;
+        const { componentKey, title, slider, markValue, disabled, onChange, searchKey } = this.state;
         const { hasQueryParams, sortOption } = this.props;
 
         const sortKeyMap: { [key: string]: string } = {
@@ -206,19 +208,28 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                         placeholder={disabled ? '' : 'Buscador'}
                     />
                     <div className='flex items-center'>
-                        <div className='flex flex-end'>
-                            {precioValue && (
-                                <span id='price-color'>
-                                    {precioValue}
-                                </span>
-                            )}
-                            {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
-                                <span>{this.state.barrio.barrios.name}</span>
-                            )}
-                            <div className='slider-hide'>
-                                {slider?.value[0] && title !== 'Precio' ? slider.value[0] : null}
+                        {searchKey ?
+                            (title === 'Baños' || title === 'Dormitorios' || title === 'Metros' || title === 'Precio') && (
+                                <div className='mobile-input-bar' >
+                                    <input type="number" placeholder="Min" />
+                                    <input type="number" placeholder="Max" />
+                                </div>
+                            )
+                            :
+                            <div className='flex flex-end'>
+                                {precioValue && (
+                                    <span id='price-color'>
+                                        {precioValue}
+                                    </span>
+                                )}
+                                {this.state.barrio && this.state.barrio.barrios && !Array.isArray(this.state.barrio.barrios) && (
+                                    <span>{this.state.barrio.barrios.name}</span>
+                                )}
+                                <div className='slider-hide'>
+                                    {slider?.value[0] && title !== 'Precio' ? slider.value[0] : null}
+                                </div>
                             </div>
-                        </div>
+                        }
                         <div
                             onClick={this.handleIconClick}
                             style={{

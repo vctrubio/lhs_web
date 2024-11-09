@@ -30,6 +30,7 @@ export const SearchBar = () => {
         onReset: handleReset,
         sortOption,
         setSortOption,
+        searchKey: true,
       })
     },
     {
@@ -50,6 +51,7 @@ export const SearchBar = () => {
         hasQueryParams, // Add hasQueryParams
         sortOption, // Pass sortOption
         setSortOption, // Pass setSortOption
+        searchKey: true,
       })
     },
     {
@@ -70,6 +72,7 @@ export const SearchBar = () => {
         hasQueryParams, // Add hasQueryParams
         sortOption, // Pass sortOption
         setSortOption, // Pass setSortOption
+        searchKey: true,
       })
     },
     {
@@ -110,6 +113,7 @@ export const SearchBar = () => {
         hasQueryParams, // Add hasQueryParams
         sortOption, // Pass sortOption
         setSortOption, // Pass setSortOption
+        searchKey: true,
       })
     },
     {
