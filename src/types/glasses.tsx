@@ -211,9 +211,39 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                     <div className='flex items-center'>
                         {searchKey ?
                             (title === 'Baños' || title === 'Dormitorios' || title === 'Metros' || title === 'Precio') && (
-                                <div className='mobile-input-bar' >
-                                    <input type="number" placeholder="Min" />
-                                    <input type="number" placeholder="Max" />
+                                <div className='mobile-input-bar'>
+                                    {title !== 'Precio' && (
+                                        <input
+                                            type="number"
+                                            placeholder={`Min`}
+                                            value={slider?.value[0] === slider?.min ? '' : slider?.value[0]}
+                                            onChange={(e) => {
+                                                if (slider?.setValue) {
+                                                    const newValue = e.target.value === ''
+                                                        ? [slider.min, slider.value[1]]
+                                                        : [Number(e.target.value), slider.value[1]];
+                                                    slider.setValue(newValue);
+                                                }
+                                            }}
+                                            min={slider?.min}
+                                            max={slider?.value[1]}
+                                        />
+                                    )}
+                                    <input
+                                        type="number"
+                                        placeholder={`Max`}
+                                        value={slider?.value[1] === slider?.max ? '' : slider?.value[1]}
+                                        onChange={(e) => {
+                                            if (slider?.setValue) {
+                                                const newValue = e.target.value === ''
+                                                    ? [slider.value[0], slider.max]
+                                                    : [slider.value[0], Number(e.target.value)];
+                                                slider.setValue(newValue);
+                                            }
+                                        }}
+                                        min={slider?.value[0]}
+                                        max={slider?.max}
+                                    />
                                 </div>
                             )
                             :
