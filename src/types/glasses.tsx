@@ -30,6 +30,7 @@ interface SideBarPropComponentProps {
     onReset?: () => void; // New prop to handle reset
     sortOption: string;
     setSortOption: (sortOption: string) => void;
+    searchKey?: boolean; // Add this line
 }
 
 interface SideBarPropComponentState {
@@ -54,7 +55,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
         barrio: this.props.barrio || null,
         onChange: this.props.onChange,
         isIconActive: false,
-        searchKey: true,
+        searchKey: this.props.searchKey ?? false,
     };
 
     icons: { [key: string]: JSX.Element } = {

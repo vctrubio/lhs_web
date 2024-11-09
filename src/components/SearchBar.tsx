@@ -93,6 +93,7 @@ export const SearchBar = () => {
         hasQueryParams, // Add hasQueryParams
         sortOption, // Pass sortOption
         setSortOption, // Pass setSortOption
+        searchKey: true,
       })
     },
     {

@@ -125,8 +125,7 @@
   }
 
   .mobile-input-bar {
-    display: flex;
-    border: 1px solid red !important;
+    display: flex !important;
   }
 
   .slider-hide {
