@@ -5,10 +5,13 @@ import { Content } from './SideBarContentProperty';
 import Link from 'next/link';
 import { Footer } from '@/components/Footer'
 import { Logo } from '@/lib/utils';
+import { useSharedQueryState } from '@/lib/nuqs';
 
 const LogoLink = () => {
+    // const { handleReset } = useSharedQueryState();
     return (
         <div className='w-full'>
+            {/* <Link href="/" onClick={handleReset}> */}
             <Link href="/">
                 <Logo />
             </Link>

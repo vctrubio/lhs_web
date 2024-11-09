@@ -212,7 +212,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                         {searchKey ?
                             (title === 'Baños' || title === 'Dormitorios' || title === 'Metros' || title === 'Precio') && (
                                 <div className='mobile-input-bar'>
-                                    {title !== 'Precio' && (
+                                    {/* {title !== 'Precio' && (
                                         <input
                                             type="number"
                                             placeholder={`Min`}
@@ -228,7 +228,7 @@ export class SideBarPropComponent extends Component<SideBarPropComponentProps, S
                                             min={slider?.min}
                                             max={slider?.value[1]}
                                         />
-                                    )}
+                                    )} */}
                                     <input
                                         type="number"
                                         placeholder={`Max`}

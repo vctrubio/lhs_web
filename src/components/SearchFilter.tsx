@@ -99,11 +99,11 @@ export const SNF = ({ entries }: { entries: Property[] }) => {
         }
 
         if (precioMinimo) {
-            updateProperty = updateProperty.filter(property => property.precio >= parseInt(precioMinimo) * 1000000);
+            updateProperty = updateProperty.filter(property => property.precio >= parseFloat(precioMinimo) * 1000000);
         }
 
         if (precioMaximo) {
-            updateProperty = updateProperty.filter(property => property.precio <= parseInt(precioMaximo) * 1000000);
+            updateProperty = updateProperty.filter(property => property.precio <= parseFloat(precioMaximo) * 1000000);
         }
 
         if (includeBarrios && includeBarrios.length > 0) {
