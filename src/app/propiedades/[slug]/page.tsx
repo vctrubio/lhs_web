@@ -1,10 +1,10 @@
-'use client'; // Ensure it's a client-side component
+'use client'; 
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { fetchPropertyByID } from '@/lib/bridges';
 import Lightbox from 'yet-another-react-lightbox';
-import 'yet-another-react-lightbox/styles.css'; // Import the lightbox styles
+import 'yet-another-react-lightbox/styles.css'; 
 import { Property } from '@/types/property';
 
 
