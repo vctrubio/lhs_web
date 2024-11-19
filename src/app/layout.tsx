@@ -21,22 +21,22 @@ config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatic
 
 export const metadata: Metadata = {
   title: "LHS Concept",
-  description: "Exculsive Madrid Living. Offering a luxry lifestyle, in search for the best homes.", //lifestyle, luxury, location familiy oriented
-  keywords: "luxury, lifestyle, Madrid, exclusive, homes, family-oriented, real estate, high-end living",
+  description: "Propiedades de Lujo en Madrid", //lifestyle, luxury, location familiy oriented
+  keywords: "luxury, lifestyle, Madrid, exclusive, homes, family-oriented, real estate, high-end living, propiedades de lujo en madrid, propiedades seelectas",
 
   openGraph: {
     title: "LHS Concept",
-    description: "Exclusive Madrid Living. Offering a luxury lifestyle, in search for the best homes.",
+    description: "Propiedades de Lujo en Madrid",
     type: "website", //article for lifestyle page 
     url: "https://www.lhsconcept.com",
 
     images: [
       {
-        url: "https://yourwebsite.com/og-image.jpg", // Image URL for WhatsApp, Facebook, Pinterest
-        width: 1200,
-        height: 630,
+        url: "/assets/logo-main.jpeg", // Image URL for WhatsApp, Facebook, Pinterest
+        width: 2546,
+        height: 1500,
         type: "image/jpeg",
-        alt: "Luxury homes in Madrid",
+        alt: "Propiedades de Lujo en Madrid",
       },
     ],
 
@@ -49,10 +49,26 @@ export const metadata: Metadata = {
     site: "@lhsconcept",
     title: "LHS Concept",
     creator: "Lourdes Hernansanz",
-    description: "Discover the best luxury homes in Madrid for family-oriented living.",
-    images: ["https://yourwebsite.com/twitter-image.jpg"], // Image URL for Twitter
+    description: "Propiedades de Lujo en Madrid",
+    images: ["/assets/logo-main.jpeg"],
 
-  }
+  },
+
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    // minimumScale: 1,
+    // maximumScale: 1,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
+  //language: es
 };
 
 export default function RootLayout({

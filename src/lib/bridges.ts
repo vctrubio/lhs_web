@@ -69,7 +69,7 @@ function parsePropertyFromContentful({ entry }: { entry: any }): Property {
         photos_url: [
             ...(photos ? extractImageUrls(photos) : []),
             ...(habitacionesPaginas ? getRoomPhotoUrl(habitacionesPaginas) : []),
-            ...(planoUrl ? [planoUrl] : [])
+            // ...(planoUrl ? [planoUrl] : [])
         ],
 
         updatedAt: updatedAt,
