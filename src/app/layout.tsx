@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: "https://www.lhsconcept.com",
     images: [
       {
-        url: "https://www.lhsconcept.com/logo-main.jpeg",
+        url: "/logo-main.jpeg",
         width: 2546,
         height: 1500,
         type: "image/jpeg",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "LHS Concept | Propiedades Selectas en Madrid",
     creator: "Lourdes Hernansanz",
     description: "Propiedades de Lujo en Madrid",
-    images: ["https://www.lhsconcept.com/logo-main.jpeg"],
+    images: ["/logo-main.jpeg"],
   },
 
   viewport: {
