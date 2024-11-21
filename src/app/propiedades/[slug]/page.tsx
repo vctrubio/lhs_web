@@ -11,10 +11,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     const metadata: Metadata = {
         title: property ? `${property?.title} | LHS` : 'LHS Concept',
-        description: property ? `${displayPrice(property.precio)} || ${property?.barrioRef.name}` : 'Propiedades de Lujo en Madrid',
+        description: property ? `${displayPrice(property.precio)} 📍 ${property?.barrioRef.name}` : 'Propiedades de Lujo en Madrid',
         openGraph: {
             title: property?.title && `${property?.title} | LHS`,
-            description: property?.description && `${displayPrice(property.precio)} |.| ${property?.barrioRef.name}`,
+            description: property?.description && `${displayPrice(property.precio)} 📍 ${property?.barrioRef.name}`,
             url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
             images: [
                 {
