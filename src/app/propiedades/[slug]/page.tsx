@@ -32,18 +32,32 @@ export const metadata: Metadata = {
 //     )
 // }
 
+function displayPrice(propertyPrice: number) {
+    return `${propertyPrice.toLocaleString('es-ES')}€`;
+}
+
 export default async function Page({ params }: { params: { slug: string } }) {
 
     const property = await fetchPropertyByID(params.slug);
 
-    console.log('checking params....', property);
-    metadata.title = property && `LHS | ${property?.title}`; // Updated to use f-string format
-    metadata.description = property && `${property?.precio}, ${property?.barrioRef.name}`;
-    // metadata.images = property?.cover_url[0] ?? '';
+    metadata.title = property && `LHS | ${property?.title}`;
+    metadata.description = property && `${displayPrice(property.precio)} 📍 ${property?.barrioRef.name}`;
+    const coverImageUrl = property?.cover_url[0] ?? '';
+    const absoluteImageUrl = coverImageUrl.startsWith('http')
+        ? coverImageUrl
+        : `https:${coverImageUrl}`;
+
     metadata.openGraph = {
-        title: metadata.title ?? '',
-        description: metadata.description ?? '',
-        images: property?.cover_url[0] ?? '',
+        title: property?.title && `LHS | ${property.title}`,
+        description: property?.description && `${displayPrice(property.precio)} 📍 ${property.barrioRef.name}`,
+        images: [
+            {
+                url: absoluteImageUrl,
+                width: 1200,
+                height: 630,
+                alt: property?.title ?? 'LHS Propiedades'
+            }
+        ],
         url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
     }
     metadata.keywords = property?.title ?? 'LHS Propiedades Selectas';
