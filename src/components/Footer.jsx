@@ -87,7 +87,7 @@ export const Footer = () => {
             if (!isRootUrl) {
                 const propertyId = pathname.split('/').pop(); // Assuming URL structure like /properties/[id]
                 try {
-                    const response = await fetch(`/api/properties/${propertyId}`);
+                    const response = await fetch(`/propiedades/${propertyId}`);
                     const data = await response.json();
                     setPropertyInfo({
                         title: data.title,

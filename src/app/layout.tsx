@@ -16,6 +16,11 @@ import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
 import { Suspense } from "react";
 import LHSLoader from "@/components/LHSLoader";
+import type { Viewport } from 'next'
+
+export const viewport: Viewport = {
+  // themeColor: 'black',
+}
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 export const metadata: Metadata = {
@@ -49,12 +54,7 @@ export const metadata: Metadata = {
     images: ["/logo-main.jpeg"],
   },
 
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    // minimumScale: 1,
-    // maximumScale: 1,
-  },
+
   robots: {
     index: true,
     follow: true,
@@ -64,6 +64,7 @@ export const metadata: Metadata = {
   //   icon: '/favicon.ico',
   // },
 };
+
 
 export default function RootLayout({
   children,
