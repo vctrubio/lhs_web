@@ -52,17 +52,47 @@ const Navigation = () => {
     );
 };
 
+const NavTwo = () => {
+    const [selected, setSelected] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        setSelected('Propiedades');
+    }, []);
+
+    const handleSelect = (option) => {
+        setSelected(option);
+        setIsOpen(false);
+    };
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className="navigation">
+            <div onClick={toggleDropdown} className="selected-option">
+                {selected}
+            </div>
+            {isOpen && (
+                <div className="dropdown">
+                    <div onClick={() => handleSelect('Eventos')}>Eventos</div>
+                    <div onClick={() => handleSelect('Propiedades')}>Propiedades</div>
+                    <div onClick={() => handleSelect('Lifestyle')}>Lifestyle</div>
+                </div>
+            )}
+        </div>
+    );
+}
 
 export const SideBar = () => {
     return (
         <div className="sidebar-level">
             <div className="top">
                 <LogoLink />
-                {/* <Navigation /> */}
+                <NavTwo />
             </div>
-            <div className="middle">
-                <Content />
-            </div>
+            <Content />
             <Footer />
         </div>
     );

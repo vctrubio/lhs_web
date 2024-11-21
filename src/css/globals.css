@@ -328,11 +328,3 @@ h3 {
   border-radius: 4px;
   cursor: pointer;
 }
-
-@media (max-width: 1440px) {
-  body {
-    transform: scale(0.9);
-    transform-origin: top left;
-    width: 111.11%; /* Adjust width to offset the scaling */
-  }
-}

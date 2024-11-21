@@ -21,6 +21,7 @@
     text-align: center;
     flex-direction: column;
     width: 100%;
+
   }
 
   .middle {
@@ -35,11 +36,10 @@
   font-weight: bold;
   letter-spacing: 4px;
   font-family: 'Times New Roman', Times, serif;
-  line-height: 1;
-  padding: 4px 0;
+  line-height: .75;
 
   display: flex;
-  margin: auto;
+  margin: 5px auto;
   justify-content: center;
 }
 
@@ -94,6 +94,13 @@
   input::placeholder {
     opacity: 0.4;
   }
+}
+
+.nav-gation {
+  background-color: var(--color-green-light);
+  border-radius: 1px;
+  width: 184px;
+  margin: auto;
 }
 
 @media (max-width: 950px) {

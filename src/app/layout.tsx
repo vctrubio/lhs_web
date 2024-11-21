@@ -79,15 +79,10 @@ export default function RootLayout({
           <Suspense fallback={<LHSLoader />}>
             <div className="layout-div">
               <SideBar />
-              <main style={{ flex: 1, padding: '12px' }}>
+              <main style={{ flex: 1, padding: '2px' }}>
                 {children}
               </main>
             </div>
-            {/* <div className="logo-mob">
-              <h1 className="text-3xl font-bold text-center tracking-wide uppercase py-4 px-6">
-                Propiedades En Madrid
-              </h1>
-            </div> */}
           </Suspense>
         </PropertyProvider>
       </body>
