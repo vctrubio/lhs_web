@@ -83,7 +83,7 @@ export default function RootLayout({
           <Suspense fallback={<LHSLoader />}>
             <div className="layout-div">
               <SideBar />
-              <main style={{ flex: 1, padding: '2px' }}>
+              <main style={{ flex: 1, padding: '12px' }}>
                 {children}
               </main>
             </div>

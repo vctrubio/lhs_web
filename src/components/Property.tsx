@@ -38,7 +38,7 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
 
     return (
         <div className="property" css-state={cssStateHover ? 'on' : ''}>
-            <Link href={`/propiedades/${property.url}`}>
+            <Link href={`/propiedades/${property.url}`} title={property.title}>
                 <div className="property-title">
                     <h1>{property.title}</h1>
                     <h2>{formatCurrency(property.precio, property.buyOrRent)}</h2>
@@ -51,6 +51,7 @@ export const PropertyCard = ({ property, cssStateHover }: { property: Property, 
                         style={{ objectFit: 'cover' }}
                         quality={100}
                         priority
+                        title={property.title}
                     />
                     <div className="property-desc">
                         <DescBox text={area} icon={IconRulerMeters} />

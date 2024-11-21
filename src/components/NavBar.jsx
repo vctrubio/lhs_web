@@ -11,7 +11,7 @@ const items = [
 
 const TopLogo = () => {
     return <div className="top-logo">
-        <Link href="/">
+        <Link href="/" title="LHS Concept">
             LHS
         </Link>
     </div>

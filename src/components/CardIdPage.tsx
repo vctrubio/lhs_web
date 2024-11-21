@@ -38,6 +38,7 @@ const CardIdPage = ({ property }: { property: Property | null }) => {
                                 style={{ objectFit: 'cover' }}
                                 loading="lazy"
                                 quality={100}
+                                title={`${property.title} -  ${idx + 1}`}
                             />
                         </div>
                     ))}
