@@ -1,7 +1,7 @@
 import { fetchPropertyByID } from '@/lib/bridges';
 import CardIdPage from '@/components/CardIdPage';
 import { Metadata } from 'next';
-import { ImageResponse } from 'next/og'
+// import { ImageResponse } from 'next/og'
 
 export const metadata: Metadata = {
     // metadata--- coverphot | title | price, barrio

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: "https://www.lhsconcept.com",
     images: [
       {
-        url: "/logo-main.jpeg",
+        url: "/logo-main.jpeg", // Ensure this path is correct
         width: 2546,
         height: 1500,
         type: "image/jpeg",
