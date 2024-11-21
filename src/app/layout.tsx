@@ -28,22 +28,22 @@ export const metadata: Metadata = {
   description: "Propiedades de Lujo en Madrid",
   keywords: "luxury, lifestyle, Madrid, exclusive, homes, family-oriented, real estate, high-end living, propiedades de lujo en madrid, propiedades seelectas, LHS Concept, LHS Propiedades",
 
-  openGraph: {
-    title: "LHS Concept",
-    description: "Propiedades de Lujo en Madrid",
-    type: "website",
-    url: "https://www.lhsconcept.com",
-    images: [
-      {
-        url: "/logo-main.jpeg", // Ensure this path is correct
-        width: 2546,
-        height: 1500,
-        type: "image/jpeg",
-        alt: "Propiedades de Lujo en Madrid",
-      },
-    ],
-    siteName: "LHSConcept.com",
-  },
+  // openGraph: {
+  //   title: "LHS Concept",
+  //   description: "Propiedades de Lujo en Madrid",
+  //   type: "website",
+  //   url: "https://www.lhsconcept.com",
+  //   images: [
+  //     {
+  //       url: "/logo-main.jpeg", // Ensure this path is correct
+  //       width: 2546,
+  //       height: 1500,
+  //       type: "image/jpeg",
+  //       alt: "Propiedades de Lujo en Madrid",
+  //     },
+  //   ],
+  //   siteName: "LHSConcept.com",
+  // },
 
   twitter: {
     card: "summary_large_image", // summary, summary_large_image, app, player
