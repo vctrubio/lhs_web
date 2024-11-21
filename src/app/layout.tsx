@@ -14,9 +14,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { PropertyProvider } from "@/lib/context";
 import { SideBar } from "@/components/SideBar";
-// import { Logo } from "@/lib/utils";
 import { Suspense } from "react";
-import LHSLoader from "@/components/LHSLoader"; // Add this import
+import LHSLoader from "@/components/LHSLoader";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically
 
 export const metadata: Metadata = {
@@ -27,23 +26,20 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LHS Concept",
     description: "Propiedades de Lujo en Madrid",
-    type: "website", //article for lifestyle page 
+    type: "website",
     url: "https://www.lhsconcept.com",
-
     images: [
       {
-        url: "/assets/logo-main.jpeg", // Image URL for WhatsApp, Facebook, Pinterest
+        url: "https://www.lhsconcept.com/assets/logo-main.jpeg",
         width: 2546,
         height: 1500,
         type: "image/jpeg",
         alt: "Propiedades de Lujo en Madrid",
       },
     ],
-
-    // Additional Open Graph tags:
-    determiner: "the", // Default determiner when displaying your site. Values: auto, the, a, an, blank (auto by default)
-    siteName: "LHSConcept.com", // The name of your website
+    siteName: "LHSConcept.com",
   },
+
   twitter: {
     card: "summary_large_image", // summary, summary_large_image, app, player
     site: "@lhsconcept",
@@ -68,7 +64,6 @@ export const metadata: Metadata = {
   // icons: {
   //   icon: '/favicon.ico',
   // },
-  //language: es
 };
 
 export default function RootLayout({

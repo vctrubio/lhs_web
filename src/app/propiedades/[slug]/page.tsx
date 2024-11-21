@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     const property = await fetchPropertyByID(params.slug);
 
-    metadata.title = property && `LHS | ${property?.title}`;
+    metadata.title = property && `${property?.title} | LHS `;
     metadata.description = property && `${displayPrice(property.precio)} 📍 ${property?.barrioRef.name}`;
     const coverImageUrl = property?.cover_url[0] ?? '';
     const absoluteImageUrl = coverImageUrl.startsWith('http')
@@ -48,19 +48,19 @@ export default async function Page({ params }: { params: { slug: string } }) {
         : `https:${coverImageUrl}`;
 
     metadata.openGraph = {
-        title: property?.title && `LHS | ${property.title}`,
+        title: property?.title && `${property.title} | LHS`,
         description: property?.description && `${displayPrice(property.precio)} 📍 ${property.barrioRef.name}`,
         images: [
             {
                 url: absoluteImageUrl,
                 width: 1200,
                 height: 630,
-                alt: property?.title ?? 'LHS Propiedades'
+                alt: property?.title && `${property.title} - LHS Propiedades`
             }
         ],
         url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
     }
-    metadata.keywords = property?.title ?? 'LHS Propiedades Selectas';
+    metadata.keywords = property?.title ? property.title : 'LHS Propiedades Selectas';
     // metadata.viewport = {
     //     width: 'device-width',
     //     initialScale: 1,
@@ -69,6 +69,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     metadata.category = 'Propiedades de Lujo en Madrid';
     metadata.creator = 'Lourdes Hernansanz';
     metadata.publisher = 'Lourdes Hernansanz';
+    metadata.authors = [{ name: 'Lourdes Hernansanz' }];
     metadata.twitter = {
         card: 'summary_large_image',
         site: '@lhsconcept',
