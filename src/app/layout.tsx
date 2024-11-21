@@ -20,8 +20,8 @@ config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatic
 
 export const metadata: Metadata = {
   title: "LHS Concept",
-  description: "Propiedades de Lujo en Madrid", //lifestyle, luxury, location familiy oriented
-  keywords: "luxury, lifestyle, Madrid, exclusive, homes, family-oriented, real estate, high-end living, propiedades de lujo en madrid, propiedades seelectas",
+  description: "Propiedades de Lujo en Madrid",
+  keywords: "luxury, lifestyle, Madrid, exclusive, homes, family-oriented, real estate, high-end living, propiedades de lujo en madrid, propiedades seelectas, LHS Concept, LHS Propiedades",
 
   openGraph: {
     title: "LHS Concept",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     url: "https://www.lhsconcept.com",
     images: [
       {
-        url: "https://www.lhsconcept.com/assets/logo-main.jpeg",
+        url: "https://www.lhsconcept.com/logo-main.jpeg",
         width: 2546,
         height: 1500,
         type: "image/jpeg",
@@ -43,11 +43,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image", // summary, summary_large_image, app, player
     site: "@lhsconcept",
-    title: "LHS Concept",
+    title: "LHS Concept | Propiedades Selectas en Madrid",
     creator: "Lourdes Hernansanz",
     description: "Propiedades de Lujo en Madrid",
-    images: ["/assets/logo-main.jpeg"],
-
+    images: ["https://www.lhsconcept.com/logo-main.jpeg"],
   },
 
   viewport: {

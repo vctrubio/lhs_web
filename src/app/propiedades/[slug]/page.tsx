@@ -50,6 +50,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     metadata.openGraph = {
         title: property?.title && `${property.title} | LHS`,
         description: property?.description && `${displayPrice(property.precio)} 📍 ${property.barrioRef.name}`,
+        url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
         images: [
             {
                 url: absoluteImageUrl,
@@ -57,10 +58,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 height: 630,
                 alt: property?.title && `${property.title} - LHS Propiedades`
             }
-        ],
-        url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
+        ]
     }
-    metadata.keywords = property?.title ? property.title : 'LHS Propiedades Selectas';
+    metadata.keywords = property?.title && property.title;
     // metadata.viewport = {
     //     width: 'device-width',
     //     initialScale: 1,
