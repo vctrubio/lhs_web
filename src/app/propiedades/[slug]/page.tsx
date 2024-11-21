@@ -11,19 +11,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
     const metadata: Metadata = {
         title: property ? `${property?.title} | LHS` : 'LHS Concept',
-        description: property ? `${displayPrice(property.precio)} -- ${property?.barrioRef.name}` : 'Propiedades de Lujo en Madrid',
+        description: property ? `${displayPrice(property.precio)} || ${property?.barrioRef.name}` : 'Propiedades de Lujo en Madrid',
         openGraph: {
             title: property?.title && `${property?.title} | LHS`,
-            description: property?.description && `${displayPrice(property.precio)} -- ${property?.barrioRef.name}`,
+            description: property?.description && `${displayPrice(property.precio)} |.| ${property?.barrioRef.name}`,
             url: `https://www.lhsconcept.com/propiedades/${params.slug}`,
-            // images: [
-            //     {
-            //         url: property?.cover_url[0] ?? '/logo-main.jpeg',
-            //         width: 1200,
-            //         height: 630,
-            //         alt: property?.title ? `${property.title} - LHS Propiedades` : 'LHS Propiedades',
-            //     }
-            // ]
+            images: [
+                {
+                    url: property?.cover_url[0] ?? '/logo-main.jpeg',
+                    width: 1200,
+                    height: 630,
+                    alt: property?.title ? `${property.title} - LHS Propiedades` : 'LHS Propiedades',
+                }
+            ]
         },
         keywords: property?.title ? property.title : 'LHS Concept',
         category: 'Propiedades de Lujo en Madrid',
